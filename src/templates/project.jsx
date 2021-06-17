@@ -56,7 +56,13 @@ const ProjectBody = styled("div")`
     margin-bottom: 0.5em;
 
     img {
-      width: 100%;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    a:hover {
+      background: rgba(0, 0, 0, 0) !important;
     }
   }
 `
