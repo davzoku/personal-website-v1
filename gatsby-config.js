@@ -21,7 +21,7 @@ const gastbySourcePrismicConfig = {
     accessToken: apiKey,
     releaseID: prismicReleaseID,
     prismicToolbar: true,
-    linkResolver: () => doc => linkResolver(doc),
+    linkResolver: () => (doc) => linkResolver(doc),
     schemas: {
       homepage: homePageSchema,
       post: postSchema,
@@ -44,7 +44,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-image`,
+    `gatsby-plugin-image`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-resolve-src`,
