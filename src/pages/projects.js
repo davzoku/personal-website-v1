@@ -13,8 +13,8 @@ const ProjectTitle = styled("h1")`
 const Projects = ({ projects, meta }) => (
   <>
     <Helmet
-      title={`Projects | Walter Teng | Full Stack Developer`}
-      titleTemplate={`%s | Projects | Walter Teng | Full Stack Developer`}
+      title={`Projects`}
+      titleTemplate={`%s | ${meta.author}`}
       meta={[
         {
           name: `description`,
@@ -22,11 +22,15 @@ const Projects = ({ projects, meta }) => (
         },
         {
           property: `og:title`,
-          content: `Walter Teng | Full Stack Developer`,
+          content: `Projects`,
         },
         {
           property: `og:description`,
           content: meta.description,
+        },
+        {
+          property: `og:image`,
+          content: meta.image,
         },
         {
           property: `og:type`,
@@ -34,11 +38,11 @@ const Projects = ({ projects, meta }) => (
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
-          content: meta.author,
+          content: meta.twitterUsername,
         },
         {
           name: `twitter:title`,
@@ -47,6 +51,11 @@ const Projects = ({ projects, meta }) => (
         {
           name: `twitter:description`,
           content: meta.description,
+        },
+        {
+          property: `twitter:image`,
+          //need to a way to resolve this dynamically
+          content: `https://walterteng.com/og.png`,
         },
       ].concat(meta)}
     />
@@ -103,6 +112,8 @@ export const query = graphql`
         title
         description
         author
+        image
+        twitterUsername
       }
     }
   }

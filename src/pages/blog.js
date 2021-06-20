@@ -30,8 +30,8 @@ const BlogGrid = styled("div")`
 const Blog = ({ posts, meta }) => (
   <>
     <Helmet
-      title={`Blog | Walter Teng | Full Stack Developer`}
-      titleTemplate={`%s | Blog | Walter Teng | Full Stack Developer`}
+      title={`Blog`}
+      titleTemplate={`%s | ${meta.author}`}
       meta={[
         {
           name: `description`,
@@ -39,11 +39,15 @@ const Blog = ({ posts, meta }) => (
         },
         {
           property: `og:title`,
-          content: `Blog | Walter Teng | Full Stack Developer`,
+          content: `Blog`,
         },
         {
           property: `og:description`,
           content: meta.description,
+        },
+        {
+          property: `og:image`,
+          content: meta.image,
         },
         {
           property: `og:type`,
@@ -51,11 +55,11 @@ const Blog = ({ posts, meta }) => (
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
-          content: meta.author,
+          content: meta.twitterUsername,
         },
         {
           name: `twitter:title`,
@@ -64,6 +68,11 @@ const Blog = ({ posts, meta }) => (
         {
           name: `twitter:description`,
           content: meta.description,
+        },
+        {
+          property: `twitter:image`,
+          //need to a way to resolve this dynamically
+          content: `https://walterteng.com/og.png`,
         },
       ].concat(meta)}
     />
@@ -122,6 +131,8 @@ export const query = graphql`
         title
         description
         author
+        image
+        twitterUsername
       }
     }
   }

@@ -113,8 +113,8 @@ const Post = ({ post, meta }) => {
   return (
     <>
       <Helmet
-        title={`${post.post_title[0].text} | Prist, Gatsby & Prismic Starter`}
-        titleTemplate={`%s | ${meta.title}`}
+        title={`${post.post_title[0].text}`}
+        titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
             name: `description`,
@@ -122,11 +122,15 @@ const Post = ({ post, meta }) => {
           },
           {
             property: `og:title`,
-            content: `${post.post_title[0].text} | Prist, Gatsby & Prismic Starter`,
+            content: `${post.post_title[0].text}`,
           },
           {
             property: `og:description`,
-            content: meta.description,
+            content: `${post.post_preview_description[0].text}`,
+          },
+          {
+            property: `og:image`,
+            content: `${post.post_hero_image.url}`,
           },
           {
             property: `og:type`,
@@ -134,19 +138,23 @@ const Post = ({ post, meta }) => {
           },
           {
             name: `twitter:card`,
-            content: `summary`,
+            content: `summary_large_image`,
           },
           {
             name: `twitter:creator`,
-            content: meta.author,
+            content: meta.twitterUsername,
           },
           {
             name: `twitter:title`,
-            content: meta.title,
+            content: `${post.post_title[0].text}`,
           },
           {
             name: `twitter:description`,
-            content: meta.description,
+            content: `${post.post_preview_description[0].text}`,
+          },
+          {
+            property: `twitter:image`,
+            content: `${post.post_hero_image.url}`,
           },
         ].concat(meta)}
       />
@@ -210,6 +218,7 @@ export const query = graphql`
         title
         description
         author
+        twitterUsername
       }
     }
   }

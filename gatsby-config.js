@@ -1,8 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Walter Teng | Full Stack Developer`,
+    title: `Walter Teng`,
     description: `Walter Teng is a full stack developer who specializes in transforming and developing digital experiences.`,
     author: `Walter Teng`,
+    siteUrl: "https://walterteng.com", // No trailing slash allowed!
+    image: "/og.png",
+    twitterUsername: "@davzoku",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

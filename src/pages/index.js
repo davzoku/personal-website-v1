@@ -121,7 +121,7 @@ const RenderBody = ({ home, projects, meta }) => (
   <>
     <Helmet
       title={meta.title}
-      titleTemplate={`%s | ${meta.title}`}
+      titleTemplate={`%s`}
       meta={[
         {
           name: `description`,
@@ -136,16 +136,20 @@ const RenderBody = ({ home, projects, meta }) => (
           content: meta.description,
         },
         {
+          property: `og:image`,
+          content: meta.image,
+        },
+        {
           property: `og:type`,
           content: `website`,
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
-          content: meta.author,
+          content: meta.twitterUsername,
         },
         {
           name: `twitter:title`,
@@ -154,6 +158,11 @@ const RenderBody = ({ home, projects, meta }) => (
         {
           name: `twitter:description`,
           content: meta.description,
+        },
+        {
+          property: `twitter:image`,
+          //need to a way to resolve this dynamically
+          content: `https://walterteng.com/og.png`,
         },
       ].concat(meta)}
     />
@@ -253,6 +262,8 @@ export const query = graphql`
         title
         description
         author
+        image
+        twitterUsername
       }
     }
   }
