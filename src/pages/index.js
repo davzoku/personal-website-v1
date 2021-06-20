@@ -137,7 +137,7 @@ const RenderBody = ({ home, projects, meta }) => (
         },
         {
           property: `og:image`,
-          content: meta.image,
+          content: meta.siteUrl + meta.image,
         },
         {
           property: `og:type`,
@@ -161,34 +161,36 @@ const RenderBody = ({ home, projects, meta }) => (
         },
         {
           property: `twitter:image`,
-          //need to a way to resolve this dynamically
-          content: `https://walterteng.com/og.png`,
+          content: meta.siteUrl + meta.image,
         },
       ].concat(meta)}
     />
     <Hero>
-      <>{RichText.render(home.hero_title)}</>
+      <>{RichText.render(home.data.hero_title.raw)}</>
       <a
-        href={home.hero_button_link.url}
+        href={home.data.hero_button_link.url}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Button>{RichText.render(home.hero_button_text)}</Button>
+        <Button>{RichText.render(home.data.hero_button_text.raw)}</Button>
       </a>
     </Hero>
     <Section>
-      {RichText.render(home.about_title)}
-      <About bio={home.about_bio} socialLinks={home.about_links} />
+      {RichText.render(home.data.about_title.raw)}
+      <About
+        bio={home.data.about_bio.raw}
+        socialLinks={home.data.about_links}
+      />
     </Section>
     <Section>
       {projects.map((project, i) => (
         <ProjectCard
           key={i}
-          category={project.node.project_category}
-          title={project.node.project_title}
-          description={project.node.project_preview_description}
-          thumbnail={project.node.project_preview_thumbnail}
-          uid={project.node._meta.uid}
+          category={project.node.data.project_category.raw}
+          title={project.node.data.project_title.raw}
+          description={project.node.data.project_preview_description.raw}
+          thumbnail={project.node.data.project_preview_thumbnail}
+          uid={project.node.uid}
         />
       ))}
       <ProjectsAction to={"/projects"}>
@@ -200,8 +202,8 @@ const RenderBody = ({ home, projects, meta }) => (
 
 export default ({ data }) => {
   //Required check for no data being returned
-  const doc = data.prismic.allHomepages.edges.slice(0, 1).pop()
-  const projects = data.prismic.allProjects.edges
+  const doc = data.allPrismicHomepage.edges.slice(0, 1).pop()
+  const projects = data.allPrismicProject.edges
   const meta = data.site.siteMetadata
 
   if (!doc || !projects) return null
@@ -221,38 +223,77 @@ RenderBody.propTypes = {
 
 export const query = graphql`
   {
-    prismic {
-      allHomepages {
-        edges {
-          node {
-            hero_title
-            hero_button_text
-            hero_button_link {
-              ... on PRISMIC__ExternalLink {
-                _linkType
-                url
-              }
+    allPrismicHomepage {
+      edges {
+        node {
+          data {
+            hero_title {
+              html
+              text
+              raw
             }
-            content
-            about_title
-            about_bio
+            hero_button_text {
+              html
+              text
+              raw
+            }
+            hero_button_link {
+              link_type
+              url
+            }
+            content {
+              html
+              text
+              raw
+            }
+            about_title {
+              html
+              text
+              raw
+            }
+            about_bio {
+              html
+              text
+              raw
+            }
             about_links {
-              about_link
+              about_link {
+                html
+                text
+                raw
+              }
             }
           }
         }
       }
-      allProjects(sortBy: project_post_date_DESC) {
-        edges {
-          node {
-            project_title
-            project_preview_description
-            project_preview_thumbnail
-            project_category
-            project_post_date
-            _meta {
-              uid
+    }
+    allPrismicProject(sort: { order: DESC, fields: data___project_post_date }) {
+      edges {
+        node {
+          uid
+          data {
+            project_title {
+              html
+              text
+              raw
             }
+            project_preview_description {
+              html
+              text
+              raw
+            }
+            project_preview_thumbnail {
+              alt
+              copyright
+              url
+              thumbnails
+            }
+            project_category {
+              html
+              text
+              raw
+            }
+            project_post_date
           }
         }
       }
@@ -264,6 +305,7 @@ export const query = graphql`
         author
         image
         twitterUsername
+        siteUrl
       }
     }
   }

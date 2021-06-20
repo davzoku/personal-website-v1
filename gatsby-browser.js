@@ -1,10 +1,6 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import * as React from "react"
+import { PreviewStoreProvider } from "gatsby-source-prismic"
 
-const { registerLinkResolver } = require('gatsby-source-prismic-graphql');
-const { linkResolver } = require('./src/utils/prismic-configuration');
-
-registerLinkResolver(linkResolver);
+export const wrapRootElement = ({ element }) => (
+  <PreviewStoreProvider initialEnabled={true}>{element}</PreviewStoreProvider>
+)

@@ -113,7 +113,7 @@ const Post = ({ post, meta }) => {
   return (
     <>
       <Helmet
-        title={`${post.post_title[0].text}`}
+        title={`${post.data.post_title.text}`}
         titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
@@ -122,15 +122,15 @@ const Post = ({ post, meta }) => {
           },
           {
             property: `og:title`,
-            content: `${post.post_title[0].text}`,
+            content: `${post.data.post_title.text}`,
           },
           {
             property: `og:description`,
-            content: `${post.post_preview_description[0].text}`,
+            content: `${post.data.post_preview_description.text}`,
           },
           {
             property: `og:image`,
-            content: `${post.post_hero_image.url}`,
+            content: `${post.data.post_hero_image.url}`,
           },
           {
             property: `og:type`,
@@ -146,43 +146,45 @@ const Post = ({ post, meta }) => {
           },
           {
             name: `twitter:title`,
-            content: `${post.post_title[0].text}`,
+            content: `${post.data.post_title.text}`,
           },
           {
             name: `twitter:description`,
-            content: `${post.post_preview_description[0].text}`,
+            content: `${post.data.post_preview_description.text}`,
           },
           {
             property: `twitter:image`,
-            content: `${post.post_hero_image.url}`,
+            content: `${post.data.post_hero_image.url}`,
           },
         ].concat(meta)}
       />
       <Layout>
-        <PostCategory>{RichText.render(post.post_category)}</PostCategory>
-        <PostTitle>{RichText.render(post.post_title)}</PostTitle>
+        <PostCategory>
+          {RichText.render(post.data.post_category.raw)}
+        </PostCategory>
+        <PostTitle>{RichText.render(post.data.post_title.raw)}</PostTitle>
         <PostMetas>
-          <PostAuthor>{post.post_author}</PostAuthor>
+          <PostAuthor>{post.data.post_author}</PostAuthor>
           <PostDate>
-            <Moment format="MMMM D, YYYY">{post.post_date}</Moment>
+            <Moment format="MMMM D, YYYY">{post.data.post_date}</Moment>
           </PostDate>
         </PostMetas>
-        {post.post_hero_image && (
+        {post.data.post_hero_image && (
           <PostHeroContainer>
-            <img src={post.post_hero_image.url} alt="bees" />
+            <img src={post.data.post_hero_image.url} alt="bees" />
             <PostHeroAnnotation>
-              {RichText.render(post.post_hero_annotation)}
+              {RichText.render(post.data.post_hero_annotation)}
             </PostHeroAnnotation>
           </PostHeroContainer>
         )}
-        <PostBody>{RichText.render(post.post_body)}</PostBody>
+        <PostBody>{RichText.render(post.data.post_body.raw)}</PostBody>
       </Layout>
     </>
   )
 }
 
 export default ({ data }) => {
-  const postContent = data.prismic.allPosts.edges[0].node
+  const postContent = data.allPrismicPost.edges[0].node
   const meta = data.site.siteMetadata
   return <Post post={postContent} meta={meta} />
 }
@@ -194,20 +196,43 @@ Post.propTypes = {
 
 export const query = graphql`
   query PostQuery($uid: String) {
-    prismic {
-      allPosts(uid: $uid) {
-        edges {
-          node {
-            post_title
-            post_hero_image
-            post_hero_annotation
+    allPrismicPost(filter: { uid: { eq: $uid } }) {
+      edges {
+        node {
+          uid
+          data {
+            post_title {
+              html
+              text
+              raw
+            }
+            post_hero_image {
+              alt
+              copyright
+              url
+              thumbnails
+            }
+            post_hero_annotation {
+              html
+              text
+              raw
+            }
             post_date
-            post_category
-            post_body
+            post_category {
+              html
+              text
+              raw
+            }
+            post_body {
+              html
+              text
+              raw
+            }
             post_author
-            post_preview_description
-            _meta {
-              uid
+            post_preview_description {
+              html
+              text
+              raw
             }
           }
         }

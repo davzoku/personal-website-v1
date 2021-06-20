@@ -30,7 +30,7 @@ const Projects = ({ projects, meta }) => (
         },
         {
           property: `og:image`,
-          content: meta.image,
+          content: meta.siteUrl + meta.image,
         },
         {
           property: `og:type`,
@@ -54,8 +54,7 @@ const Projects = ({ projects, meta }) => (
         },
         {
           property: `twitter:image`,
-          //need to a way to resolve this dynamically
-          content: `https://walterteng.com/og.png`,
+          content: meta.siteUrl + meta.image,
         },
       ].concat(meta)}
     />
@@ -65,11 +64,11 @@ const Projects = ({ projects, meta }) => (
         {projects.map((project, i) => (
           <ProjectCard
             key={i}
-            category={project.node.project_category}
-            title={project.node.project_title}
-            description={project.node.project_preview_description}
-            thumbnail={project.node.project_preview_thumbnail}
-            uid={project.node._meta.uid}
+            category={project.node.data.project_category.raw}
+            title={project.node.data.project_title.raw}
+            description={project.node.data.project_preview_description.raw}
+            thumbnail={project.node.data.project_preview_thumbnail}
+            uid={project.node.uid}
           />
         ))}
       </>
@@ -78,7 +77,7 @@ const Projects = ({ projects, meta }) => (
 )
 
 export default ({ data }) => {
-  const projects = data.prismic.allProjects.edges
+  const projects = data.allPrismicProject.edges
   const meta = data.site.siteMetadata
   if (!projects) return null
 
@@ -91,18 +90,33 @@ Projects.propTypes = {
 
 export const query = graphql`
   {
-    prismic {
-      allProjects(sortBy: project_post_date_DESC) {
-        edges {
-          node {
-            project_title
-            project_preview_description
-            project_preview_thumbnail
-            project_category
-            project_post_date
-            _meta {
-              uid
+    allPrismicProject(sort: { order: DESC, fields: data___project_post_date }) {
+      edges {
+        node {
+          uid
+          data {
+            project_title {
+              html
+              text
+              raw
             }
+            project_preview_description {
+              html
+              text
+              raw
+            }
+            project_preview_thumbnail {
+              alt
+              copyright
+              url
+              thumbnails
+            }
+            project_category {
+              html
+              text
+              raw
+            }
+            project_post_date
           }
         }
       }
@@ -114,6 +128,7 @@ export const query = graphql`
         author
         image
         twitterUsername
+        siteUrl
       }
     }
   }

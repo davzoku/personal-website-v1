@@ -47,7 +47,7 @@ const Blog = ({ posts, meta }) => (
         },
         {
           property: `og:image`,
-          content: meta.image,
+          content: meta.siteUrl + meta.image,
         },
         {
           property: `og:type`,
@@ -71,8 +71,7 @@ const Blog = ({ posts, meta }) => (
         },
         {
           property: `twitter:image`,
-          //need to a way to resolve this dynamically
-          content: `https://walterteng.com/og.png`,
+          content: meta.siteUrl + meta.image,
         },
       ].concat(meta)}
     />
@@ -82,12 +81,12 @@ const Blog = ({ posts, meta }) => (
         {posts.map((post, i) => (
           <PostCard
             key={i}
-            author={post.node.post_author}
-            category={post.node.post_category}
-            title={post.node.post_title}
-            date={post.node.post_date}
-            description={post.node.post_preview_description}
-            uid={post.node._meta.uid}
+            author={post.node.data.post_author}
+            category={post.node.data.post_category.raw}
+            title={post.node.data.post_title.raw}
+            date={post.node.data.post_date}
+            description={post.node.data.post_preview_description.raw}
+            uid={post.node.uid}
           />
         ))}
       </BlogGrid>
@@ -96,7 +95,7 @@ const Blog = ({ posts, meta }) => (
 )
 
 export default ({ data }) => {
-  const posts = data.prismic.allPosts.edges
+  const posts = data.allPrismicPost.edges
   const meta = data.site.siteMetadata
   if (!posts) return null
 
@@ -110,22 +109,33 @@ Blog.propTypes = {
 
 export const query = graphql`
   {
-    prismic {
-      allPosts(sortBy: post_date_DESC) {
-        edges {
-          node {
-            post_title
-            post_date
-            post_category
-            post_preview_description
-            post_author
-            _meta {
-              uid
+    allPrismicPost(sort: { order: DESC, fields: data___post_date }) {
+      edges {
+        node {
+          uid
+          data {
+            post_title {
+              html
+              text
+              raw
             }
+            post_date
+            post_category {
+              html
+              text
+              raw
+            }
+            post_preview_description {
+              html
+              text
+              raw
+            }
+            post_author
           }
         }
       }
     }
+
     site {
       siteMetadata {
         title
@@ -133,6 +143,7 @@ export const query = graphql`
         author
         image
         twitterUsername
+        siteUrl
       }
     }
   }

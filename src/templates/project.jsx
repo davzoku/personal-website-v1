@@ -77,7 +77,7 @@ const Project = ({ project, meta }) => {
   return (
     <>
       <Helmet
-        title={`${project.project_title[0].text}`}
+        title={`${project.data.project_title.text}`}
         titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
@@ -86,15 +86,15 @@ const Project = ({ project, meta }) => {
           },
           {
             property: `og:title`,
-            content: `${project.project_title[0].text}`,
+            content: `${project.data.project_title.text}`,
           },
           {
             property: `og:description`,
-            content: `${project.project_preview_description[0].text}`,
+            content: `${project.data.project_preview_description.text}`,
           },
           {
             property: `og:image`,
-            content: `${project.project_preview_thumbnail.url}`,
+            content: `${project.data.project_preview_thumbnail.url}`,
           },
           {
             property: `og:type`,
@@ -110,27 +110,29 @@ const Project = ({ project, meta }) => {
           },
           {
             name: `twitter:title`,
-            content: `${project.project_title[0].text}`,
+            content: `${project.data.project_title.text}`,
           },
           {
             name: `twitter:description`,
-            content: `${project.project_preview_description[0].text}`,
+            content: `${project.data.project_preview_description.text}`,
           },
           {
             property: `twitter:image`,
-            content: `${project.project_preview_thumbnail.url}`,
+            content: `${project.data.project_preview_thumbnail.url}`,
           },
         ].concat(meta)}
       />
       <Layout>
-        <ProjectTitle>{RichText.render(project.project_title)}</ProjectTitle>
-        {project.project_hero_image && (
+        <ProjectTitle>
+          {RichText.render(project.data.project_title.raw)}
+        </ProjectTitle>
+        {project.data.project_hero_image && (
           <ProjectHeroContainer>
-            <img src={project.project_hero_image.url} alt="bees" />
+            <img src={project.data.project_hero_image.url} alt="bees" />
           </ProjectHeroContainer>
         )}
         <ProjectBody>
-          {RichText.render(project.project_description)}
+          {RichText.render(project.data.project_description.raw)}
         </ProjectBody>
         <Projectslink to={"/projects"}>
           <Button className="Button--secondary">See other projects</Button>
@@ -141,7 +143,7 @@ const Project = ({ project, meta }) => {
 }
 
 export default ({ data }) => {
-  const projectContent = data.prismic.allProjects.edges[0].node
+  const projectContent = data.allPrismicProject.edges[0].node
   const meta = data.site.siteMetadata
   return <Project project={projectContent} meta={meta} />
 }
@@ -152,19 +154,43 @@ Project.propTypes = {
 
 export const query = graphql`
   query ProjectQuery($uid: String) {
-    prismic {
-      allProjects(uid: $uid) {
-        edges {
-          node {
-            project_title
-            project_preview_description
-            project_preview_thumbnail
-            project_category
+    allPrismicProject(filter: { uid: { eq: $uid } }) {
+      edges {
+        node {
+          uid
+          data {
+            project_title {
+              html
+              text
+              raw
+            }
+            project_preview_description {
+              html
+              text
+              raw
+            }
+            project_preview_thumbnail {
+              alt
+              copyright
+              url
+              thumbnails
+            }
+            project_category {
+              html
+              text
+              raw
+            }
             project_post_date
-            project_hero_image
-            project_description
-            _meta {
-              uid
+            project_hero_image {
+              alt
+              copyright
+              url
+              thumbnails
+            }
+            project_description {
+              html
+              text
+              raw
             }
           }
         }

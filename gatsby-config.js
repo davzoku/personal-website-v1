@@ -1,3 +1,35 @@
+require("dotenv").config()
+const {
+  prismicRepo,
+  releaseID,
+  accessToken,
+} = require("./prismic-configuration")
+const linkResolver = require("./src/utils/linkResolver")
+
+const reponame = process.env.PRISMIC_REPO_NAME || prismicRepo
+const apiKey = process.env.PRISMIC_API_KEY || accessToken
+const prismicReleaseID = process.env.PRISMIC_RELEASE_ID || releaseID
+
+const homePageSchema = require("./custom_types/homepage.json")
+const postSchema = require("./custom_types/post.json")
+const projectSchema = require("./custom_types/project.json")
+
+const gastbySourcePrismicConfig = {
+  resolve: "gatsby-source-prismic",
+  options: {
+    repositoryName: reponame,
+    accessToken: apiKey,
+    releaseID: prismicReleaseID,
+    prismicToolbar: true,
+    linkResolver: () => doc => linkResolver(doc),
+    schemas: {
+      homepage: homePageSchema,
+      post: postSchema,
+      project: projectSchema,
+    },
+  },
+}
+
 module.exports = {
   siteMetadata: {
     title: `Walter Teng`,
@@ -8,6 +40,7 @@ module.exports = {
     twitterUsername: "@davzoku",
   },
   plugins: [
+    gastbySourcePrismicConfig,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -26,13 +59,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: "gatsby-source-prismic-graphql",
-      options: {
-        repositoryName: "wt-portfolio-v1", // (REQUIRED, replace with your own)
-        linkResolver: () => post => `/${post.uid}`,
-      },
-    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
