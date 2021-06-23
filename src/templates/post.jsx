@@ -171,7 +171,7 @@ const Post = ({ post, meta }) => {
         </PostMetas>
         {post.data.post_hero_image && (
           <PostHeroContainer>
-            <img src={post.data.post_hero_image.url} alt="bees" />
+            <img src={post.data.post_hero_image.url} alt="hero image" />
             <PostHeroAnnotation>
               {RichText.render(post.data.post_hero_annotation)}
             </PostHeroAnnotation>

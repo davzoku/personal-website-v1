@@ -7,6 +7,7 @@ import { Link, graphql } from "gatsby"
 import { RichText } from "prismic-reactjs"
 import Button from "components/_ui/Button"
 import Layout from "components/Layout"
+import dimensions from "styles/dimensions"
 
 const ProjectHeroContainer = styled("div")`
   display: flex;
@@ -25,13 +26,13 @@ const ProjectHeroContainer = styled("div")`
 `
 
 const ProjectTitle = styled("div")`
-  max-width: 550px;
+  max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
   text-align: center;
 `
 
 const ProjectBody = styled("div")`
-  max-width: 550px;
+  max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
 
   a {
@@ -128,7 +129,7 @@ const Project = ({ project, meta }) => {
         </ProjectTitle>
         {project.data.project_hero_image && (
           <ProjectHeroContainer>
-            <img src={project.data.project_hero_image.url} alt="bees" />
+            <img src={project.data.project_hero_image.url} alt="hero image" />
           </ProjectHeroContainer>
         )}
         <ProjectBody>

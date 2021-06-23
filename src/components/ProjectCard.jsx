@@ -6,7 +6,7 @@ import dimensions from "styles/dimensions"
 import colors from "styles/colors"
 import PropTypes from "prop-types"
 
-const ProjectCardContainer = styled(Link)`
+const ProjectCardContainer = styled("div")`
   display: grid;
   grid-template-columns: 4fr 7fr;
   box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.06);
@@ -31,17 +31,6 @@ const ProjectCardContainer = styled(Link)`
     box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.1);
     transition: all 150ms ease-in-out;
 
-    .ProjectCardAction {
-      color: ${colors.blue500};
-      transition: all 150ms ease-in-out;
-
-      span {
-        transform: translateX(0px);
-        opacity: 1;
-        transition: transform 150ms ease-in-out;
-      }
-    }
-
     .ProjectCardContent::before {
       opacity: 0.02;
       transition: all 150ms ease-in-out;
@@ -61,7 +50,6 @@ const ProjectCardContent = styled("div")`
 
   &:before {
     position: absolute;
-    content: "";
     width: 100%;
     height: 100%;
     left: 0;
@@ -96,12 +84,24 @@ const ProjectCardBlurb = styled("div")`
   margin-top: 0.5em;
   margin-bottom: 5em;
 
+  a {
+    font-weight: 600;
+    text-decoration: none;
+    color: currentColor;
+    transition: all 150ms ease-in-out;
+  }
+
+  a:hover {
+    color: ${colors.blue500};
+    transition: all 150ms ease-in-out;
+  }
+
   @media (max-width: ${dimensions.maxwidthTablet}px) {
     margin-bottom: 2.5em;
   }
 `
 
-const ProjectCardAction = styled("div")`
+const ProjectCardAction = styled(Link)`
   font-weight: 600;
   text-decoration: none;
   color: currentColor;
@@ -113,9 +113,20 @@ const ProjectCardAction = styled("div")`
     display: inline-block;
     transition: transform 400ms ease-in-out;
   }
+
+  &:hover{
+    color: ${colors.blue500};
+    transition: all 150ms ease-in-out;
+
+    span {
+      transform: translateX(0px);
+      opacity: 1;
+      transition: transform 150ms ease-in-out;
+    }
+  }
 `
 
-const ProjectCardImageContainer = styled("div")`
+const ProjectCardImageContainer = styled(Link)`
   background: ${colors.grey200};
   display: flex;
   justify-content: center;
@@ -160,16 +171,16 @@ const ProjectCardImageContainer = styled("div")`
 `
 
 const ProjectCard = ({ category, title, description, thumbnail, uid }) => (
-  <ProjectCardContainer to={`/projects/${uid}`}>
+  <ProjectCardContainer>
     <ProjectCardContent className="ProjectCardContent">
       <ProjectCardCategory>{category[0].text}</ProjectCardCategory>
       <ProjectCardTitle>{title[0].text}</ProjectCardTitle>
       <ProjectCardBlurb>{RichText.render(description)}</ProjectCardBlurb>
-      <ProjectCardAction className="ProjectCardAction">
+      <ProjectCardAction className="ProjectCardAction" to={`/projects/${uid}`}>
         Details <span>&#8594;</span>
       </ProjectCardAction>
     </ProjectCardContent>
-    <ProjectCardImageContainer className="ProjectCardImageContainer">
+    <ProjectCardImageContainer className="ProjectCardImageContainer" to={`/projects/${uid}`}>
       <img src={thumbnail.url} alt={title[0].text} />
     </ProjectCardImageContainer>
   </ProjectCardContainer>
