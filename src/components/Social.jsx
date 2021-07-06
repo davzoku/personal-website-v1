@@ -30,7 +30,7 @@ export const GitHub = ({ url = `${config.github}` }) => {
   return (
     <a
       target="_blank"
-      rel="noopener"
+      rel="me noopener"
       href={url}
       css={css`
         margin-left: 10px;
