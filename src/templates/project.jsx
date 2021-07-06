@@ -9,6 +9,8 @@ import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
 
+const readingTime = require("reading-time")
+
 const ProjectHeroContainer = styled("div")`
   display: flex;
   justify-content: center;
@@ -30,6 +32,19 @@ const ProjectTitle = styled("div")`
   margin: 0 auto;
   text-align: center;
 `
+
+const ProjectStats = styled("div")`
+  max-width: ${dimensions.maxwidthTablet}px;
+  margin: 0 auto;
+  border-bottom: 0.1em solid ${colors.grey600};
+  font-weight: 300;
+  color: ${colors.grey600};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+const ProjectReadingTime = styled("span")``
+const ProjectLastUpdatedDate = styled("span")``
 
 const ProjectBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
@@ -132,6 +147,21 @@ const Project = ({ project, meta }) => {
             <img src={project.data.project_hero_image.url} alt="hero image" />
           </ProjectHeroContainer>
         )}
+        <ProjectStats>
+          <ProjectReadingTime>
+            {readingTime(
+              project.data.project_description.text
+            ).minutes.toFixed()}{" "}
+            min read{" "}
+            {readingTime(project.data.project_description.text).minutes > 5
+              ? "☕️"
+              : "⚡️"}
+          </ProjectReadingTime>
+          <ProjectLastUpdatedDate>
+            Last Updated: {project.data.project_post_date}
+          </ProjectLastUpdatedDate>
+        </ProjectStats>
+
         <ProjectBody>
           {RichText.render(project.data.project_description.raw)}
         </ProjectBody>
@@ -181,7 +211,7 @@ export const query = graphql`
               text
               raw
             }
-            project_post_date
+            project_post_date(fromNow: false, formatString: "DD MMM YYYY")
             project_hero_image {
               alt
               copyright
