@@ -1,3 +1,4 @@
+const config = require("./config/website")
 require("dotenv").config()
 const {
   prismicRepo,
@@ -32,12 +33,12 @@ const gastbySourcePrismicConfig = {
 
 module.exports = {
   siteMetadata: {
-    title: `Walter Teng`,
-    description: `Walter Teng is a full stack developer who specializes in transforming and developing digital experiences.`,
-    author: `Walter Teng`,
-    siteUrl: "https://walterteng.com", // No trailing slash allowed!
-    image: "/og.png",
-    twitterUsername: "@davzoku",
+    title: config.siteTitle,
+    description: config.siteDescription,
+    author: config.author,
+    siteUrl: config.siteUrl, // No trailing slash allowed!
+    image: config.ogImage,
+    twitterUsername: config.twitterHandle,
   },
   plugins: [
     gastbySourcePrismicConfig,
@@ -62,11 +63,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Walter Teng`,
-        short_name: `Walter Teng`,
-        start_url: `/`,
-        background_color: `#FFFFFF`,
-        theme_color: `#FFFFFF`,
+        name: config.siteUrl,
+        short_name: config.siteTitleShort,
+        start_url: config.pathPrefix,
+        background_color: config.themeColor,
+        theme_color: config.backgroundColor,
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
       },
@@ -74,7 +75,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-43031692-9",
+        trackingId: config.googleAnalyticsID,
         head: true,
       },
     },
