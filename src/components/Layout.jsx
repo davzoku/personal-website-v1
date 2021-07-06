@@ -37,6 +37,7 @@ const Layout = ({ children }) => (
       query SiteTitleQuery {
         site {
           siteMetadata {
+            author
             title
           }
         }
@@ -48,7 +49,7 @@ const Layout = ({ children }) => (
         <div className="Layout">
           <Header />
           <main className="Layout__content">{children}</main>
-          <Footer />
+          <Footer author={data.site.siteMetadata.author} />
         </div>
       </LayoutContainer>
     )}

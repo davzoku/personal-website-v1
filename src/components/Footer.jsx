@@ -2,26 +2,32 @@ import React from "react"
 import styled from "@emotion/styled"
 import colors from "styles/colors"
 import icon from "images/icon.png"
+import PropTypes from "prop-types"
+import { Twitter, GitHub, LinkedIn } from "./Social"
 
 const FooterContainer = styled("div")`
   padding-top: 2em;
   padding-bottom: 3em;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
 
   svg {
-    max-width: 50px;
+    max-width: 23px;
   }
+`
+const FooterCopyright = styled("div")`
+  display: flex;
+  justify-content: space-between;
 `
 
 const FooterAuthor = styled("a")`
-  font-size: 0.75em;
   color: ${colors.grey700};
   display: flex;
-  flex-direction: column;
   align-items: center;
   text-decoration: none;
+  margin-top: 1.5em;
+`
+const FooterLinks = styled("div")`
   margin-top: 1.5em;
 `
 
@@ -30,13 +36,23 @@ const FooterIcon = styled("img")`
   margin-top: 1em;
 `
 
-const Footer = () => (
+const Footer = ({ author }) => (
   <FooterContainer>
-    <FooterAuthor href="/">
-      © 2021 - Built with React, Gatsby & ♥!
-      <FooterIcon className="FooterIcon" src={icon} />
-    </FooterAuthor>
+    <FooterCopyright>
+      <FooterAuthor href="/">
+        {author} © {new Date().getFullYear()}
+      </FooterAuthor>
+    </FooterCopyright>
+    <FooterLinks>
+      <Twitter />
+      <GitHub />
+      <LinkedIn />
+    </FooterLinks>
   </FooterContainer>
 )
 
 export default Footer
+
+Footer.propTypes = {
+  author: PropTypes.string.isRequired,
+}
