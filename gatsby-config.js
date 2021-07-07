@@ -80,5 +80,19 @@ module.exports = {
       },
     },
     `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-webmention`,
+      options: {
+        username: "www.walterteng.com", // webmention.io username
+        identity: {
+          github: "davzoku",
+          twitter: "davzoku", // no @
+        },
+        mentions: true,
+        pingbacks: true,
+        domain: "www.walterteng.com",
+        token: process.env.WEBMENTIONS_TOKEN,
+      },
+    },
   ],
 }

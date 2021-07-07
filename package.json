@@ -23,6 +23,7 @@
     "gatsby-plugin-resolve-src": "^2.0.0",
     "gatsby-plugin-sass": "^4.7.1",
     "gatsby-plugin-sharp": "^3.7.1",
+    "gatsby-plugin-webmention": "^0.2.0",
     "gatsby-source-filesystem": "^3.7.1",
     "gatsby-source-graphql-universal": "^3.4.0",
     "gatsby-source-prismic": "^3.3.6",
