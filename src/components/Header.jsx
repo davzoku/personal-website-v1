@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import dimensions from "styles/dimensions"
 import Logo from "components/_ui/Logo"
 import { ThemeContext } from "gatsby-plugin-theme-switcher"
-import ThemePicker from "./themePicker"
+import ThemePicker from "./ThemePicker"
 import SmoothCollapse from "react-smooth-collapse"
 import FormatPaintIcon from "@material-ui/icons/FormatPaint"
 
