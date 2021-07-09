@@ -1,23 +1,16 @@
 import { css } from "@emotion/react"
 import colors from "styles/colors"
 import dimensions from "styles/dimensions"
+import "styles/multitheme.css"
 
 const globalStyles = css`
-  html,
-  body,
-  #root {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100%;
-  }
-
   body {
     width: 100%;
     margin: 0 auto;
     font-size: 16px;
     line-height: 1.5;
-    color: ${colors.grey900};
+    color: var(--color-text, #16161a);
+    background: var(--color-background, #ffffff);
     -webkit-font-smoothing: antialiased;
 
     @media (max-width: ${dimensions.maxwidthMobile}px) {
@@ -28,9 +21,38 @@ const globalStyles = css`
       box-sizing: border-box;
 
       &::selection {
-        background: ${colors.orange500};
+        background: var(--color-secondary, #08bee7);
         color: white;
       }
+    }
+  }
+
+  .Layout__content {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+  }
+
+  @keyframes bounce {
+    0%,
+    100%,
+    20%,
+    50%,
+    80% {
+      -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+      transform: translateY(0);
+    }
+    40% {
+      -webkit-transform: translateY(-30px);
+      -ms-transform: translateY(-30px);
+      transform: translateY(-30px);
+    }
+    60% {
+      -webkit-transform: translateY(-15px);
+      -ms-transform: translateY(-15px);
+      transform: translateY(-15px);
     }
   }
 

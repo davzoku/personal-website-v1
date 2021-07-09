@@ -1,56 +1,71 @@
-import React from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 import dimensions from "styles/dimensions"
 import Logo from "components/_ui/Logo"
+import { ThemeContext } from "gatsby-plugin-theme-switcher"
+import ThemePicker from "./themePicker"
+import SmoothCollapse from "react-smooth-collapse"
+import FormatPaintIcon from "@material-ui/icons/FormatPaint"
 
-const HeaderContainer = styled("div")`
-  padding-top: 3.75em;
-  padding-bottom: 3em;
+const HeaderContainer = styled("div")``
+
+const ThemeMenu = styled("div")`
+  background: var(--color-backgroundOffset);
+  width: 100%;
+  border-bottom: 1px var(--color-border);
+
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: "Segoe UI", Roboto, sans-serif;
 `
 
 const HeaderContent = styled("div")`
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-top: 3.75em;
+  padding-bottom: 3em;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `
 
 const HeaderLinks = styled("div")`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 7em;
-  justify-content: flex-end;
-  width: 100%;
-  max-width: 200px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-gap: 5.5em;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
-    grid-gap: 2.5em;
   }
 
   a {
-    color: currentColor;
+    color: var(--color-text, #16161a);
     text-decoration: none;
     border-bottom: 3px solid transparent;
     font-weight: 600;
-    font-size: 0.95em;
+    font-size: 1em;
     height: 100%;
-    padding-bottom: 1.25em;
-    padding-top: 0.25em;
+    padding-right: 1em;
     display: block;
     position: relative;
+    line-height: 2;
 
     &:after {
       position: absolute;
       content: "";
       bottom: 0;
-      width: 18px;
-      height: 3px;
+      left: 0.5rem;
+      right: 0.5rem;
+      height: 5px;
       background: transparent;
-      bottom: -3px;
+      bottom: -5px;
       right: 50%;
       margin-right: -9px;
       transition: 100ms ease-in-out background;
@@ -58,34 +73,87 @@ const HeaderLinks = styled("div")`
 
     &:hover {
       &:after {
-        background: ${colors.blue500};
+        background: var(--color-primary, #73abff);
         transition: 100ms ease-in-out background;
       }
     }
 
     &.Link--is-active {
       &:after {
-        background: ${colors.blue500};
+        background: var(--color-primary, #73abff);
         transition: 100ms ease-in-out background;
       }
     }
   }
 `
 
-const Header = () => (
-  <HeaderContainer>
-    <HeaderContent>
-      <Link to="/">
-        <Logo />
-      </Link>
-      <HeaderLinks>
-        <Link activeClassName="" to=""></Link>
-        <Link activeClassName="Link--is-active" to="/projects">
-          Projects
+const HeaderButtons = styled("div")``
+
+const HeaderButton = styled("div")`
+  padding-bottom: 1em;
+  padding-top: 0.75em;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  color: var(--color-text);
+  background-color: var(--color-backgroundOffset);
+  border: 2px var(--color-border);
+  cursor: pointer;
+  svg {
+    display: block;
+    margin: auto;
+  }
+`
+
+const ThemeSelectorTitle = styled("div")`
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  padding: 2rem 1.5rem 0;
+`
+
+const Header = () => {
+  const { theme, switchTheme } = useContext(ThemeContext)
+  const [themeExpanded, setThemeExpanded] = useState(false)
+  const [menuExpanded, toggleMenuExpansion] = useState(false)
+
+  return (
+    <HeaderContainer>
+      <ThemeMenu>
+        <SmoothCollapse expanded={themeExpanded} className="">
+          <ThemeSelectorTitle>Select Theme</ThemeSelectorTitle>
+
+          <ThemePicker theme={theme} setTheme={switchTheme} />
+        </SmoothCollapse>
+      </ThemeMenu>
+      <HeaderContent>
+        <Link to="/">
+          <Logo />
         </Link>
-      </HeaderLinks>
-    </HeaderContent>
-  </HeaderContainer>
-)
+        <HeaderLinks>
+          <Link activeClassName="" to=""></Link>
+          <Link activeClassName="Link--is-active" to="/projects">
+            Projects
+          </Link>
+          <HeaderButtons>
+            <HeaderButton>
+              <FormatPaintIcon
+                aria-label="Theme Changer"
+                onClick={() => {
+                  setThemeExpanded(!themeExpanded)
+                  toggleMenuExpansion(false)
+                }}
+              />
+            </HeaderButton>
+          </HeaderButtons>
+        </HeaderLinks>
+      </HeaderContent>
+    </HeaderContainer>
+  )
+}
 
 export default Header

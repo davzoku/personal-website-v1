@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 import dimensions from "styles/dimensions"
 
 const ButtonContainer = styled("button")`
   padding: 1em 2em;
-  background: ${colors.blue400};
+  background: var(--color-primary, #73abff);
   font-weight: 600;
-  color: white;
+  color: var(--color-textOffset, #f5f5ff);
   outline: none;
   border: none;
   font-size: 1rem;
@@ -31,11 +31,7 @@ const ButtonContainer = styled("button")`
     top: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      135deg,
-      ${colors.blueMarine100} 0%,
-      ${colors.blueMarine600} 100%
-    );
+    background: var(--color-primaryOffset, #3672f8);
     z-index: -1;
   }
 
@@ -46,13 +42,13 @@ const ButtonContainer = styled("button")`
   }
 
   &.Button--secondary {
-    background: ${colors.blue200};
-    color: ${colors.blue600};
+    background: var(--color-primary, #73abff);
+    color: var(--color-textOffset, #f5f5ff);
     padding: 0.95em 1.8em;
     font-size: 0.95rem;
 
     &:hover {
-      background: ${colors.blue300};
+      background: var(--color-primaryOffset, #3672f8);
       transition: background 100ms ease-in-out;
     }
   }

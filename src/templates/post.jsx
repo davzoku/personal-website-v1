@@ -32,7 +32,7 @@ const PostHeroAnnotation = styled("div")`
   }
 
   a {
-    color: currentColor;
+    color: var(--color-text, #16161a);
   }
 `
 
@@ -64,20 +64,20 @@ const PostBody = styled("div")`
   margin: 0 auto;
 
   a {
-    margin-bottom: 1.5em;
     font-weight: 600;
-    line-height: 1.9;
+    color: var(--color-primary, #73abff);
+    box-shadow: inset 0 -2px 0 0 var(--color-primary, #73abff);
+    border-bottom: 1px solid var(--color-primary, #73abff);
     text-decoration: none;
-    color: ${colors.blue500};
+    transition: all 150ms ease-in-out;
   }
 
   a:hover {
-    color: white;
-    background: linear-gradient(
-      135deg,
-      ${colors.blueMarine100} 0%,
-      ${colors.blueMarine600} 100%
-    );
+    color: var(--color-background, #ffffff);
+    box-shadow: inset 0 -1.25em 0 0 var(--color-primary, #73abff);
+    border-bottom-color: var(--color-primary, #73abff);
+    outline: 0;
+    text-decoration: none;
   }
 
   .block-img {

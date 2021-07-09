@@ -3,17 +3,18 @@ import { Link } from "gatsby"
 import { RichText } from "prismic-reactjs"
 import styled from "@emotion/styled"
 import dimensions from "styles/dimensions"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 import PropTypes from "prop-types"
 
 const ProjectCardContainer = styled("div")`
+  border: 1px solid var(--color-border, #f5f5ff);
   display: grid;
   grid-template-columns: 4fr 7fr;
   box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.06);
   margin-bottom: 4em;
   transition: all 150ms ease-in-out;
   text-decoration: none;
-  color: currentColor;
+  color: var(--color-text, #16161a);
 
   @media (max-width: 950px) {
     grid-template-columns: 4.5fr 7fr;
@@ -44,7 +45,7 @@ const ProjectCardContainer = styled("div")`
 `
 
 const ProjectCardContent = styled("div")`
-  background: white;
+  background: var(--color-backgroundOffset, #ffffff);
   padding: 4em 3em 2.25em 3em;
   position: relative;
 
@@ -54,7 +55,7 @@ const ProjectCardContent = styled("div")`
     height: 100%;
     left: 0;
     top: 0;
-    background: ${colors.blue500};
+    background: var(--color-primary, #73abff);
     mix-blend-mode: multiply;
     opacity: 0;
     transition: all 150ms ease-in-out;
@@ -71,7 +72,7 @@ const ProjectCardContent = styled("div")`
 
 const ProjectCardCategory = styled("h6")`
   font-weight: 600;
-  color: ${colors.grey600};
+  color: var(--color-primaryOffset, #3672f8);
 `
 
 const ProjectCardTitle = styled("h3")`
@@ -86,14 +87,19 @@ const ProjectCardBlurb = styled("div")`
 
   a {
     font-weight: 600;
+    color: var(--color-primary, #73abff);
+    box-shadow: inset 0 -2px 0 0 var(--color-primary, #73abff);
+    border-bottom: 1px solid var(--color-primary, #73abff);
     text-decoration: none;
-    color: currentColor;
     transition: all 150ms ease-in-out;
   }
 
   a:hover {
-    color: ${colors.blue500};
-    transition: all 150ms ease-in-out;
+    color: var(--color-background, #ffffff);
+    box-shadow: inset 0 -1.25em 0 0 var(--color-primary, #73abff);
+    border-bottom-color: var(--color-primary, #73abff);
+    outline: 0;
+    text-decoration: none;
   }
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
@@ -104,7 +110,7 @@ const ProjectCardBlurb = styled("div")`
 const ProjectCardAction = styled(Link)`
   font-weight: 600;
   text-decoration: none;
-  color: currentColor;
+  color: var(--color-text, #16161a);
   transition: all 150ms ease-in-out;
 
   span {
@@ -114,8 +120,8 @@ const ProjectCardAction = styled(Link)`
     transition: transform 400ms ease-in-out;
   }
 
-  &:hover{
-    color: ${colors.blue500};
+  &:hover {
+    color: var(--color-primary, #73abff);
     transition: all 150ms ease-in-out;
 
     span {
@@ -127,7 +133,7 @@ const ProjectCardAction = styled(Link)`
 `
 
 const ProjectCardImageContainer = styled(Link)`
-  background: ${colors.grey200};
+  background: var(--color-backgroundOffset, #ffffff);
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -155,7 +161,7 @@ const ProjectCardImageContainer = styled(Link)`
     height: 100%;
     left: 0;
     top: 0;
-    background: ${colors.blue500};
+    background: var(--color-primary, #73abff);
     mix-blend-mode: multiply;
     opacity: 0;
     transition: all 150ms ease-in-out;
@@ -180,7 +186,10 @@ const ProjectCard = ({ category, title, description, thumbnail, uid }) => (
         Details <span>&#8594;</span>
       </ProjectCardAction>
     </ProjectCardContent>
-    <ProjectCardImageContainer className="ProjectCardImageContainer" to={`/projects/${uid}`}>
+    <ProjectCardImageContainer
+      className="ProjectCardImageContainer"
+      to={`/projects/${uid}`}
+    >
       <img src={thumbnail.url} alt={title[0].text} />
     </ProjectCardImageContainer>
   </ProjectCardContainer>

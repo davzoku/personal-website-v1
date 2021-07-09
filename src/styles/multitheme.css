@@ -1,0 +1,142 @@
+.theme-merlion {
+  --color-primary: #73abff;
+  --color-secondary: #08bee7;
+  --color-text: #16161a;
+  --color-border: #f5f5ff;
+  --color-background: #ffffff;
+  --color-primaryOffset: #3672f8;
+  --color-textOffset: #f5f5ff;
+  --color-backgroundOffset: #e7f1ff;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #5d96f7;
+  --color-logo-ring: #4b84e5;
+}
+
+.theme-night-safari {
+  --color-primary: #ffb814;
+  --color-secondary: #10c8ee;
+  --color-text: #f5f5ff;
+  --color-border: #10c8ee;
+  --color-background: #16161a;
+  --color-primaryOffset: #bee71f;
+  --color-textOffset: #16161a;
+  --color-backgroundOffset: #404043;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #ca8d00;
+  --color-logo-ring: #ffb814;
+}
+
+.theme-garden-by-the-bay {
+  --color-primary: #ed347b;
+  --color-secondary: #2cb67d;
+  --color-text: #effffd;
+  --color-border: #383a61;
+  --color-background: #004643;
+  --color-primaryOffset: #2cb67d;
+  --color-textOffset: #fffffe;
+  --color-backgroundOffset: #29293e;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #ff5697;
+  --color-logo-ring: #ed347b;
+}
+
+.theme-chinatown {
+  --color-primary: #ff3e00;
+  --color-secondary: #283e3c;
+  --color-text: #fcf2de;
+  --color-border: #383a61;
+  --color-background: #422736;
+  --color-primaryOffset: #ff861d;
+  --color-textOffset: #fff9ed;
+  --color-backgroundOffset: #2d1a24;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #ff6737;
+  --color-logo-ring: #ff3e00;
+}
+
+.theme-sentosa-sunset {
+  --color-primary: #003b61;
+  --color-secondary: #ffb814;
+  --color-text: #4c4341;
+  --color-border: #5f7c46;
+  --color-background: #e2c9a6;
+  --color-primaryOffset: #5f7c46;
+  --color-textOffset: #f5f5ff;
+  --color-backgroundOffset: #f0ceab;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #629dc3;
+  --color-logo-ring: #030303;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  --maxWidth-none: "none";
+  --maxWidth-xs: 20rem;
+  --maxWidth-sm: 24rem;
+  --maxWidth-md: 28rem;
+  --maxWidth-lg: 32rem;
+  --maxWidth-xl: 36rem;
+  --maxWidth-2xl: 42rem;
+  --maxWidth-3xl: 48rem;
+  --maxWidth-4xl: 56rem;
+  --maxWidth-full: "100%";
+  --maxWidth-wrapper: var(--maxWidth-2xl);
+  --spacing-px: "1px";
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+  --fontFamily-sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
+    Times, serif;
+  --font-body: var(--fontFamily-serif);
+  --font-heading: var(--fontFamily-sans);
+  --fontWeight-normal: 400;
+  --fontWeight-medium: 500;
+  --fontWeight-semibold: 600;
+  --fontWeight-bold: 700;
+  --fontWeight-extrabold: 800;
+  --fontWeight-black: 900;
+  --fontSize-root: 16px;
+  --lineHeight-none: 1;
+  --lineHeight-tight: 1.1;
+  --lineHeight-normal: 1.5;
+  --lineHeight-relaxed: 1.625;
+  /* 1.200 Minor Third Type Scale */
+  --fontSize-0: 0.833rem;
+  --fontSize-1: 1rem;
+  --fontSize-2: 1.2rem;
+  --fontSize-3: 1.44rem;
+  --fontSize-4: 1.728rem;
+  --fontSize-5: 2.074rem;
+  --fontSize-6: 2.488rem;
+  --fontSize-7: 2.986rem;
+  --color-primary: #005b99;
+  --color-text: #2e353f;
+  --color-text-light: #4f5969;
+  --color-heading: #1a202c;
+  --color-heading-black: black;
+  --color-accent: #d1dce5;
+}

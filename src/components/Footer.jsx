@@ -1,11 +1,15 @@
 import React from "react"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
-import icon from "images/icon.png"
+//import colors from "styles/colors"
+//import icon from "images/icon.png"
 import PropTypes from "prop-types"
 import { Twitter, GitHub, LinkedIn } from "./Social"
 
 const FooterContainer = styled("div")`
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
   padding-top: 2em;
   padding-bottom: 3em;
   display: flex;
@@ -21,11 +25,14 @@ const FooterCopyright = styled("div")`
 `
 
 const FooterAuthor = styled("a")`
-  color: ${colors.grey700};
+  color: var(--color-text, #16161a);
   display: flex;
   align-items: center;
   text-decoration: none;
   margin-top: 1.5em;
+  :hover {
+    color: var(--color-primary, #73abff);
+  }
 `
 const FooterLinks = styled("div")`
   margin-top: 1.5em;

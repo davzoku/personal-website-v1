@@ -69,7 +69,7 @@ module.exports = {
         background_color: config.themeColor,
         theme_color: config.backgroundColor,
         display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/profile-photo.png`, // This path is relative to the root of the site.
       },
     },
     {
@@ -92,6 +92,13 @@ module.exports = {
         pingbacks: true,
         domain: "walterteng.com",
         token: process.env.WEBMENTIONS_TOKEN,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-theme-switcher",
+      options: {
+        defaultDarkTheme: "theme-merlion",
+        defaultLightTheme: "theme-night-safari",
       },
     },
   ],

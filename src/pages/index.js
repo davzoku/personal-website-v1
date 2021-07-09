@@ -28,46 +28,9 @@ const Hero = styled("div")`
       text-decoration: none;
       transition: all 100ms ease-in-out;
 
-      &:nth-of-type(1) {
-        color: ${colors.blue500};
-      }
-      &:nth-of-type(2) {
-        color: ${colors.orange500};
-      }
-      &:nth-of-type(3) {
-        color: ${colors.purple500};
-      }
-      &:nth-of-type(4) {
-        color: ${colors.green500};
-      }
-      &:nth-of-type(5) {
-        color: ${colors.teal500};
-      }
-
       &:hover {
         cursor: pointer;
         transition: all 100ms ease-in-out;
-
-        &:nth-of-type(1) {
-          color: ${colors.blue600};
-          background-color: ${colors.blue200};
-        }
-        &:nth-of-type(2) {
-          color: ${colors.orange600};
-          background-color: ${colors.orange200};
-        }
-        &:nth-of-type(3) {
-          color: ${colors.purple600};
-          background-color: ${colors.purple200};
-        }
-        &:nth-of-type(4) {
-          color: ${colors.green600};
-          background-color: ${colors.green200};
-        }
-        &:nth-of-type(5) {
-          color: ${colors.teal600};
-          background-color: ${colors.teal200};
-        }
       }
     }
   }
@@ -90,7 +53,7 @@ const Section = styled("div")`
 const ProjectsAction = styled(Link)`
   font-weight: 600;
   text-decoration: none;
-  color: currentColor;
+  color: var(--color-text, #16161a);
   transition: all 150ms ease-in-out;
   margin-left: auto;
 
@@ -106,7 +69,7 @@ const ProjectsAction = styled(Link)`
   }
 
   &:hover {
-    color: ${colors.blue500};
+    color: var(--color-primary, #73abff);
     transition: all 150ms ease-in-out;
 
     span {

@@ -4,7 +4,7 @@ import config from "../../config/website"
 import TwitterIcon from "@material-ui/icons/Twitter"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LinkedInIcon from "@material-ui/icons/LinkedIn"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 
 export const Twitter = ({ url = `${config.twitter}` }) => {
   return (
@@ -14,9 +14,9 @@ export const Twitter = ({ url = `${config.twitter}` }) => {
       href={url}
       css={css`
         margin-left: 10px;
-        color: ${colors.grey900};
+        color: var(--color-text, #16161a);
         :hover {
-          color: ${colors.grey700};
+          color: var(--color-primary, #73abff);
         }
       `}
       aria-label="Visit my Twitter"
@@ -34,9 +34,9 @@ export const GitHub = ({ url = `${config.github}` }) => {
       href={url}
       css={css`
         margin-left: 10px;
-        color: ${colors.grey900};
+        color: var(--color-text, #16161a);
         :hover {
-          color: ${colors.grey700};
+          color: var(--color-primary, #73abff);
         }
       `}
       aria-label="Visit my GitHub"
@@ -54,9 +54,9 @@ export const LinkedIn = ({ url = `${config.linkedin}` }) => {
       href={url}
       css={css`
         margin-left: 10px;
-        color: ${colors.grey900};
+        color: var(--color-text, #16161a);
         :hover {
-          color: ${colors.grey700};
+          color: var(--color-primary, #73abff);
         }
       `}
       aria-label="Visit my Linkedin"

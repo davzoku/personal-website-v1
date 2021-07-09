@@ -4,7 +4,7 @@ import dimensions from "styles/dimensions"
 import { RichText } from "prismic-reactjs"
 import PropTypes from "prop-types"
 import profilePhoto from "images/profile-photo.png"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 
 const AboutContainer = styled("div")`
   padding-top: 1em;
@@ -49,20 +49,20 @@ const AboutBio = styled("div")`
   grid-area: 1 / 3 / 2 / 7;
 
   a {
-    margin-bottom: 1.5em;
     font-weight: 600;
-    line-height: 1.9;
+    color: var(--color-primary, #73abff);
+    box-shadow: inset 0 -2px 0 0 var(--color-primary, #73abff);
+    border-bottom: 1px solid var(--color-primary, #73abff);
     text-decoration: none;
-    color: ${colors.blue500};
+    transition: all 150ms ease-in-out;
   }
 
   a:hover {
-    color: white;
-    background: linear-gradient(
-      135deg,
-      ${colors.blueMarine100} 0%,
-      ${colors.blueMarine600} 100%
-    );
+    color: var(--color-background, #ffffff);
+    box-shadow: inset 0 -1.25em 0 0 var(--color-primary, #73abff);
+    border-bottom-color: var(--color-primary, #73abff);
+    outline: 0;
+    text-decoration: none;
   }
 
   ul {
@@ -82,7 +82,7 @@ const AboutBio = styled("div")`
       content: "▹";
       position: absolute;
       left: 0;
-      color: ${colors.blue500};
+      color: var(--color-primary, #73abff);
       font-size: 1.5em;
       line-height: 18px;
     }
@@ -127,7 +127,7 @@ const AboutLink = styled("a")`
   font-weight: 600;
   line-height: 1.9;
   text-decoration: none;
-  color: currentColor;
+  color: var(--color-text, #16161a);
 
   span {
     margin-left: 1em;
