@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import dimensions from "styles/dimensions"
 import { RichText } from "prismic-reactjs"
 import PropTypes from "prop-types"
-import profilePhoto from "images/profile-photo.png"
+import profilePhoto from "images/profile-photo-circle.png"
 //import colors from "styles/colors"
 
 const AboutContainer = styled("div")`
@@ -13,15 +13,14 @@ const AboutContainer = styled("div")`
   grid-column-gap: 3em;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 2em;
+    grid-column-gap: 1em;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 1em;
+    grid-column-gap: 0.5em;
   }
 `
 
@@ -32,7 +31,6 @@ const AboutPhoto = styled("div")`
   grid-area: 1 / 1 / 2 / 3;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-area: 1 / 1 / 2 / 4;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
@@ -89,7 +87,6 @@ const AboutBio = styled("div")`
   }
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-area: 2 / 1 / 3 / 3;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
@@ -113,8 +110,6 @@ const AboutLinkContainer = styled("div")`
   grid-area: 1 / 7 / 2 / 8;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-area: 2 / 3 / 3 / 4;
-    padding-left: 3em;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
