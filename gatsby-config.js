@@ -63,13 +63,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: config.siteUrl,
+        name: config.siteTitle,
         short_name: config.siteTitleShort,
         start_url: config.pathPrefix,
         background_color: config.themeColor,
         theme_color: config.backgroundColor,
-        display: `minimal-ui`,
-        icon: `src/images/profile-photo.png`, // This path is relative to the root of the site.
+        display: `standalone`,
+        icon: `src/images/profile-photo-circle.png`, // This path is relative to the root of the site.
       },
     },
     {

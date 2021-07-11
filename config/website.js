@@ -19,8 +19,8 @@ module.exports = {
   ogImage: "/og.png",
 
   // Manifest and Progress color
-  themeColor: "#FFFFFF",
-  backgroundColor: "#FFFFFF",
+  themeColor: "#16161a",
+  backgroundColor: "#16161a",
 
   // Social component
   twitter: "https://twitter.com/davzoku/",
