@@ -138,14 +138,5 @@ module.exports = {
         defaultLightTheme: "theme-night-safari",
       },
     },
-    // {
-    //   resolve: `@aengusm/gatsby-theme-brain`,
-    //   options: {
-    //     mdxOtherwiseConfigured: true,
-    //     notesDirectory: `content/notes/`,
-    //     rootPath: `/`,
-    //     hideDoubleBrackets: true,
-    //   },
-    // },
   ],
 }
