@@ -4,12 +4,15 @@ import Helmet from "react-helmet"
 import styled from "@emotion/styled"
 import colors from "styles/colors"
 import { Link, graphql } from "gatsby"
-import { RichText } from "prismic-reactjs"
+//import { RichText } from "prismic-reactjs"
 import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
+import { MDXRenderer } from "gatsby-plugin-mdx"
+import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
+import SeoHelmet from "components/SeoHelmet"
 
-const readingTime = require("reading-time")
+//const readingTime = require("reading-time")
 
 const ProjectHeroContainer = styled("div")`
   display: flex;
@@ -90,27 +93,31 @@ const Projectslink = styled(Link)`
 `
 
 const Project = ({ project, meta }) => {
+  console.log(project)
   return (
     <>
+      <SeoHelmet />
       <Helmet
-        title={`${project.data.project_title.text}`}
+        title={`${project.frontmatter.title}`}
         titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
             name: `description`,
-            content: meta.description,
+            content: `${project.frontmatter.description}`,
           },
           {
             property: `og:title`,
-            content: `${project.data.project_title.text}`,
+            content: `${project.frontmatter.title}`,
           },
           {
             property: `og:description`,
-            content: `${project.data.project_preview_description.text}`,
+            content: `${project.frontmatter.description}`,
           },
           {
             property: `og:image`,
-            content: `${project.data.project_preview_thumbnail.url}`,
+            content:
+              meta.siteUrl +
+              `${project.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
           {
             property: `og:type`,
@@ -126,44 +133,37 @@ const Project = ({ project, meta }) => {
           },
           {
             name: `twitter:title`,
-            content: `${project.data.project_title.text}`,
+            content: `${project.frontmatter.title}`,
           },
           {
             name: `twitter:description`,
-            content: `${project.data.project_preview_description.text}`,
+            content: `${project.frontmatter.description}`,
           },
           {
             property: `twitter:image`,
-            content: `${project.data.project_preview_thumbnail.url}`,
+            content:
+              meta.siteUrl +
+              `${project.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
         ].concat(meta)}
       />
       <Layout>
         <ProjectTitle>
-          {RichText.render(project.data.project_title.raw)}
+          <h1>{project.frontmatter.title}</h1>
         </ProjectTitle>
-        {project.data.project_hero_image && (
-          <ProjectHeroContainer>
-            <img src={project.data.project_hero_image.url} alt="hero image" />
-          </ProjectHeroContainer>
-        )}
         <ProjectStats>
           <ProjectReadingTime>
-            {readingTime(
-              project.data.project_description.text
-            ).minutes.toFixed()}{" "}
-            min read{" "}
-            {readingTime(project.data.project_description.text).minutes > 5
-              ? "☕️"
-              : "⚡️"}
+            {project.timeToRead} min read{" "}
+            {project.timeToRead > 5 ? "☕️" : "⚡️"}
           </ProjectReadingTime>
           <ProjectLastUpdatedDate>
-            Last Updated: {project.data.project_post_date}
+            Last Updated: {project.frontmatter.updated}
           </ProjectLastUpdatedDate>
         </ProjectStats>
-
         <ProjectBody>
-          {RichText.render(project.data.project_description.raw)}
+          <DefaultMdxComponentsProvider>
+            <MDXRenderer>{project.body}</MDXRenderer>
+          </DefaultMdxComponentsProvider>
         </ProjectBody>
         <Projectslink to={"/projects"}>
           <Button className="Button--secondary">See other projects</Button>
@@ -174,7 +174,8 @@ const Project = ({ project, meta }) => {
 }
 
 export default ({ data }) => {
-  const projectContent = data.allPrismicProject.edges[0].node
+  // const projectContent = data.allPrismicProject.edges[0].node
+  const projectContent = data.mdx
   const meta = data.site.siteMetadata
   return <Project project={projectContent} meta={meta} />
 }
@@ -184,56 +185,34 @@ Project.propTypes = {
 }
 
 export const query = graphql`
-  query ProjectQuery($uid: String) {
-    allPrismicProject(filter: { uid: { eq: $uid } }) {
-      edges {
-        node {
-          uid
-          data {
-            project_title {
-              html
-              text
-              raw
-            }
-            project_preview_description {
-              html
-              text
-              raw
-            }
-            project_preview_thumbnail {
-              alt
-              copyright
-              url
-              thumbnails
-            }
-            project_category {
-              html
-              text
-              raw
-            }
-            project_post_date(fromNow: false, formatString: "DD MMM YYYY")
-            project_hero_image {
-              alt
-              copyright
-              url
-              thumbnails
-            }
-            project_description {
-              html
-              text
-              raw
-            }
-          }
-        }
-      }
-    }
+  query ($id: String!) {
     site {
       siteMetadata {
         title
         description
         author
+        image
         twitterUsername
+        siteUrl
       }
+    }
+    mdx(id: { eq: $id }) {
+      frontmatter {
+        title
+        slug
+        techStack
+        type
+        updated(formatString: "DD MMM YYYY")
+        description
+        startDate
+        cover {
+          childImageSharp {
+            gatsbyImageData
+          }
+        }
+      }
+      body
+      timeToRead
     }
   }
 `

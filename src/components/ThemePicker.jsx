@@ -14,7 +14,7 @@ const ThemeButtons = styled("div")`
   justify-content: space-between;
   align-items: stretch;
   text-align: center;
-  padding: 1rem 1.5rem 2rem;
+  padding: 1rem 1.5rem 1rem;
 
   img {
     max-width: 20%;

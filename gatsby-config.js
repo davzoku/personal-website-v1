@@ -58,6 +58,49 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/content/projects`,
+        name: "Projects",
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/content/notes`,
+        name: "Notes",
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/content/books`,
+        name: "Books",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [".mdx", ".md", ".markdown"],
+        gatsbyRemarkPlugins: [
+          `gatsby-remark-embedder`,
+          `gatsby-plugin-twitter`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+              wrapperStyle:
+                "border-radius: 4px; max-width: 100%; margin-bottom: 0;",
+              linkImagesToOriginal: false,
+              quality: 100,
+            },
+          },
+        ],
+        plugins: [`gatsby-remark-images`, `gatsby-remark-embedder`],
+      },
+    },
+    "gatsby-plugin-twitter",
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -69,7 +112,8 @@ module.exports = {
         background_color: config.themeColor,
         theme_color: config.backgroundColor,
         display: `standalone`,
-        icon: `src/images/profile-photo-circle.png`, // This path is relative to the root of the site.
+        icon: `src/images/pwa-maskable-icon.png`, // This path is relative to the root of the site.
+        include_favicon: false,
       },
     },
     {
@@ -101,5 +145,14 @@ module.exports = {
         defaultLightTheme: "theme-night-safari",
       },
     },
+    // {
+    //   resolve: `@aengusm/gatsby-theme-brain`,
+    //   options: {
+    //     mdxOtherwiseConfigured: true,
+    //     notesDirectory: `content/notes/`,
+    //     rootPath: `/`,
+    //     hideDoubleBrackets: true,
+    //   },
+    // },
   ],
 }

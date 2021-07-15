@@ -38,10 +38,10 @@ const FooterLinks = styled("div")`
   margin-top: 1.5em;
 `
 
-const FooterIcon = styled("img")`
-  max-width: 33px;
-  margin-top: 1em;
-`
+// const FooterIcon = styled("img")`
+//   max-width: 33px;
+//   margin-top: 1em;
+// `
 
 const Footer = ({ author }) => (
   <FooterContainer>

@@ -28,7 +28,7 @@ const typeStyles = css`
   }
 
   h5 {
-    margin-bottom: 1.45rem;
+    margin: 1.2rem 0;
     font-weight: 500;
     line-height: 20px;
     font-size: 0.95em;

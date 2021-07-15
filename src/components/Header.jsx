@@ -8,6 +8,9 @@ import { ThemeContext } from "gatsby-plugin-theme-switcher"
 import ThemePicker from "./ThemePicker"
 import SmoothCollapse from "react-smooth-collapse"
 import FormatPaintIcon from "@material-ui/icons/FormatPaint"
+import MenuIcon from "@material-ui/icons/Menu"
+import CloseIcon from "@material-ui/icons/Close"
+import config from "../../config/website"
 
 const HeaderContainer = styled("div")``
 
@@ -34,16 +37,16 @@ const HeaderContent = styled("div")`
   justify-content: space-between;
 `
 
+const HeaderNavBar = styled("div")`
+  display: flex;
+  align-items: center;
+`
+
 const HeaderLinks = styled("div")`
   padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
-
-  @media (max-width: ${dimensions.maxwidthTablet}px) {
-  }
-
-  @media (max-width: ${dimensions.maxwidthMobile}px) {
-  }
+  flex-direction: row;
 
   a {
     color: var(--color-text, #16161a);
@@ -85,9 +88,16 @@ const HeaderLinks = styled("div")`
       }
     }
   }
+
+  @media (max-width: ${dimensions.maxwidthTablet}px) {
+    display: none;
+  }
 `
 
-const HeaderButtons = styled("div")``
+const HeaderButtons = styled("div")`
+  display: flex;
+  justify-content: space-evenly;
+`
 
 const HeaderButton = styled("div")`
   padding-bottom: 1em;
@@ -102,8 +112,8 @@ const HeaderButton = styled("div")`
   background-color: var(--color-backgroundOffset);
   border: 2px var(--color-border);
   cursor: pointer;
+  margin-right: 1em;
   svg {
-    display: block;
     margin: auto;
   }
 `
@@ -113,19 +123,124 @@ const ThemeSelectorTitle = styled("div")`
   align-items: center;
   text-align: center;
   font-weight: 700;
-  padding: 2rem 1.5rem 0;
+  padding: 1rem 1.5rem 0;
+`
+
+const CloseThemeBtn = styled(CloseIcon)`
+  cursor: pointer;
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.125rem;
+`
+
+const MenuButton = styled("div")`
+  padding-bottom: 1em;
+  padding-top: 0.75em;
+  justify-content: center;
+  align-items: stretch;
+  text-align: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  color: var(--color-text);
+  background-color: var(--color-backgroundOffset);
+  border: 2px var(--color-border);
+  cursor: pointer;
+  svg {
+    margin: auto;
+  }
+  display: none;
+
+  @media (max-width: ${dimensions.maxwidthTablet}px) {
+    display: block;
+  }
+
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    display: block;
+  }
+`
+
+const BurgerNav = styled("div")`
+  display: none;
+
+  @media (max-width: ${dimensions.maxwidthTablet}px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--color-backgroundOffset);
+    width: 60%;
+    z-index: 2;
+    padding: 1em;
+    font-size: 1.5em;
+    text-align: center;
+    transform: ${(props) =>
+      props.show ? "translateX(0)" : "translateX(100%)"};
+    transition: transform 0.3s;
+
+    nav {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+    }
+
+    ol {
+      list-style: none;
+    }
+
+    li {
+      padding: 2em;
+      border-bottom: 1px solid var(--color-border);
+      a {
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--color-primary);
+      }
+      a:hover {
+        color: var(--color-primaryOffset);
+        font-weight: 800;
+      }
+    }
+  }
+  @media (max-width: ${dimensions.maxwidthMobile}px) {
+    width: 100%;
+  }
+`
+
+const CloseBtn = styled(CloseIcon)`
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.125rem;
+`
+
+const CloseWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `
 
 const Header = () => {
   const { theme, switchTheme } = useContext(ThemeContext)
   const [themeExpanded, setThemeExpanded] = useState(false)
-  const [menuExpanded, toggleMenuExpansion] = useState(false)
+  const [burgerStatus, setBurgerStatus] = useState(false)
 
   return (
     <HeaderContainer>
       <ThemeMenu>
-        <SmoothCollapse expanded={themeExpanded} className="">
+        <SmoothCollapse expanded={themeExpanded}>
           <ThemeSelectorTitle>Select Theme</ThemeSelectorTitle>
+          <CloseThemeBtn
+            aria-label="Close Theme"
+            onClick={() => {
+              setThemeExpanded(false)
+            }}
+          />
 
           <ThemePicker theme={theme} setTheme={switchTheme} />
         </SmoothCollapse>
@@ -134,24 +249,58 @@ const Header = () => {
         <Link to="/">
           <Logo />
         </Link>
-        <HeaderLinks>
-          <Link activeClassName="" to=""></Link>
-          <Link activeClassName="Link--is-active" to="/projects">
-            Projects
-          </Link>
+        <HeaderNavBar>
+          <HeaderLinks>
+            {config.navLinksShort && (
+              <>
+                {config.navLinksShort.map(({ url, name }, i) => (
+                  <Link activeClassName="Link--is-active" to={url}>
+                    {name}
+                  </Link>
+                ))}
+              </>
+            )}
+          </HeaderLinks>
           <HeaderButtons>
-            <HeaderButton>
-              <FormatPaintIcon
-                aria-label="Theme Changer"
-                onClick={() => {
-                  setThemeExpanded(!themeExpanded)
-                  toggleMenuExpansion(false)
-                }}
-              />
+            <HeaderButton
+              aria-label="Theme Changer"
+              onClick={() => {
+                setThemeExpanded(!themeExpanded)
+                setBurgerStatus(false)
+              }}
+            >
+              <FormatPaintIcon />
             </HeaderButton>
+            <MenuButton
+              onClick={() => {
+                setBurgerStatus(true)
+                setThemeExpanded(false)
+              }}
+            >
+              <MenuIcon />
+            </MenuButton>
           </HeaderButtons>
-        </HeaderLinks>
+        </HeaderNavBar>
       </HeaderContent>
+
+      <BurgerNav show={burgerStatus}>
+        <CloseWrapper>
+          <CloseBtn onClick={() => setBurgerStatus(false)} />
+        </CloseWrapper>
+        <nav>
+          {config.navLinks && (
+            <ol>
+              {config.navLinks.map(({ url, name }, i) => (
+                <li key={i}>
+                  <Link to={url} onClick={() => setBurgerStatus(false)}>
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
+        </nav>
+      </BurgerNav>
     </HeaderContainer>
   )
 }

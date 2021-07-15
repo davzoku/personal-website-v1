@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "@emotion/styled"
 import dimensions from "styles/dimensions"
-import { RichText } from "prismic-reactjs"
-import PropTypes from "prop-types"
-import profilePhoto from "images/profile-photo-circle.png"
+//import { RichText } from "prismic-reactjs"
+//import PropTypes from "prop-types"
+import { StaticImage } from "gatsby-plugin-image"
 //import colors from "styles/colors"
 
 const AboutContainer = styled("div")`
@@ -13,12 +13,12 @@ const AboutContainer = styled("div")`
   grid-column-gap: 3em;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-column-gap: 1em;
+    grid-column-gap: 1.5em;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 0.5em;
   }
@@ -29,21 +29,26 @@ const AboutPhoto = styled("div")`
   padding-bottom: 3em;
   margin: auto;
   grid-area: 1 / 1 / 2 / 3;
+  text-align: center;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
+    padding-bottom: 2em;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
+    padding-bottom: 1em;
     grid-area: 1 / 1 / 2 / 4;
+    img {
+      width: 70%;
+
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 `
 
-const AboutProfilePhoto = styled("img")`
-  width: 100%;
-`
-
 const AboutBio = styled("div")`
-  padding-bottom: 3em;
+  padding-bottom: 3rem;
   grid-area: 1 / 3 / 2 / 7;
 
   a {
@@ -87,9 +92,11 @@ const AboutBio = styled("div")`
   }
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
+    padding-bottom: 2rem;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
+    padding-bottom: 1rem;
     grid-area: 2 / 1 / 3 / 3;
     ul {
       display: grid;
@@ -114,6 +121,7 @@ const AboutLinkContainer = styled("div")`
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
     grid-area: 2 / 3 / 3 / 4;
+    display: none;
   }
 `
 
@@ -141,31 +149,73 @@ const AboutLink = styled("a")`
   }
 `
 
-const About = ({ bio, socialLinks }) => (
-  <AboutContainer>
-    <AboutPhoto>
-      <AboutProfilePhoto className="ProfilePhoto" src={profilePhoto} />
-    </AboutPhoto>
-    <AboutBio>{RichText.render(bio)}</AboutBio>
-    <AboutLinkContainer>
-      {socialLinks.map((social, i) => (
-        <AboutLink
-          key={i}
-          href={social.about_link.raw[0].spans[0].data.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {social.about_link.raw[0].text}
-          <span>&#8594;</span>
-        </AboutLink>
-      ))}
-    </AboutLinkContainer>
-  </AboutContainer>
-)
+const skills = ["Java", "Spring Framework", "JSP", "Javascript", "React", "AWS"]
+
+const bioLinks = new Map([
+  ["Twitter", "https://twitter.com/davzoku"],
+  ["Github", "https://github.com/davzoku"],
+  ["Linkedin", "https://www.linkedin.com/in/tengkokwai/"],
+  ["Polywork", "https://www.polywork.com/walterteng"],
+  ["Credly", "https://credly.com/users/waltertengkw/badges"],
+])
+
+const About = () => {
+  return (
+    <AboutContainer>
+      <AboutPhoto>
+        <StaticImage
+          className="img"
+          src="../images/profile-photo-circle-512.png"
+          width={500}
+          quality={95}
+          placeholder="blurred"
+          formats={["AUTO", "WEBP", "AVIF"]}
+          alt="Profile Photo"
+        />
+      </AboutPhoto>
+      <AboutBio>
+        <p>
+          Hi! My name is Walter and I am currently based in Singapore. I did my
+          Bachelors in{" "}
+          <a href="https://www.ntu.edu.sg/eee">
+            Nanyang Technological University (NTU)
+          </a>{" "}
+          , majoring in Electrical and Electronic Engineering.{" "}
+        </p>
+
+        <p>
+          In my free time, I like to go hiking in nature and tinkering with code
+          to make digital experiences smoother and more productive.
+        </p>
+
+        <p>
+          Currently, I am working at{" "}
+          <a href="https://www.crimsonlogic.com/">CrimsonLogic</a> focused on{" "}
+          <a href="https://www.crimsonlogic.com/products-services/legal">
+            digitalizing the judiciary system
+          </a>
+          .
+        </p>
+
+        <p>Here are a few technologies that I've been working with recently:</p>
+        <ul>{skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}</ul>
+      </AboutBio>
+      <AboutLinkContainer>
+        {[...bioLinks].map((item) => {
+          let name = item[0]
+          let link = item[1]
+          return (
+            <AboutLink href={link} target="_blank" rel="noopener noreferrer">
+              {name}
+              <span>&#8594;</span>
+            </AboutLink>
+          )
+        })}
+      </AboutLinkContainer>
+    </AboutContainer>
+  )
+}
 
 export default About
 
-About.propTypes = {
-  bio: PropTypes.array.isRequired,
-  socialLinks: PropTypes.array.isRequired,
-}
+About.propTypes = {}

@@ -1,15 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { RichText } from "prismic-reactjs"
+//import { RichText } from "prismic-reactjs"
 import { graphql, Link } from "gatsby"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 import dimensions from "styles/dimensions"
 import Button from "components/_ui/Button"
 import About from "components/About"
 import Layout from "components/Layout"
-import ProjectCard from "components/ProjectCard"
+import ProjectCardMdx from "components/ProjectCardMdx"
+import NoteCardMdx from "components/NoteCardMdx"
+import SeoHelmet from "components/SeoHelmet"
+import config from "../../config/website"
 
 const Hero = styled("div")`
   padding-top: 2.5em;
@@ -37,7 +40,7 @@ const Hero = styled("div")`
 `
 
 const Section = styled("div")`
-  margin-bottom: 10em;
+  margin-bottom: 5em;
   display: flex;
   flex-direction: column;
 
@@ -48,9 +51,52 @@ const Section = styled("div")`
   &:last-of-type {
     margin-bottom: 0;
   }
+  h3,
+  h5 {
+    a {
+      text-decoration: none;
+      transition: all 100ms ease-in-out;
+      color: var(--color-text);
+
+      &:hover {
+        color: var(--color-primary, #73abff);
+        cursor: pointer;
+        transition: all 100ms ease-in-out;
+      }
+    }
+  }
 `
 
-const ProjectsAction = styled(Link)`
+const ProjectSection = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1.5rem;
+
+  @media (min-width: ${dimensions.maxwidthTablet}px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+  }
+`
+// TODO
+const GardenSection = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: ${dimensions.maxwidthTablet}px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+    gap: 2rem;
+  }
+`
+
+const ActionLink = styled(Link)`
+  margin-top: 1em;
   font-weight: 600;
   text-decoration: none;
   color: var(--color-text, #16161a);
@@ -58,7 +104,7 @@ const ProjectsAction = styled(Link)`
   margin-left: auto;
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    margin: 0 auto;
+    margin: 1em auto;
   }
 
   span {
@@ -80,8 +126,9 @@ const ProjectsAction = styled(Link)`
   }
 `
 
-const RenderBody = ({ home, projects, meta }) => (
+const RenderBody = ({ projects, notes, meta }) => (
   <>
+    <SeoHelmet />
     <Helmet
       title={meta.title}
       titleTemplate={`%s`}
@@ -129,134 +176,135 @@ const RenderBody = ({ home, projects, meta }) => (
       ].concat(meta)}
     />
     <Hero>
-      <>{RichText.render(home.data.hero_title.raw)}</>
+      <h1>
+        Hello, I'm Walter Teng. 👋🏻 <br />I help to transform and develop digital
+        experiences.
+      </h1>
       <a
-        href={home.data.hero_button_link.url}
+        href="mailto:walter.tengkw@gmail.com"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Button>{RichText.render(home.data.hero_button_text.raw)}</Button>
+        <Button>Let's work together</Button>
       </a>
     </Hero>
     <Section>
-      {RichText.render(home.data.about_title.raw)}
-      <About
-        bio={home.data.about_bio.raw}
-        socialLinks={home.data.about_links}
-      />
+      <h3>About Me</h3>
+      <About />
     </Section>
     <Section>
-      {projects.map((project, i) => (
-        <ProjectCard
-          key={i}
-          category={project.node.data.project_category.raw}
-          title={project.node.data.project_title.raw}
-          description={project.node.data.project_preview_description.raw}
-          thumbnail={project.node.data.project_preview_thumbnail}
-          uid={project.node.uid}
-        />
-      ))}
-      <ProjectsAction to={"/projects"}>
-        See more projects <span>&#8594;</span>
-      </ProjectsAction>
+      <h3>
+        <a href="/projects">Featured Projects</a>
+      </h3>
+      <h5>{config.projectDesc}</h5>
+      <ProjectSection>
+        {projects.map((project, i) => (
+          <ProjectCardMdx key={i} data={project.node.frontmatter} />
+        ))}
+      </ProjectSection>
+
+      <ActionLink to={"/projects"}>
+        All projects <span>&#8594;</span>
+      </ActionLink>
+    </Section>
+
+    <Section>
+      <h3>
+        <a href="/garden">The Digital Garden</a>
+      </h3>
+      <h5>{config.gardenDesc}</h5>
+      <GardenSection>
+        {notes.map((note, i) => (
+          <NoteCardMdx key={i} data={note.node.frontmatter} />
+        ))}
+      </GardenSection>
+
+      <ActionLink to={"/garden"}>
+        Visit the Garden <span>&#8594;</span>
+      </ActionLink>
     </Section>
   </>
 )
 
 export default ({ data }) => {
   //Required check for no data being returned
-  const doc = data.allPrismicHomepage.edges.slice(0, 1).pop()
-  const projects = data.allPrismicProject.edges
+  const projects = data.projectQuery.edges
+  const notes = data.noteQuery.edges
   const meta = data.site.siteMetadata
 
-  if (!doc || !projects) return null
+  if (!projects || !notes) return null
 
   return (
     <Layout>
-      <RenderBody home={doc.node} projects={projects} meta={meta} />
+      <RenderBody projects={projects} notes={notes} meta={meta} />
     </Layout>
   )
 }
 
 RenderBody.propTypes = {
-  home: PropTypes.object.isRequired,
+  notes: PropTypes.array.isRequired,
   projects: PropTypes.array.isRequired,
   meta: PropTypes.object.isRequired,
 }
 
 export const query = graphql`
   {
-    allPrismicHomepage {
+    projectQuery: allMdx(
+      limit: 4
+      filter: {
+        frontmatter: {
+          published: { eq: true }
+          featured: { eq: true }
+          type: { eq: "Project" }
+        }
+      }
+      sort: { order: DESC, fields: frontmatter___startDate }
+    ) {
       edges {
         node {
-          data {
-            hero_title {
-              html
-              text
-              raw
-            }
-            hero_button_text {
-              html
-              text
-              raw
-            }
-            hero_button_link {
-              link_type
-              url
-            }
-            content {
-              html
-              text
-              raw
-            }
-            about_title {
-              html
-              text
-              raw
-            }
-            about_bio {
-              html
-              text
-              raw
-            }
-            about_links {
-              about_link {
-                html
-                text
-                raw
+          frontmatter {
+            description
+            title
+            techStack
+            slug
+            category
+            cover {
+              id
+              childImageSharp {
+                gatsbyImageData(
+                  width: 800
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
           }
         }
       }
     }
-    allPrismicProject(sort: { order: DESC, fields: data___project_post_date }) {
+    noteQuery: allMdx(
+      limit: 4
+      filter: { frontmatter: { published: { eq: true }, type: { eq: "Note" } } }
+      sort: { order: DESC, fields: frontmatter___startDate }
+    ) {
       edges {
         node {
-          uid
-          data {
-            project_title {
-              html
-              text
-              raw
+          frontmatter {
+            description
+            title
+            slug
+            tags
+            growthStage
+            cover {
+              id
+              childImageSharp {
+                gatsbyImageData(
+                  width: 800
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
             }
-            project_preview_description {
-              html
-              text
-              raw
-            }
-            project_preview_thumbnail {
-              alt
-              copyright
-              url
-              thumbnails
-            }
-            project_category {
-              html
-              text
-              raw
-            }
-            project_post_date
           }
         }
       }

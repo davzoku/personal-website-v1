@@ -11,7 +11,7 @@ const ButtonContainer = styled("button")`
   outline: none;
   border: none;
   font-size: 1rem;
-  border-radius: 2px;
+  border-radius: 0.3rem;
   position: relative;
   transition: background 100ms ease-in-out;
 
@@ -25,6 +25,7 @@ const ButtonContainer = styled("button")`
   }
 
   &:before {
+    border-radius: 0.3rem;
     content: "";
     position: absolute;
     left: 0;

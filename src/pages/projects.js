@@ -4,14 +4,30 @@ import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 import styled from "@emotion/styled"
 import Layout from "components/Layout"
-import ProjectCard from "components/ProjectCard"
+import ProjectCardMdx from "components/ProjectCardMdx"
+import SeoHelmet from "components/SeoHelmet"
+import dimensions from "styles/dimensions"
+import config from "../../config/website"
 
-const ProjectTitle = styled("h1")`
-  margin-bottom: 1em;
+const ProjectTitle = styled("h1")``
+
+const ProjectSection = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1.5rem;
+
+  @media (min-width: ${dimensions.maxwidthTablet}px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2rem;
+  }
 `
 
 const Projects = ({ projects, meta }) => (
   <>
+    <SeoHelmet />
     <Helmet
       title={`Projects`}
       titleTemplate={`%s | ${meta.author}`}
@@ -60,24 +76,18 @@ const Projects = ({ projects, meta }) => (
     />
     <Layout>
       <ProjectTitle>Projects</ProjectTitle>
-      <>
+      <h5>{config.projectDesc}</h5>
+      <ProjectSection>
         {projects.map((project, i) => (
-          <ProjectCard
-            key={i}
-            category={project.node.data.project_category.raw}
-            title={project.node.data.project_title.raw}
-            description={project.node.data.project_preview_description.raw}
-            thumbnail={project.node.data.project_preview_thumbnail}
-            uid={project.node.uid}
-          />
+          <ProjectCardMdx key={i} data={project.node.frontmatter} />
         ))}
-      </>
+      </ProjectSection>
     </Layout>
   </>
 )
 
 export default ({ data }) => {
-  const projects = data.allPrismicProject.edges
+  const projects = data.allMdx.edges
   const meta = data.site.siteMetadata
   if (!projects) return null
 
@@ -90,33 +100,30 @@ Projects.propTypes = {
 
 export const query = graphql`
   {
-    allPrismicProject(sort: { order: DESC, fields: data___project_post_date }) {
+    allMdx(
+      filter: {
+        frontmatter: { published: { eq: true }, type: { eq: "Project" } }
+      }
+      sort: { order: DESC, fields: frontmatter___startDate }
+    ) {
       edges {
         node {
-          uid
-          data {
-            project_title {
-              html
-              text
-              raw
+          frontmatter {
+            description
+            title
+            techStack
+            slug
+            category
+            cover {
+              id
+              childImageSharp {
+                gatsbyImageData(
+                  width: 800
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
             }
-            project_preview_description {
-              html
-              text
-              raw
-            }
-            project_preview_thumbnail {
-              alt
-              copyright
-              url
-              thumbnails
-            }
-            project_category {
-              html
-              text
-              raw
-            }
-            project_post_date
           }
         }
       }

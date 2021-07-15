@@ -5,7 +5,7 @@ module.exports = {
   siteTitleShort: "Walter Teng", // short_name for manifest
   siteUrl: "https://walterteng.com", // Domain of your site. No trailing slash!
   siteLanguage: "en", // Language Tag on <html> element
-  siteLogo: "images/favicon-ma.svg", // Used for SEO and manifest, path to your image you placed in the 'static' folder
+  siteLogo: "/favicon.png", // Used for SEO and manifest, path to your image you placed in the 'static' folder
   siteDescription:
     "Walter Teng is a full stack developer who specializes in transforming and developing digital experiences.",
   author: "Walter Teng", // Author for schemaORGJSONLD
@@ -28,4 +28,40 @@ module.exports = {
   github: "https://github.com/davzoku",
   linkedin: "https://sg.linkedin.com/in/tengkokwai",
   email: "walter.tengkw@gmail.com",
+
+  navLinks: [
+    {
+      name: "Home",
+      url: "/",
+    },
+    {
+      name: "Projects",
+      url: "/projects",
+    },
+    {
+      name: "Digital Garden",
+      url: "/garden",
+    },
+    // { name: "Library", url: "/library" },
+  ],
+
+  navLinksShort: [
+    {
+      name: "Home",
+      url: "/",
+    },
+    {
+      name: "Projects",
+      url: "/projects",
+    },
+    {
+      name: "Garden",
+      url: "/garden",
+    },
+    // { name: "Library", url: "/library" },
+  ],
+
+  projectDesc: "An collection of things I've built.",
+  gardenDesc:
+    "An open collection of notes, articles I'm currently cultivating. The maturity level ranges from Seedling 🌱, Budding 🌿 and Evergreen 🌳.",
 }
