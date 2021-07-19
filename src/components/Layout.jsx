@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 import styled from "@emotion/styled"

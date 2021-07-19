@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "@emotion/styled"
 import dimensions from "styles/dimensions"
-//import { RichText } from "prismic-reactjs"
 //import PropTypes from "prop-types"
 import { StaticImage } from "gatsby-plugin-image"
 //import colors from "styles/colors"

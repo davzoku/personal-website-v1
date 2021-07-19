@@ -4,52 +4,50 @@ import Helmet from "react-helmet"
 import styled from "@emotion/styled"
 import colors from "styles/colors"
 import { Link, graphql } from "gatsby"
-//import { RichText } from "prismic-reactjs"
 import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
+import PreviousNext from "components/PreviousNext"
 
-//const readingTime = require("reading-time")
+// const NoteHeroContainer = styled("div")`
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end;
+//   overflow: hidden;
+//   position: relative;
+//   margin-bottom: 3.5em;
 
-const ProjectHeroContainer = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 3.5em;
+//   img {
+//     max-height: 100%;
+//     min-width: 100%;
+//     object-fit: cover;
+//     vertical-align: bottom;
+//   }
+// `
 
-  img {
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    vertical-align: bottom;
-  }
-`
-
-const ProjectTitle = styled("div")`
+const NoteTitle = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
   text-align: center;
 `
 
-const ProjectStats = styled("div")`
+const NoteStats = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
-  border-bottom: 0.1em solid ${colors.grey600};
+  border-bottom: 0.1em solid var(--color-text, #16161a);
   font-weight: 300;
-  color: ${colors.grey600};
+  color: var(--color-text, #16161a);
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
-const ProjectReadingTime = styled("span")``
-const ProjectLastUpdatedDate = styled("span")``
+const NoteReadingTime = styled("span")``
+const NoteLastUpdatedDate = styled("span")``
 
-const ProjectBody = styled("div")`
+const NoteBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
 
@@ -86,38 +84,37 @@ const ProjectBody = styled("div")`
   }
 `
 
-const Projectslink = styled(Link)`
+const Noteslink = styled(Link)`
   margin-top: 3em;
   display: block;
   text-align: center;
 `
 
-const Project = ({ project, meta }) => {
-  console.log(project)
+const Note = ({ note, meta, prev, next }) => {
   return (
     <>
       <SeoHelmet />
       <Helmet
-        title={`${project.frontmatter.title}`}
+        title={`${note.frontmatter.title}`}
         titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
             name: `description`,
-            content: `${project.frontmatter.description}`,
+            content: `${note.frontmatter.description}`,
           },
           {
             property: `og:title`,
-            content: `${project.frontmatter.title}`,
+            content: `${note.frontmatter.title}`,
           },
           {
             property: `og:description`,
-            content: `${project.frontmatter.description}`,
+            content: `${note.frontmatter.description}`,
           },
           {
             property: `og:image`,
             content:
               meta.siteUrl +
-              `${project.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
+              `${note.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
           {
             property: `og:type`,
@@ -133,55 +130,62 @@ const Project = ({ project, meta }) => {
           },
           {
             name: `twitter:title`,
-            content: `${project.frontmatter.title}`,
+            content: `${note.frontmatter.title}`,
           },
           {
             name: `twitter:description`,
-            content: `${project.frontmatter.description}`,
+            content: `${note.frontmatter.description}`,
           },
           {
             property: `twitter:image`,
             content:
               meta.siteUrl +
-              `${project.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
+              `${note.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
         ].concat(meta)}
       />
       <Layout>
-        <ProjectTitle>
-          <h1>{project.frontmatter.title}</h1>
-        </ProjectTitle>
-        <ProjectStats>
-          <ProjectReadingTime>
-            {project.timeToRead} min read{" "}
-            {project.timeToRead > 5 ? "☕️" : "⚡️"}
-          </ProjectReadingTime>
-          <ProjectLastUpdatedDate>
-            Last Updated: {project.frontmatter.updated}
-          </ProjectLastUpdatedDate>
-        </ProjectStats>
-        <ProjectBody>
+        <NoteTitle>
+          <h1>{note.frontmatter.title}</h1>
+        </NoteTitle>
+        <NoteStats>
+          <NoteReadingTime>
+            {note.timeToRead} min read {note.timeToRead > 5 ? "☕️" : "⚡️"}
+          </NoteReadingTime>
+          <NoteLastUpdatedDate>
+            Last Updated: {note.frontmatter.updated}
+          </NoteLastUpdatedDate>
+        </NoteStats>
+        <NoteBody>
           <DefaultMdxComponentsProvider>
-            <MDXRenderer>{project.body}</MDXRenderer>
+            <MDXRenderer>{note.body}</MDXRenderer>
           </DefaultMdxComponentsProvider>
-        </ProjectBody>
-        <Projectslink to={"/garden"}>
+        </NoteBody>
+        {/* <Noteslink to={"/garden"}>
           <Button className="Button--secondary">See other notes</Button>
-        </Projectslink>
+        </Noteslink> */}
+        <PreviousNext
+          prevSlug={prev && `garden/${prev.frontmatter.slug}`}
+          prevTitle={prev && prev.frontmatter.title}
+          nextSlug={next && `garden/${next.frontmatter.slug}`}
+          nextTitle={next && next.frontmatter.title}
+        />
       </Layout>
     </>
   )
 }
 
-export default ({ data }) => {
-  // const projectContent = data.allPrismicProject.edges[0].node
-  const projectContent = data.mdx
-  const meta = data.site.siteMetadata
-  return <Project project={projectContent} meta={meta} />
+export default function NotePage({
+  data: { site, mdx },
+  pageContext: { prevPage, nextPage },
+}) {
+  return (
+    <Note note={mdx} meta={site.siteMetadata} prev={prevPage} next={nextPage} />
+  )
 }
 
-Project.propTypes = {
-  project: PropTypes.object.isRequired,
+Note.propTypes = {
+  note: PropTypes.object.isRequired,
 }
 
 export const query = graphql`

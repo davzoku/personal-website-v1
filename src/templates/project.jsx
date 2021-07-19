@@ -2,33 +2,31 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
+//import colors from "styles/colors"
 import { Link, graphql } from "gatsby"
-//import { RichText } from "prismic-reactjs"
 import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
+import PreviousNext from "components/PreviousNext"
 
-//const readingTime = require("reading-time")
+// const ProjectHeroContainer = styled("div")`
+//   display: flex;
+//   justify-content: center;
+//   align-items: flex-end;
+//   overflow: hidden;
+//   position: relative;
+//   margin-bottom: 3.5em;
 
-const ProjectHeroContainer = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 3.5em;
-
-  img {
-    max-height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    vertical-align: bottom;
-  }
-`
+//   img {
+//     max-height: 100%;
+//     min-width: 100%;
+//     object-fit: cover;
+//     vertical-align: bottom;
+//   }
+// `
 
 const ProjectTitle = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
@@ -39,9 +37,9 @@ const ProjectTitle = styled("div")`
 const ProjectStats = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
-  border-bottom: 0.1em solid ${colors.grey600};
+  border-bottom: 0.1em solid var(--color-text, #16161a);
   font-weight: 300;
-  color: ${colors.grey600};
+  color: var(--color-text, #16161a);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -92,8 +90,7 @@ const Projectslink = styled(Link)`
   text-align: center;
 `
 
-const Project = ({ project, meta }) => {
-  console.log(project)
+const Project = ({ project, meta, prev, next }) => {
   return (
     <>
       <SeoHelmet />
@@ -165,19 +162,32 @@ const Project = ({ project, meta }) => {
             <MDXRenderer>{project.body}</MDXRenderer>
           </DefaultMdxComponentsProvider>
         </ProjectBody>
-        <Projectslink to={"/projects"}>
+        {/* <Projectslink to={"/projects"}>
           <Button className="Button--secondary">See other projects</Button>
-        </Projectslink>
+        </Projectslink> */}
+        <PreviousNext
+          prevSlug={prev && `projects/${prev.frontmatter.slug}`}
+          prevTitle={prev && prev.frontmatter.title}
+          nextSlug={next && `projects/${next.frontmatter.slug}`}
+          nextTitle={next && next.frontmatter.title}
+        />
       </Layout>
     </>
   )
 }
 
-export default ({ data }) => {
-  // const projectContent = data.allPrismicProject.edges[0].node
-  const projectContent = data.mdx
-  const meta = data.site.siteMetadata
-  return <Project project={projectContent} meta={meta} />
+export default function ProjectPage({
+  data: { site, mdx },
+  pageContext: { prevPage, nextPage },
+}) {
+  return (
+    <Project
+      project={mdx}
+      meta={site.siteMetadata}
+      prev={prevPage}
+      next={nextPage}
+    />
+  )
 }
 
 Project.propTypes = {
@@ -205,6 +215,7 @@ export const query = graphql`
         updated(formatString: "DD MMM YYYY")
         description
         startDate
+        extLink
         cover {
           childImageSharp {
             gatsbyImageData

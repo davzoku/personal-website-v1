@@ -114,6 +114,8 @@ export const query = graphql`
             techStack
             slug
             category
+            githubLink
+            extLink
             cover {
               id
               childImageSharp {

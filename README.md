@@ -19,3 +19,11 @@
 <div align="center">
   <img alt="demo" src="https://raw.githubusercontent.com/davzoku/personal-website-v1/main/static/og.png" />
 </div>
+
+## About the site
+
+This site serves as a common ground / digital garden to share my projects and notes.
+
+### Inspiration
+
+I have came across many beautiful personal websites while developing my own. Some of the design ideas are influenced by these awesome developers and designers, do check out their work too: @margueriteroth, @bchiang7, @maxboeck, @MaggieAppleton, @slarsendisney, @joshwcomeau, @mxstbr
