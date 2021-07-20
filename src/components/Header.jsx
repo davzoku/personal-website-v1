@@ -260,6 +260,14 @@ const Header = () => {
                 ))}
               </>
             )}
+            <a
+              className="resume-button"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
           </HeaderLinks>
           <HeaderButtons>
             <HeaderButton
@@ -297,6 +305,16 @@ const Header = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  className="resume-button"
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Resume
+                </a>
+              </li>
             </ol>
           )}
         </nav>
