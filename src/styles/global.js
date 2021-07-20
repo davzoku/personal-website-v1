@@ -66,6 +66,10 @@ const globalStyles = css`
     height: 100%;
     min-height: 100% !important;
   }
+
+  a.anchor {
+    fill: var(--color-primary, #73abff);
+  }
 `
 
 export default globalStyles

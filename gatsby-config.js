@@ -79,6 +79,7 @@ module.exports = {
         gatsbyRemarkPlugins: [
           `gatsby-remark-embedder`,
           `gatsby-plugin-twitter`,
+          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -90,7 +91,11 @@ module.exports = {
             },
           },
         ],
-        plugins: [`gatsby-remark-images`, `gatsby-remark-embedder`],
+        plugins: [
+          `gatsby-remark-images`,
+          `gatsby-remark-embedder`,
+          `gatsby-remark-autolink-headers`,
+        ],
       },
     },
     "gatsby-plugin-twitter",

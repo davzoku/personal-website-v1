@@ -51,7 +51,7 @@ const NoteBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
 
-  a {
+  a:not(.anchor) {
     font-weight: 600;
     color: var(--color-primary, #73abff);
     box-shadow: inset 0 -2px 0 0 var(--color-primary, #73abff);
@@ -60,7 +60,7 @@ const NoteBody = styled("div")`
     transition: all 150ms ease-in-out;
   }
 
-  a:hover {
+  a:hover:not(.anchor) {
     color: var(--color-background, #ffffff);
     box-shadow: inset 0 -1.25em 0 0 var(--color-primary, #73abff);
     border-bottom-color: var(--color-primary, #73abff);

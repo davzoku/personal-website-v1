@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  The first iteration of <a href="https://walterteng.com" target="_blank">walterteng.com</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a>, <a href="https://prismic.io/" target="_blank">Prismic</a> and hosted with <a href="https://www.netlify.com/" target="_blank">Netlify</a>
+  The first iteration of <a href="https://walterteng.com" target="_blank">walterteng.com</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a>  and hosted with <a href="https://www.netlify.com/" target="_blank">Netlify</a>
 </p>
 
 <div align="center">
@@ -27,3 +27,7 @@ This site serves as a common ground / digital garden to share my projects and no
 ### Inspiration
 
 I have came across many beautiful personal websites while developing my own. Some of the design ideas are influenced by these awesome developers and designers, do check out their work too: @margueriteroth, @bchiang7, @maxboeck, @MaggieAppleton, @slarsendisney, @joshwcomeau, @mxstbr
+
+## Changelog
+
+The changelog is maintained <a href="https://walterteng.com/garden/how-i-built-my-website-v1" target="_blank">here</a>
