@@ -2,15 +2,16 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import styled from "@emotion/styled"
-import colors from "styles/colors"
-import { Link, graphql } from "gatsby"
-import Button from "components/_ui/Button"
+//import colors from "styles/colors"
+import { graphql } from "gatsby"
+//import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
-import PreviousNext from "components/PreviousNext"
+import PreviousNext from "components/_ui/PreviousNext"
+import PostTime from "components/_ui/PostTime"
 
 // const NoteHeroContainer = styled("div")`
 //   display: flex;
@@ -33,19 +34,6 @@ const NoteTitle = styled("div")`
   margin: 0 auto;
   text-align: center;
 `
-
-const NoteStats = styled("div")`
-  max-width: ${dimensions.maxwidthTablet}px;
-  margin: 0 auto;
-  border-bottom: 0.1em solid var(--color-text, #16161a);
-  font-weight: 300;
-  color: var(--color-text, #16161a);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-const NoteReadingTime = styled("span")``
-const NoteLastUpdatedDate = styled("span")``
 
 const NoteBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
@@ -84,11 +72,11 @@ const NoteBody = styled("div")`
   }
 `
 
-const Noteslink = styled(Link)`
-  margin-top: 3em;
-  display: block;
-  text-align: center;
-`
+// const Noteslink = styled(Link)`
+//   margin-top: 3em;
+//   display: block;
+//   text-align: center;
+// `
 
 const Note = ({ note, meta, prev, next }) => {
   return (
@@ -148,14 +136,10 @@ const Note = ({ note, meta, prev, next }) => {
         <NoteTitle>
           <h1>{note.frontmatter.title}</h1>
         </NoteTitle>
-        <NoteStats>
-          <NoteReadingTime>
-            {note.timeToRead} min read {note.timeToRead > 5 ? "☕️" : "⚡️"}
-          </NoteReadingTime>
-          <NoteLastUpdatedDate>
-            Last Updated: {note.frontmatter.updated}
-          </NoteLastUpdatedDate>
-        </NoteStats>
+        <PostTime
+          timeToRead={note.timeToRead}
+          updatedDate={note.frontmatter.updated}
+        />
         <NoteBody>
           <DefaultMdxComponentsProvider>
             <MDXRenderer>{note.body}</MDXRenderer>

@@ -3,14 +3,15 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import styled from "@emotion/styled"
 //import colors from "styles/colors"
-import { Link, graphql } from "gatsby"
-import Button from "components/_ui/Button"
+import { graphql } from "gatsby"
+//import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
-import PreviousNext from "components/PreviousNext"
+import PreviousNext from "components/_ui/PreviousNext"
+import PostTime from "components/_ui/PostTime"
 
 // const ProjectHeroContainer = styled("div")`
 //   display: flex;
@@ -33,19 +34,6 @@ const ProjectTitle = styled("div")`
   margin: 0 auto;
   text-align: center;
 `
-
-const ProjectStats = styled("div")`
-  max-width: ${dimensions.maxwidthTablet}px;
-  margin: 0 auto;
-  border-bottom: 0.1em solid var(--color-text, #16161a);
-  font-weight: 300;
-  color: var(--color-text, #16161a);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-const ProjectReadingTime = styled("span")``
-const ProjectLastUpdatedDate = styled("span")``
 
 const ProjectBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
@@ -84,11 +72,11 @@ const ProjectBody = styled("div")`
   }
 `
 
-const Projectslink = styled(Link)`
-  margin-top: 3em;
-  display: block;
-  text-align: center;
-`
+// const Projectslink = styled(Link)`
+//   margin-top: 3em;
+//   display: block;
+//   text-align: center;
+// `
 
 const Project = ({ project, meta, prev, next }) => {
   return (
@@ -148,15 +136,10 @@ const Project = ({ project, meta, prev, next }) => {
         <ProjectTitle>
           <h1>{project.frontmatter.title}</h1>
         </ProjectTitle>
-        <ProjectStats>
-          <ProjectReadingTime>
-            {project.timeToRead} min read{" "}
-            {project.timeToRead > 5 ? "☕️" : "⚡️"}
-          </ProjectReadingTime>
-          <ProjectLastUpdatedDate>
-            Last Updated: {project.frontmatter.updated}
-          </ProjectLastUpdatedDate>
-        </ProjectStats>
+        <PostTime
+          timeToRead={project.timeToRead}
+          updatedDate={project.frontmatter.updated}
+        />
         <ProjectBody>
           <DefaultMdxComponentsProvider>
             <MDXRenderer>{project.body}</MDXRenderer>
