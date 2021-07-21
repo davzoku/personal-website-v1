@@ -25,7 +25,7 @@ const myThemes = [
 
 const ThemeButton = styled("div")``
 
-const ThemePicker = ({ theme, setTheme }) => {
+const ThemeSwitcher = ({ theme, setTheme }) => {
   if (theme) {
     return (
       <div>
@@ -52,4 +52,4 @@ const ThemePicker = ({ theme, setTheme }) => {
   return null
 }
 
-export default ThemePicker
+export default ThemeSwitcher

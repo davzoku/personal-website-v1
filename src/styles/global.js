@@ -70,6 +70,15 @@ const globalStyles = css`
   a.anchor {
     fill: var(--color-primary, #73abff);
   }
+
+  pre {
+    background-color: var(--color-backgroundOffset);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
 `
 
 export default globalStyles

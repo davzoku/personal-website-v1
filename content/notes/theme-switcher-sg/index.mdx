@@ -1,17 +1,250 @@
 ---
 slug: theme-switcher-sg
 startDate: 2021-07-15
-updated: 2021-07-15
+updated: 2021-07-21
 title: "How I built a Theme Switcher based on Singapore attractions"
 description: "A Singapore-inspired colour theme switcher "
-published: false
+published: true
 type: ["Note"]
-tags: ["Code", "Design", "Singapore"]
+tags: ["Code", "Design", "Figma", Singapore"]
 cover: ./cover.png
 growthStage: "Seedling"
 ---
 
-![cover](./cover.png)
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626793681/waltertengcom/garden/theme-switcher-sg/cover_t0cdng.png"
+  alt="cover"
+/>
 
-#TODO
-Something to write about
+## The Idea
+
+Supporting dark mode is part of the [roadmap](https://walterteng.com/garden/how-i-built-my-website-v1#roadmap) for my website. After some research, I found Max Böck's implementation of a [color them switcher](https://mxb.dev/blog/color-theme-switcher/). The execution and the beautiful design widget to toggle themes really blew my mind. _Mario Kart 64 race tracks really make a good choice for themes._
+
+Click on the **paint-roller button** above to try it!
+
+_If you are reading this from somewhere else, this is what it will do:_
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626871098/waltertengcom/garden/theme-switcher-sg/demo_lpo6qa.gif"
+  alt="demo"
+/>
+
+As Max's website uses [Eleventy](https://www.11ty.dev/) while mine is built with [Gatsby](https://www.gatsbyjs.com/), the guide below will vary in implementation.
+
+## Design Exploration
+
+Like how his themes are based on Mario Kart race tracks, I needed a central topic across my themes. After a travel-less year because of COVID-19, many of us have probably explored most tourist spots in our current location. In my home country, Singapore, adult citizens were given [SingapoRediscover Vouchers](https://singaporediscovers.life.gov.sg/) to support local tourism businesses. I have enjoyed my time at some of these places, thanks to this initiative. _💡 tadaa~, I have an idea now!_
+
+After going through the list of Singapore attractions, I shortlisted 5 with distinct color hues and extracted 8 colors to form individual color swatches using Figma.
+
+### Merlion
+
+I picked [Merlion](https://en.wikipedia.org/wiki/Merlion) for the default light theme,
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865284/waltertengcom/garden/theme-switcher-sg/cs_01_merlion_ingxqw.png"
+  alt="merlion color swatch"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/VCLU-0cUkDY)
+
+### Night Safari
+
+[Night Safari](https://www.wrs.com.sg/en/night-safari.html) for the default dark theme,
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865254/waltertengcom/garden/theme-switcher-sg/cs_02_ns_oylkfw.png"
+  alt="night safari color swatch"
+/>
+
+[Photo from Visit Singapore](https://www.visitsingapore.com/see-do-singapore/nature-wildlife/fun-with-animals/night-safari/)
+
+### Garden by the Bay
+
+[Gardens by the Bay](https://www.gardensbythebay.com.sg/en.html) for the natural theme,
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865288/waltertengcom/garden/theme-switcher-sg/cs_03_gbtb_foin7j.png"
+  alt="garden by the bay color swatch"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/VbB6HYunm04)
+
+### Chinatown
+
+[Chinatown](https://en.wikipedia.org/wiki/Chinatown,_Singapore) for its distinct look _(inspired by the Chinatown Maroon in Jonathan Tan's [Singapore Pantone](https://cargocollective.com/jontan/Singapore-Pantone) project)_,
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865252/waltertengcom/garden/theme-switcher-sg/cs_04_ct_qhfgta.png"
+  alt="chinatown swatch"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/JH8YVV39R74)
+
+### Sentosa
+
+and, lastly, [Sentosa](https://www.sentosa.com.sg/) for the relaxing beachy vibes.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865265/waltertengcom/garden/theme-switcher-sg/cs_05_s_vaqsa5.png"
+  alt="sentosa color swatch"
+/>
+
+[Photo from Sentosa](https://www.sentosa.com.sg/en/safe-measures/)
+
+## Implementation
+
+Fortunately, Ruben Casas created the [gatsby-plugin-theme-switcher](https://github.com/infoxicator/gatsby-plugin-theme-switcher) plugin which made the implementation of a theme switcher with Gatsby straightforward.
+
+After installing `gatsby-plugin-theme-switcher`, we can add the plugin to our `gatsby-config.js`.
+
+Reuben provided a helpful feature in which we can declare our defaultDarkTheme and defaultLightTheme. The defaultDarkTheme takes advantage of the CSS media feature, [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme). If the user has indicated the dark preference through the system or user agent setting, the user will be greeted with the defaultDarkTheme first.
+
+```
+module.exports = {
+  plugins: [
+    {
+      resolve: "gatsby-plugin-theme-switcher",
+      options: {
+        defaultDarkTheme: "theme-merlion",
+        defaultLightTheme: "theme-night-safari",
+      },
+    },
+  ],
+};
+```
+
+Next, we can arrange our color palettes from above into CSS variable with the `.theme-*` format.
+
+```
+.theme-night-safari {
+  --color-primary: #ffb814;
+  --color-secondary: #10c8ee;
+  --color-text: #f5f5ff;
+  --color-border: #10c8ee;
+  --color-background: #16161a;
+  --color-primaryOffset: #bee71f;
+  --color-textOffset: #16161a;
+  --color-backgroundOffset: #404043;
+
+  --color-logo-text: #ffffff;
+  --color-logo-circle: #ca8d00;
+  --color-logo-ring: #ffb814;
+}
+```
+
+Subsequently, we have to change every color attribute in our CSS to use the CSS variables that we have declared. _Yes, every single one of them!_
+
+```
+  body {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text, #16161a);
+    background: var(--color-background, #ffffff);
+    -webkit-font-smoothing: antialiased;
+
+    @media (max-width: ${dimensions.maxwidthMobile}px) {
+      font-size: 14px;
+    }
+```
+
+Additionally, if we have any SVG that we want to toggle alongside with the themes, we can change the fill attribute to take in the CSS variable.
+
+```
+  <svg
+    width="31"
+    height="31"
+    viewBox="0 0 31 31"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15.5 31C24.0604 31 31 24.0604 31 15.5C31 6.93959 24.0604 0 15.5 0C6.93959 0 0 6.93959 0 15.5C0 24.0604 6.93959 31 15.5 31Z"
+      fill="var(--color-logo-ring, #4B84E5)"
+    />
+    ...
+  </svg>
+```
+
+Finally, we can build either a theme toggler or a theme picker UI component for the user to change themes. I have built both types of components, and you can find these components in [my Github repo](https://github.com/davzoku/personal-website-v1). The theme toggler method is also provided as an example in docs by Reuben.
+
+Since I have opted to find a theme picker inspired by Max's UI design, I will further discuss it.
+
+First, we can create a hashmap to represent all the available theme options, each containing the theme name and the SVG icon.
+
+```
+const allThemes = new Map([
+  ["Merlion", MIcon],
+  ["Night Safari", NSIcon],
+  ["Garden by the Bay", GBTBIcon],
+  ["Chinatown", CTIcon],
+  ["Sentosa Sunset", SSIcon],
+])
+```
+
+We will loop through the map and create a `ThemeButton` component for each item in the map.
+
+```
+const ThemePicker = ({ theme, setTheme }) => {
+  return (
+    <ThemeButtons>
+      <ReactTooltip />
+
+      {[...allThemes].map((item) => {
+        let name = item[0]
+        let svg = item[1]
+        const themeVal = name.toLowerCase().replace(/ /g, "-")
+
+        return (
+          <ThemeButton
+            key={name}
+            className={`theme-${themeVal}`}
+            aria-label={`Theme ${name}`}
+            className={`${
+              theme === `theme-${themeVal}` ? "selectedTheme" : ""
+            }`}
+            onClick={() => setTheme(`theme-${themeVal}`)}
+          >
+            <div data-tip={`${name}`}>
+              <img src={svg} />
+            </div>
+            <ThemeName
+              className={`${
+                theme === `theme-${themeVal}` ? "selectedThemeText" : ""
+              }`}
+            >
+              {name}
+            </ThemeName>
+          </ThemeButton>
+        )
+      })}
+    </ThemeButtons>
+  )
+}
+```
+
+To switch themes, we can use the `ThemeContext`.
+
+```
+import React, { useContext } from "react"
+import { ThemeContext } from 'gatsby-plugin-theme-switcher';
+...
+const { theme, switchTheme } = useContext(ThemeContext)
+...
+<ThemePicker theme={theme} setTheme={switchTheme} />
+```
+
+The remaining step is to apply CSS for the ThemePicker component and it is dependent on the look on that you are trying to achieve.
+
+_I would like your feedback! Other than the Merlion and Night Safari theme, I am unsure how the remaining themes fares in terms of color accessibility. If you find that the color combination is affecting the site’s readability, please reach out so that I can improve on it._ 😀
+
+## Bonus
+
+Below is a snapshot of my Figma screen behind the scenes while I was picking suitable color combinations and creating the image assets. _The color styles feature is a lifesaver!_
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626865235/waltertengcom/garden/theme-switcher-sg/bts_iskqh9.png"
+  alt="figma bts"
+/>

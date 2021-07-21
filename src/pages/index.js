@@ -79,17 +79,17 @@ const ProjectSection = styled("div")`
     gap: 2rem;
   }
 `
-// TODO
+
 const GardenSection = styled("div")`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: repeat(4, 1fr);
   gap: 1.5rem;
 
   @media (min-width: ${dimensions.maxwidthTablet}px) {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 1fr;
+    grid-template-rows: repeat(2, 1fr);
     gap: 2rem;
   }
 `
