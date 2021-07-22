@@ -14,7 +14,7 @@ const ProjectTitle = styled("h1")``
 const ProjectSection = styled("div")`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: auto;
   gap: 1.5rem;
 
   @media (min-width: ${dimensions.maxwidthTablet}px) {

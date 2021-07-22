@@ -194,7 +194,7 @@ const BurgerNav = styled("div")`
     }
 
     li {
-      padding: 2em;
+      padding: 2rem;
       border-bottom: 1px solid var(--color-border);
       a {
         font-weight: 600;

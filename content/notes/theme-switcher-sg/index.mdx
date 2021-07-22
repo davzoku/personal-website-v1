@@ -1,14 +1,14 @@
 ---
 slug: theme-switcher-sg
 startDate: 2021-07-15
-updated: 2021-07-21
+updated: 2021-07-22
 title: "How I built a Theme Switcher based on Singapore attractions"
 description: "A Singapore-inspired colour theme switcher "
 published: true
 type: ["Note"]
 tags: ["Code", "Design", "Figma", Singapore"]
 cover: ./cover.png
-growthStage: "Seedling"
+growthStage: "Evergreen"
 ---
 
 <BasicImage
@@ -92,7 +92,28 @@ and, lastly, [Sentosa](https://www.sentosa.com.sg/) for the relaxing beachy vibe
 
 [Photo from Sentosa](https://www.sentosa.com.sg/en/safe-measures/)
 
+### Color Picking
+
+To keep things simple, I picked 8 colors for each theme, just like Max have done. Having 8 colors is manageable and I find it sufficent for my website's design. You can have any number of colors as you see fit.
+
+```
+  --color-primary: for links
+  --color-secondary: for ::selection selector
+  --color-text: for normal text
+  --color-border: for border
+  --color-background: for main background
+  --color-primaryOffset: for hover links;
+  --color-textOffset: for emphasized text like sub-headings;
+  --color-backgroundOffset: for components which requires some background constrast like cards and code blocks;
+```
+
+We can use any online image color picker like [this](https://coolors.co/image-picker) to help us pick the dominant colors from an image. However, after some trial and error, I decided to do it manually using Figma so I can see how the selection of colors would look together on a page.
+
+Depending on how you decide to group the colors on your site, some implicit color rules have to be considered when finalizing the color swatches. For example, text color, primary color and primary offset color have to be distinct from background and background offset color to ensure the site's readability.
+
 ## Implementation
+
+### Setting up gatsby-plugin-theme-switcher
 
 Fortunately, Ruben Casas created the [gatsby-plugin-theme-switcher](https://github.com/infoxicator/gatsby-plugin-theme-switcher) plugin which made the implementation of a theme switcher with Gatsby straightforward.
 
@@ -150,7 +171,18 @@ Subsequently, we have to change every color attribute in our CSS to use the CSS 
     }
 ```
 
-Additionally, if we have any SVG that we want to toggle alongside with the themes, we can change the fill attribute to take in the CSS variable.
+### Toggle SVG Colors
+
+Additionally, if we have any SVG icons that we want to toggle alongside with the themes, we can change the fill attribute to take in the CSS variable.
+
+For example, my site icon is a SVG which should change along with the theme ideally.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1626932163/waltertengcom/garden/theme-switcher-sg/svg_icons_ezpbdo.png"
+  alt="toggling svg icons"
+/>
+
+Instead of generating multiple image assets, we can modify the SVG code to accept a CSS variable.
 
 ```
   <svg
@@ -167,6 +199,8 @@ Additionally, if we have any SVG that we want to toggle alongside with the theme
     ...
   </svg>
 ```
+
+### Building UI Component
 
 Finally, we can build either a theme toggler or a theme picker UI component for the user to change themes. I have built both types of components, and you can find these components in [my Github repo](https://github.com/davzoku/personal-website-v1). The theme toggler method is also provided as an example in docs by Reuben.
 
@@ -248,3 +282,11 @@ Below is a snapshot of my Figma screen behind the scenes while I was picking sui
   src="https://res.cloudinary.com/wtkw/image/upload/v1626865235/waltertengcom/garden/theme-switcher-sg/bts_iskqh9.png"
   alt="figma bts"
 />
+
+## Tools for Sharing
+
+Below are some useful links that I have gathered while working on this feature:
+
+- [Happy Hues](https://www.happyhues.co/): helps you visualize how a color palette would look on a website
+- [Adobe Color](https://color.adobe.com/explore): explore popular color palettes
+- [Color wheel](https://www.canva.com/colors/color-wheel/): A color wheel by Canva to help you select harmonious colors
