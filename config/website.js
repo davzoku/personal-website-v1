@@ -42,7 +42,7 @@ module.exports = {
       name: "Digital Garden",
       url: "/garden",
     },
-    // { name: "Library", url: "/library" },
+    { name: "Resonance Library", url: "/library" },
   ],
 
   navLinksShort: [
@@ -58,10 +58,16 @@ module.exports = {
       name: "Garden",
       url: "/garden",
     },
-    // { name: "Library", url: "/library" },
+    { name: "Library", url: "/library" },
   ],
 
-  projectDesc: "An collection of things I've built.",
+  projectDesc: "A collection of things I've built.",
+  gardenIndexDesc:
+    "Some of my personal picks from my digital garden; an open collection of notes, articles I'm currently cultivating. The maturity level ranges from Seedling 🌱, Budding 🌿 and Evergreen 🌳.",
   gardenDesc:
     "An open collection of notes, articles I'm currently cultivating. The maturity level ranges from Seedling 🌱, Budding 🌿 and Evergreen 🌳.",
+  libraryDesc:
+    "A list of books that have contributed to my skill stack or improved my worldview.",
+  libraryIndexDesc:
+    "Some of my personal favourites from my resonance library; a list of books that have contributed to my skill stack or improved my worldview.",
 }
