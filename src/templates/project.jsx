@@ -12,6 +12,7 @@ import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
 import PreviousNext from "components/_ui/PreviousNext"
 import PostTime from "components/_ui/PostTime"
+import Share from "components/_ui/Share"
 
 // const ProjectHeroContainer = styled("div")`
 //   display: flex;
@@ -145,6 +146,11 @@ const Project = ({ project, meta, prev, next }) => {
             <MDXRenderer>{project.body}</MDXRenderer>
           </DefaultMdxComponentsProvider>
         </ProjectBody>
+        <Share
+          url={`${meta.siteUrl}/projects/${project.frontmatter.slug}`}
+          title={project.frontmatter.title}
+          twitterHandle={meta.twitterUsername}
+        />
         {/* <Projectslink to={"/projects"}>
           <Button className="Button--secondary">See other projects</Button>
         </Projectslink> */}

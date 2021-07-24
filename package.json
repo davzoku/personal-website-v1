@@ -50,6 +50,7 @@
     "react-moment": "^1.1.1",
     "react-router-dom": "^5.0.0",
     "react-router-hash-link": "^2.4.3",
+    "react-share": "^4.4.0",
     "react-smooth-collapse": "^2.1.0",
     "react-tooltip": "^4.2.21",
     "smooth-scroll": "^16.0.3"

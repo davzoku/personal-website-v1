@@ -12,6 +12,7 @@ import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
 import PreviousNext from "components/_ui/PreviousNext"
 import PostTime from "components/_ui/PostTime"
+import Share from "components/_ui/Share"
 
 // const NoteHeroContainer = styled("div")`
 //   display: flex;
@@ -145,6 +146,11 @@ const Note = ({ note, meta, prev, next }) => {
             <MDXRenderer>{note.body}</MDXRenderer>
           </DefaultMdxComponentsProvider>
         </NoteBody>
+        <Share
+          url={`${meta.siteUrl}/garden/${note.frontmatter.slug}`}
+          title={note.frontmatter.title}
+          twitterHandle={meta.twitterUsername}
+        />
         {/* <Noteslink to={"/garden"}>
           <Button className="Button--secondary">See other notes</Button>
         </Noteslink> */}
