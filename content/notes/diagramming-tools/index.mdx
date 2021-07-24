@@ -1,0 +1,62 @@
+---
+slug: diagramming-tools
+startDate: 2021-07-24
+updated: 2021-07-24
+title: "Diagramming Tools"
+description: "My search for the best diagramming tools and a comparison of tools that I have used"
+published: true
+featured: false
+type: ["Note"]
+tags: ["Diagramming", "Tooling"]
+cover: ./cover.png
+growthStage: "Budding"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1627138105/waltertengcom/garden/diagramming-tools/cover_xpwjrl.png"
+  alt="cover"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/3V8xo5Gbusk)
+
+## The Quest
+
+As a software developer, it is part of our job to create diagrams to communicate and illustrate our ideas to our team members and stakeholders. These diagrams may include [UML diagrams](https://en.wikipedia.org/wiki/Unified_Modeling_Language), [entity-relationship (ER) diagrams](https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model) for databases, [BPMN workflow diagrams](https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation), and architectural diagrams. A comprehensive diagramming tool that can cover all bases would be ideal in simplifying the design workflow. However, diagraming mechanisms are often less discussed among team members working on the same project than the best IDE to use. The approach is often "whatever-works-for-you."
+
+Thus begins my journey to find the best diagramming tool.
+
+## Prologue
+
+In my university days, the diagrams I make are primarily simple visualization diagrams, UML diagrams, and ER diagrams. As the need to create these diagrams are module-specific, there wasn’t a real need to look for a unified diagramming tool. I would just pick the recommended tool or the first result from Google Search.
+
+For example, I played around with free tools like [PlantUML](https://www.planttext.com/) and [UMLet](https://github.com/umlet/umlet) to [create UML diagrams](https://github.com/davzoku/UML-study).
+
+To create charts with PlantUML, one would have to use its custom syntax to make objects like classes and arrows. While the coding method ensures that you can recreate or modify the diagram as long as you have the source code, it is very time-consuming to internalize the syntax to create charts efficiently. UMLet, on the other hand, is a drag-and-drop tool to create UML diagrams. It is effortless to use, and it is sufficient if your goal is to make only UML diagrams.
+
+At that moment, simple ER diagrams are either drawn by hand or on Microsoft Office. The Office 365 Student subscription didn’t include Microsoft Visio, so it wasn’t a viable option.
+
+## Current Context
+
+After starting work, I am exposed to [more diagramming standards](https://www.omg.org/about/omg-standards-introduction.htm) and there is also a need to create diagrams in design documents to illustrate the problem and solutions. _"How do I be efficient if the tools in my toolkit are disorganized?"_
+
+### One-stop Solution
+
+After trying out different tools over time, [draw.io](https://app.diagrams.net/) became my personal favorite. With a single tool, I am able to [create flowcharts, process diagrams, UML, ER and network diagrams](https://github.com/davzoku/drawio-diagrams).
+
+#### Draw.io plays well in VS Code
+
+Draw.io is very accessible. It can be accessed as a web app and it can also work out of the box in VS Code with this [extension](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio). This means I can reference/create diagrams in VS Code while I code if I wanted to.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1627138100/waltertengcom/garden/diagramming-tools/ss-drawio_s2yznc.png"
+  alt="draw.io in VS Code"
+/>
+
+#### Camunda Modeler
+
+While draw.io can create BPMN-like diagrams, I still prefer using [Camunda Modeler](https://camunda.com/products/camunda-platform/modeler/) to create BPMN diagrams so that I convert them to the XML format for the process engine if needed.
+
+## Better Options?
+
+The goal of this note is to encourage discussion and sharing of diagramming tools within the dev community. Draw.io and Camunda Modeler are my current go-to tools to create diagrams. Do you use a different tool? <a href="https://twitter.com/intent/tweet?screen_name=davzoku" target="_blank">
+Tweet me about it</a>; I would love to hear any suggestions.
