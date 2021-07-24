@@ -29,7 +29,7 @@ const Notes = ({ notes, meta }) => (
   <>
     <SeoHelmet />
     <Helmet
-      title={`Notes`}
+      title={`Digital Garden`}
       titleTemplate={`%s | ${meta.author}`}
       meta={[
         {
@@ -38,7 +38,7 @@ const Notes = ({ notes, meta }) => (
         },
         {
           property: `og:title`,
-          content: `Notes`,
+          content: `Digital Garden`,
         },
         {
           property: `og:description`,
@@ -102,7 +102,7 @@ export const query = graphql`
   {
     allMdx(
       filter: { frontmatter: { published: { eq: true }, type: { eq: "Note" } } }
-      sort: { order: DESC, fields: frontmatter___startDate }
+      sort: { order: DESC, fields: frontmatter___updated }
     ) {
       edges {
         node {

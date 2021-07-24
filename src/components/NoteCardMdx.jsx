@@ -55,6 +55,7 @@ const PostTitle = styled("h3")`
 const PostMetas = styled("div")`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin: 1rem 0;
   padding: 0 2rem;
   justify-content: flex-start;
@@ -66,6 +67,7 @@ const Tag = styled("div")`
   text-align: center;
   padding: 0.5rem;
   margin-right: 1.5rem;
+  margin-bottom: 0.5rem;
   background-color: var(--color-background);
   border-radius: 0.5rem;
 `
