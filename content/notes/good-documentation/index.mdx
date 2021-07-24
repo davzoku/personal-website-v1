@@ -1,0 +1,77 @@
+---
+slug: good-documentation
+startDate: 2021-07-24
+updated: 2021-07-24
+title: "Good Documentation"
+description: "Some references and budding ideas on wrtiting good documentation"
+published: true
+featured: false
+type: ["Note"]
+tags: ["Documentation", "DX"]
+cover: ./cover.png
+growthStage: "Seedling"
+---
+
+<WIP />
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1627138094/waltertengcom/garden/good-documentation/cover_fgplhq.png"
+  alt="cover"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/HsTnjCVQ798)
+
+## Documentation is a mental map
+
+After working on several software projects, I brood over the notion of what constitutes good documentation. Each software project is unique, and even software that shares similar architectures and functionalities may require a different set of documentation to point out the differences.
+
+Documentation provides a mental map and a starting point for new users to interact with or modify parts of the software.
+
+## Tips
+
+Here are a collection of tips that other developers are sharing on good documentation:
+
+### 1. Start with writing self-documenting code
+
+Having a self-documenting codebase that adheres to some form of [coding guidelines](https://github.com/alibaba/Alibaba-Java-Coding-Guidelines) can improve the readability and understandability of the code.
+
+Some tips from Mike Cronin on writing [self-documenting code](https://itnext.io/tips-for-writing-self-documenting-code-e54a15e9de2)
+
+- Don’t use magic numbers; always give a name for numbers.
+- Use clear variable names, avoid using acronyms as much as possible
+- Refactor with tiny, named functions; Don't Repeat Yourself
+
+### 2. Write docs with user-centric goals
+
+Swyx reminds us to [write docs with user-centric goals](https://www.swyx.io/documentation-levels/)
+
+- Think about the user profile of your readers
+
+| Users        | Goals                                                              |
+| ------------ | ------------------------------------------------------------------ |
+| Beginners    | get to success as quickly as possible, avoid/recover from mistakes |
+| Intermediate | contrast with comparable projects, learn every API/option          |
+| Experts      | keep up with changes and future plans                              |
+| Contributors | How to contribute, how the project is setup                        |
+
+### 3. Keep an ARCHITECTURE.md for open-source projects
+
+Aleksey Kladov encourages [adding an ARCHITECTURE.md file](https://matklad.github.io/2021/02/06/ARCHITECTURE.md.html) to describe the high-level architecture of the project. It offers a low-effort high-leverage way for other developers to contribute to the project as it gives them a better understanding of the project.
+
+## Documentation Tools
+
+A collection of documentation tools:
+
+- [Swagger](https://swagger.io/solutions/api-documentation/): Generate documentation for your API endpoints
+
+- [Storybook](https://storybook.js.org/docs/react/writing-docs/introduction): A UI component explorer for developing UI components in isolation and documenting component stories
+
+- [readme.so](https://readme.so/): An editor to quickly add and customize all the sections you need for your project's readme
+
+## Further Reading
+
+- [Painless Functional Specifications – Part 1: Why Bother? – Joel on Software](https://www.joelonsoftware.com/2000/10/02/painless-functional-specifications-part-1-why-bother/)
+- [alibaba/Alibaba-Java-Coding-Guidelines: Gitbook for AJCG](https://github.com/alibaba/Alibaba-Java-Coding-Guidelines)
+- [How to Write Good Documentation](https://www.freecodecamp.org/news/how-to-write-good-documentation/)
+- [How to Write Documentation For Your Next Software Development Project](https://www.freecodecamp.org/news/how-to-write-documentation-for-your-next-software-development-project/)
+- [How to write a good software design doc](https://www.freecodecamp.org/news/how-to-write-a-good-software-design-document-66fcf019569c/)

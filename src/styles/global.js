@@ -79,6 +79,14 @@ const globalStyles = css`
     white-space: pre-wrap;
     word-wrap: break-word;
   }
+
+  table,
+  th,
+  td {
+    border: 1px solid var(--color-border);
+    border-collapse: collapse;
+    padding: 0.5rem;
+  }
 `
 
 export default globalStyles
