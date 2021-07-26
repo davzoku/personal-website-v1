@@ -175,7 +175,7 @@ const About = () => {
       <AboutBio>
         <p>
           Hi! My name is Walter, and I am currently based in Singapore. I did my
-          Bachelors in
+          Bachelors in{" "}
           <a href="https://www.ntu.edu.sg/eee">
             Nanyang Technological University (NTU)
           </a>
@@ -188,7 +188,7 @@ const About = () => {
         </p>
 
         <p>
-          Currently, I am working at
+          Currently, I am working at{" "}
           <a href="https://www.crimsonlogic.com/">CrimsonLogic</a> focused on{" "}
           <a href="https://www.crimsonlogic.com/products-services/legal">
             digitalizing the judiciary system
