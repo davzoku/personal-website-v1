@@ -116,7 +116,7 @@ export const query = graphql`
   {
     allMdx(
       filter: { frontmatter: { published: { eq: true }, type: { eq: "Book" } } }
-      sort: { order: DESC, fields: frontmatter___updated }
+      sort: { order: DESC, fields: frontmatter___startDate }
     ) {
       edges {
         node {
