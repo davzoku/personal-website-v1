@@ -27,6 +27,11 @@ const typeStyles = css`
     font-size: 1.5em;
   }
 
+  h4 {
+    line-height: 1.1;
+    font-size: 1.3em;
+  }
+
   h5 {
     margin: 1.2rem 0;
     font-weight: 500;
