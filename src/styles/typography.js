@@ -54,6 +54,30 @@ const typeStyles = css`
       cursor: pointer;
     }
   }
+
+  blockquote {
+    background-color: var(--color-backgroundOffset, #ffffff);
+    border-left: 5px solid var(--color-primaryOffset, #3672f8);
+    margin: 20px 0;
+  }
+
+  blockquote p {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  blockquote ul {
+    margin: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  blockquote ol {
+    margin: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
 `
 
 export default typeStyles

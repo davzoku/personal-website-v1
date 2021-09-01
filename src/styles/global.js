@@ -87,6 +87,12 @@ const globalStyles = css`
     border-collapse: collapse;
     padding: 0.5rem;
   }
+
+  .twitter-tweet,
+  .twitter-tweet-rendered {
+    margin: 40px auto;
+    align-content: center;
+  }
 `
 
 export default globalStyles

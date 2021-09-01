@@ -191,6 +191,7 @@ const BurgerNav = styled("div")`
 
     ol {
       list-style: none;
+      padding: 0;
     }
 
     li {

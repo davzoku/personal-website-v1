@@ -110,7 +110,7 @@ const Note = ({ note, meta, prev, next }) => {
 
   // emoji logic
   switch (note.frontmatter.readingStatus) {
-    case "Currently Reading":
+    case "In Progress":
       readingStatusEmoji = "📖"
       break
   }

@@ -49,7 +49,7 @@ const BookCardMdx = ({ data }) => {
 
   // emoji logic
   switch (data.readingStatus) {
-    case "Currently Reading":
+    case "In Progress":
       readingStatusEmoji = "📖"
       break
   }
