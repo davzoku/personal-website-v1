@@ -183,17 +183,14 @@ const About = () => {
         </p>
 
         <p>
-          In my free time, I like to go hiking in nature and tinkering with code
-          to make digital experiences smoother and more productive.
+          Fast forward to today, I am delighted to have the opportunities to
+          help clients in the government and legal sectors in improving their
+          digital experiences.
         </p>
 
         <p>
-          Currently, I am working at{" "}
-          <a href="https://www.crimsonlogic.com/">CrimsonLogic</a> focused on{" "}
-          <a href="https://www.crimsonlogic.com/products-services/legal">
-            digitalizing the judiciary system
-          </a>
-          .
+          In my free time, I like to go hiking in nature and tinkering with code
+          to make digital experiences smoother and more productive.
         </p>
 
         <p>Here are a few technologies that I've been working with recently:</p>
