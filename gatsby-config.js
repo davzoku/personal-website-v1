@@ -97,11 +97,23 @@ module.exports = {
               quality: 100,
             },
           },
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: "Table of Contents",
+              tight: true,
+              ordered: false,
+              fromHeading: 1,
+              toHeading: 6,
+              className: "toc",
+            },
+          },
         ],
         plugins: [
           `gatsby-remark-images`,
           `gatsby-remark-embedder`,
           `gatsby-remark-autolink-headers`,
+          `gatsby-remark-table-of-contents`,
         ],
       },
     },

@@ -113,6 +113,13 @@ const globalStyles = css`
     width: 100%;
     height: 100%;
   }
+
+  .toc {
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    background-color: var(--color-backgroundOffset);
+  }
 `
 
 export default globalStyles
