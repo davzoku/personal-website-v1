@@ -11,7 +11,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx"
 import DefaultMdxComponentsProvider from "components/mdx/DefaultProvider"
 import SeoHelmet from "components/SeoHelmet"
 import PreviousNext from "components/_ui/PreviousNext"
-import PostTime from "components/_ui/PostTime"
+import PostTime from "components/_ui/PostTimeGrowthStage"
 import Share from "components/_ui/Share"
 
 // const NoteHeroContainer = styled("div")`
@@ -140,6 +140,7 @@ const Note = ({ note, meta, prev, next }) => {
         <PostTime
           timeToRead={note.timeToRead}
           updatedDate={note.frontmatter.updated}
+          growthStage={note.frontmatter.growthStage}
         />
         <NoteBody>
           <DefaultMdxComponentsProvider>
@@ -196,6 +197,7 @@ export const query = graphql`
         slug
         tags
         type
+        growthStage
         updated(formatString: "DD MMM YYYY")
         description
         startDate
