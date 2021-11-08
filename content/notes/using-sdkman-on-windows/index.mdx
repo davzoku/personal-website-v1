@@ -1,0 +1,82 @@
+---
+slug: using-sdkman-on-windows
+startDate: 2021-11-05
+updated: 2021-11-05
+title: "Using SDKMan on Windows"
+description: "Notes on how to use SDKMan on Windows"
+published: true
+featured: false
+type: ["Note"]
+tags: ["SWE", "Tips", "SDKMan", "Windows", "Java", "Gradle"]
+cover: ./cover.png
+growthStage: "Budding"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1636369585/waltertengcom/garden/using-sdkman-on-windows/cover_esymar.png"
+  alt="cover"
+/>
+
+## What is SDKMAN?
+
+[SDKMAN](https://sdkman.io/) is a tool to manage multiple Software Development Kits in parallel on most Unix-based systems. It includes an easy-to-use Command Line Interface (CLI) and API for installing, switching, removing, and listing Candidates. Having used it on Mac machine to develop and maintain microservices written in different versions of Java, I am amazed by the ease of switching JDKs on the fly.
+
+SDKMAN is built for unix systems. Installing it on Windows is not impossible, but it can be quite cumbersome. There are several ways to do it and you can refer to the [references](#references) section to see how others do it. Below are the steps that I find work best for my setup. If you are using an unix-based machine, you can check out the quick guide over [here](/garden/using-sdkman-on-mac).
+
+## Steps
+
+1. [Install Chocolatey](https://docs.chocolatey.org/en-us/choco/setup)
+2. Install Git for Windows `choco install git`
+3. Install Zip `choco install git`
+4. Install SDKMAN in a custom project folder in C drive.
+
+```
+ export SDKMAN_DIR="/c/project/lib/sdkman" && curl -s "https://get.sdkman.io" | bash
+ curl -s "https://get.sdkman.io" | bash
+```
+
+5. Update current shell environment `source ~/.bashrc`
+
+## Install SDK
+
+### Java
+
+- Install my commonly used JDK versions
+
+```
+sdk install java 8.0.302-open
+
+sdk install java 11.0.2-open
+
+sdk install java 17.0.1-open
+```
+
+### Gradle
+
+- Install my commonly used Gradle versions
+
+```
+sdk install gradle 4.2.1
+
+sdk install gradle 6.9.1
+```
+
+### Maven
+
+- Install maven
+
+```
+sdk install maven
+```
+
+## Additional Steps
+
+- Uninstall the JDKs in old locations and remove the environment variables accordingly since we can use SDKMAN to handle the SDKs from now on.
+- Change your IDEs like Intellij, VSCode to use Git Bash by default
+- Change Windows Terminal to use Git Bash by default
+
+## References
+
+- [Install SdkMan on Win 10](https://gist.github.com/der3k/5d84e87b759acc0ff8c1ad341f832635)
+- [SDKMAN on Windows. SDKMAN is a sdk management tool for… | by Gayan Perera | Medium](https://medium.com/@gayanper/sdkman-on-windows-661976238042)
+- [SDKMAN! on Windows | ngeor.com](https://ngeor.com/2019/12/07/sdkman-windows.html)
