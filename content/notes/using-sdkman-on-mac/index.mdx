@@ -1,0 +1,69 @@
+---
+slug: using-sdkman-on-mac
+startDate: 2021-11-04
+updated: 2021-11-04
+title: "Using SDKMan on Mac"
+description: "Notes on how to use SDKMan on Windows"
+published: true
+featured: false
+type: ["Note"]
+tags: ["SWE", "Tips", "SDKMan", "MacOS", "Java", "Gradle"]
+cover: ./cover.png
+growthStage: "Budding"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1636369619/waltertengcom/garden/using-sdkman-on-mac/cover_lhe8kn.png"
+  alt="cover"
+/>
+
+## What is SDKMAN?
+
+[SDKMAN](https://sdkman.io/) is a tool to manage multiple Software Development Kits in parallel on most Unix-based systems. It includes an easy-to-use Command Line Interface (CLI) and API for installing, switching, removing, and listing Candidates. Having used it on Mac machine to develop and maintain microservices written in different versions of Java, I am amazed by the ease of switching JDKs on the fly.
+
+I love it so much that I wanted to replicate the [same process in a Windows machine](/garden/using-sdkman-on-windows) too.
+
+## Steps
+
+Since SDKMAN is built for unix systems, installation and using on a mac is smooth as butter.
+
+1. [Install Homebrew](https://docs.brew.sh/Homebrew-on-Linux#install)
+2. Install SDKMAN
+
+```
+curl -s "https://get.sdkman.io" | bash
+
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+
+## Install SDK
+
+### Java
+
+- Install my commonly used JDK versions
+
+```
+sdk install java 8.0.302-open
+
+sdk install java 11.0.2-open
+
+sdk install java 17.0.1-open
+```
+
+### Gradle
+
+- Install my commonly used Gradle versions
+
+```
+sdk install gradle 4.2.1
+
+sdk install gradle 6.9.1
+```
+
+### Maven
+
+- Install maven
+
+```
+sdk install maven
+```
