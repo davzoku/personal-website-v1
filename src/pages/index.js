@@ -219,11 +219,11 @@ const RenderBody = ({ projects, notes, books, meta }) => (
       </a>
     </Hero>
     <Section>
-      <h3>About Me</h3>
+      <h3 id="about">About Me</h3>
       <About />
     </Section>
     <Section>
-      <h3>
+      <h3 id="projects">
         <a href="/projects">Featured Projects</a>
       </h3>
       <h5>{config.projectDesc}</h5>
@@ -239,7 +239,7 @@ const RenderBody = ({ projects, notes, books, meta }) => (
     </Section>
 
     <Section>
-      <h3>
+      <h3 id="garden">
         <a href="/garden">The Digital Garden</a>
       </h3>
       <h5>{config.gardenIndexDesc}</h5>
@@ -255,7 +255,7 @@ const RenderBody = ({ projects, notes, books, meta }) => (
     </Section>
 
     <Section>
-      <h3>
+      <h3 id="library">
         <a href="/library">The Resonance Library</a>
       </h3>
       <h5>{config.libraryIndexDesc}</h5>

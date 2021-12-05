@@ -189,8 +189,10 @@ const About = () => {
         </p>
 
         <p>
-          In my free time, I like to go hiking in nature and tinkering with code
-          to make digital experiences smoother and more productive.
+          Over here in my <a href="#garden">digital garden</a>, I write about
+          how I make my life 1% easier as a software engineer, summarize books I
+          read and occasionally describe my learning process for making digital
+          illustrations with my iPad.
         </p>
 
         <p>Here are a few technologies that I've been working with recently:</p>
