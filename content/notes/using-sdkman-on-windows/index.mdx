@@ -1,7 +1,7 @@
 ---
 slug: using-sdkman-on-windows
 startDate: 2021-11-05
-updated: 2021-11-05
+updated: 2021-12-05
 title: "Using SDKMAN on Windows"
 description: "Notes on how to use SDKMAN on Windows"
 published: true
@@ -74,6 +74,60 @@ sdk install maven
 - Uninstall the JDKs in old locations and remove the environment variables accordingly since we can use SDKMAN to handle the SDKs from now on.
 - Change your IDEs like Intellij, VSCode to use Git Bash by default
 - Change Windows Terminal to use Git Bash by default
+
+## Advanced Features
+
+SDKMAN supports the `use` command to switch the candidate version **for the current shell only**. In my circumstances, the command is the least useful to me as I like things to be configured nicely once and for all.
+
+### Default Version and Auto-Switching
+
+For example, most of my projects are written in Java 11 and only a couple of them is written in Java 8.
+
+I would set up my environment as such:
+
+1. Set my default Java and Gradle versions:
+
+```
+sdk default java 11.0.12-open
+sdk default gradle 6.9.1
+```
+
+2. Navigate to the config file of your SDKMAN installation. If you are following the same installation command as I did,
+   the location of the config file is `C:\project\lib\sdkman\etc`
+
+- Open the file and set `sdkman_auto_env` as true.
+
+```
+sdkman_auto_env=true
+```
+
+3. Navigate to one of the projects that is using Java 8 and set up the environment using `env` command
+
+```
+# creates a .sdkmanrc config file in the base directory
+sdk env init
+```
+
+- In the `.sdkmanrc` file, I add the following:
+
+```
+# Enable auto-env through the sdkman_auto_env config
+# Add key=value pairs of SDKs to use below
+java=8.0.302-open
+gradle=4.2.1
+```
+
+4. Repeat for other Java 8 projects. Or you could group your projects by java versions and set the environment for multiple projects
+
+- Whenever I navigate to my Java 8 project, I will see the SDKs switch automatically.
+
+```
+$ cd my-java-8-project
+
+Using java version 8.0.302-open in this shell.
+
+Using gradle version 4.2.1 in this shell.
+```
 
 ## Alternatives and Other Programming Languages
 
