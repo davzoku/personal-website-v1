@@ -73,11 +73,17 @@ const globalStyles = css`
 
   pre {
     background-color: var(--color-backgroundOffset);
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
     margin: 1rem;
     padding: 1rem;
-    border-radius: 0.3rem;
     white-space: pre-wrap;
     word-wrap: break-word;
+  }
+
+  code {
+    background-color: var(--color-backgroundOffset);
+    padding: 0.1rem;
   }
 
   table,
