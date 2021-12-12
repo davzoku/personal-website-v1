@@ -81,8 +81,14 @@ const globalStyles = css`
     word-wrap: break-word;
   }
 
+  pre code {
+    border: 0;
+  }
+
   code {
     background-color: var(--color-backgroundOffset);
+    border: 1px solid var(--color-border);
+    border-radius: 0.3rem;
     padding: 0.1rem;
   }
 
