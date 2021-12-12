@@ -341,7 +341,7 @@ export const query = graphql`
           featured: { eq: true }
         }
       }
-      sort: { order: DESC, fields: frontmatter___startDate }
+      sort: { order: DESC, fields: frontmatter___updated }
     ) {
       edges {
         node {
