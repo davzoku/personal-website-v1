@@ -11,7 +11,7 @@ const _ = require("lodash")
 //   })
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createRedirect, createPage } = actions
 
   return graphql(`
     query {
@@ -34,6 +34,7 @@ exports.createPages = async ({ graphql, actions }) => {
             frontmatter {
               slug
               title
+              redirects
             }
           }
         }
@@ -58,6 +59,7 @@ exports.createPages = async ({ graphql, actions }) => {
             frontmatter {
               slug
               title
+              redirects
             }
           }
         }
@@ -82,6 +84,7 @@ exports.createPages = async ({ graphql, actions }) => {
             frontmatter {
               slug
               title
+              redirects
             }
           }
         }
@@ -92,6 +95,19 @@ exports.createPages = async ({ graphql, actions }) => {
       return Promise.reject(errors)
     }
 
+    const pageRedirects = (node) => {
+      if (node.frontmatter.redirects) {
+        node.frontmatter.redirects.forEach((fromPath) => {
+          createRedirect({
+            fromPath,
+            toPath: `/${node.frontmatter.slug}`,
+            redirectInBrowser: true,
+            isPermanent: true,
+          })
+        })
+      }
+    }
+
     const projectTemplate = require.resolve("./src/templates/project.jsx")
     const noteTemplate = require.resolve("./src/templates/note.jsx")
     const bookTemplate = require.resolve("./src/templates/book.jsx")
@@ -100,8 +116,9 @@ exports.createPages = async ({ graphql, actions }) => {
       const { edges } = data.projectsQuery
       const prevPage = i === 0 ? null : edges[i - 1].node
       const nextPage = i === edges.length - 1 ? null : edges[i + 1].node
+      pageRedirects(node)
       createPage({
-        path: `/projects/${node.frontmatter.slug}`,
+        path: `/${node.frontmatter.slug}`,
         component: projectTemplate,
         context: {
           id: node.id,

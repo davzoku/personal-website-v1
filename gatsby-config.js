@@ -140,7 +140,8 @@ module.exports = {
         head: true,
       },
     },
-    `gatsby-plugin-offline`,
+    "gatsby-plugin-offline",
+    "gatsby-plugin-netlify",
     {
       resolve: `gatsby-plugin-webmention`,
       options: {

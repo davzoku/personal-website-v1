@@ -21,6 +21,7 @@
     "gatsby-plugin-image": "^1.7.1",
     "gatsby-plugin-manifest": "^3.7.1",
     "gatsby-plugin-mdx": "^2.9.0",
+    "gatsby-plugin-netlify": "^3.14.0",
     "gatsby-plugin-offline": "^4.7.1",
     "gatsby-plugin-react-helmet": "^4.7.1",
     "gatsby-plugin-resolve-src": "^2.0.0",

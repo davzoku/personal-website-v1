@@ -182,13 +182,13 @@ const ProjectCard = ({ category, title, description, thumbnail, uid }) => (
       <ProjectCardCategory>{category[0].text}</ProjectCardCategory>
       <ProjectCardTitle>{title[0].text}</ProjectCardTitle>
       <ProjectCardBlurb>{RichText.render(description)}</ProjectCardBlurb>
-      <ProjectCardAction className="ProjectCardAction" to={`/projects/${uid}`}>
+      <ProjectCardAction className="ProjectCardAction" to={`/${uid}`}>
         Details <span>&#8594;</span>
       </ProjectCardAction>
     </ProjectCardContent>
     <ProjectCardImageContainer
       className="ProjectCardImageContainer"
-      to={`/projects/${uid}`}
+      to={`/${uid}`}
     >
       <img src={thumbnail.url} alt={title[0].text} />
     </ProjectCardImageContainer>

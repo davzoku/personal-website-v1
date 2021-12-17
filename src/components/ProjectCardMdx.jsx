@@ -125,7 +125,7 @@ const ActionIcons = styled("div")`
 
 const ProjectCardMdx = ({ data }) => {
   const image = getImage(data.cover)
-  const projectUrl = `/projects/${data.slug}`
+  const projectUrl = `/${data.slug}`
   return (
     <ProjectCardContainer>
       <Link to={projectUrl}>

@@ -147,7 +147,7 @@ const Project = ({ project, meta, prev, next }) => {
           </DefaultMdxComponentsProvider>
         </ProjectBody>
         <Share
-          url={`${meta.siteUrl}/projects/${project.frontmatter.slug}`}
+          url={`${meta.siteUrl}/${project.frontmatter.slug}`}
           title={project.frontmatter.title}
           twitterHandle={meta.twitterUsername}
         />
@@ -155,9 +155,9 @@ const Project = ({ project, meta, prev, next }) => {
           <Button className="Button--secondary">See other projects</Button>
         </Projectslink> */}
         <PreviousNext
-          prevSlug={prev && `projects/${prev.frontmatter.slug}`}
+          prevSlug={prev && `${prev.frontmatter.slug}`}
           prevTitle={prev && prev.frontmatter.title}
-          nextSlug={next && `projects/${next.frontmatter.slug}`}
+          nextSlug={next && `${next.frontmatter.slug}`}
           nextTitle={next && next.frontmatter.title}
         />
       </Layout>
