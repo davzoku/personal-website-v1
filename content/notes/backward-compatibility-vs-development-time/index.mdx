@@ -1,0 +1,68 @@
+---
+slug: backward-compatibility-vs-development-time
+startDate: 2021-12-30
+updated: 2021-12-30
+title: "Managing Backward Compatibility and Development Time"
+description: "Some thoughts on prioritizing backward compatibility implementation and managing development time"
+published: true
+featured: false
+type: ["Note"]
+tags: ["SWE", "Decision Making", "Backward Compatibility"]
+cover: ./cover.png
+growthStage: "Seedling"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1640969541/waltertengcom/garden/backward-compatibility-vs-development-time/cover_qpsmdz.png"
+  alt="cover"
+/>
+
+[Photo from Unsplash](https://unsplash.com/photos/yVuRzuqArkg)
+
+> _Time is always tight and estimations are hard to make._
+
+_This is written from the perspective of a service owner of a backend service._
+
+Some of us are familiar with the [Project Management Triangle](https://en.wikipedia.org/wiki/Project_management_triangle). There is a famous quote, "Time, quality, features. Choose two." Managing a project is hard in the real world. We can't have the best circumstances to deliver. In the pursuit of our delivery targets, we have to inevitably prioritize some factors more than others. Sometimes, time is a non-negotiable factor. We can reduce the features or the scope or even consider making new APIs backwards incompatible. We can save time writing more code.
+
+_I mean as long as the new features are shipped on time, we are all okay right?_ - this is a tempting thought when pressed on time. I realised we should unpack this further before making the decision.
+
+Let's assume a scenario where we need a new set of APIs are needed, data are stored in new database schemas and we don't have time.
+
+### Who are the consumers of our APIs?
+
+#### Internal Users
+
+Our Consumers are internal teams that we work closely with within our organisation. As long as we can coordinate our releases, it might be possible to skip backward compatibility for time.
+
+#### External Users
+
+Backward compatibility is almost always a must. It can be hard to coordinate if another company is involved.
+
+### What platforms are our consumers using?
+
+### Web
+
+**What is the deployment method?**
+
+Web is easy when we use in-place deployment (all at once). Once we deploy the new web app with updated endpoints, we are good to go. Our users will use the new website with the new endpoints. Without backward compatibility, the impact is minimal.
+
+For other [deployment methods](https://docs.aws.amazon.com/whitepapers/latest/practicing-continuous-integration-continuous-delivery/deployment-methods.html) that aim to reduce downtime, there is a possibility that we have both old and new apps running simultaneously. It might be problematic when we have APIs that are not backwards compatible.
+
+#### Mobile
+
+Backward compatibility is needed. Web apps are deployed; mobile apps are published. It takes time to get your mobile apps approved and propagated to all your users around the globe. There is little certainty that all your users will get to use your new mobile apps simultaneously. Users may even refuse to update their apps.
+
+## Summary
+
+**TLDR:** Although backward compatibility may seem trivial and transparent to the users, that extra effort you put into making your APIs backward/forward-compatible might save you from a lot of stress and headaches when it is time to ship your code.
+
+## References
+
+- [Backward Compatibility in Software Development: What and Why - Red Star IT - Helping You Tackle Legacy Code](https://www.redstar.be/backward-compatibility-in-software-development-what-and-why/)
+
+- [ParallelChange](https://martinfowler.com/bliki/ParallelChange.html)
+
+- [Expand and Contract - A Pattern to Apply Breaking Changes to Persistent Data with Zero Downtime](https://www.tim-wellhausen.de/papers/ExpandAndContract/ExpandAndContract.html)
+
+- [The Hidden Cost of Backward Compatibility: When Deprecation Turns into Technical Debt - An Experience Report](https://www.diva-portal.org/smash/get/diva2:1485431/FULLTEXT01.pdf)
