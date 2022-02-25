@@ -20,13 +20,25 @@
   <img alt="demo" src="https://raw.githubusercontent.com/davzoku/personal-website-v1/main/static/og.png" />
 </div>
 
-## About the site
+## About the Site
 
 This site serves as a common ground / digital garden to share my projects and notes.
 
 ### Inspiration
 
 I have came across many beautiful personal websites while developing my own. Some of the design ideas are influenced by these awesome developers and designers, do check out their work too: @margueriteroth, @bchiang7, @maxboeck, @MaggieAppleton, @slarsendisney, @joshwcomeau, @mxstbr
+
+### Using Docker
+
+This Gatsby site supports Docker for local development.
+
+To run the Docker container on your local machine:
+
+```
+docker compose up
+```
+
+For more info on the Docker config and how to set up similar configurations for your Gatsby site: <a href="https://walterteng.com/garden/gatsby-docker" target="_blank">My Docker Setup for Gatsby</a>
 
 ## Changelog
 
