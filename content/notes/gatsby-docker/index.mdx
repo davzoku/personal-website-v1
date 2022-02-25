@@ -1,0 +1,209 @@
+---
+slug: gatsby-docker
+startDate: 2022-02-24
+updated: 2022-02-26
+title: "My Docker Setup for Gatsby"
+description: "How I get the development environment for my Gatsby site up and running on Docker"
+published: true
+featured: false
+type: ["Note"]
+tags: ["Gatsby", "Docker", "SWE"]
+cover: ./cover.png
+growthStage: "Budding"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645717937/waltertengcom/garden/gatsby-docker/cover_hkqzwb.png"
+  alt="cover"
+/>
+
+Recently, I decided to dockerize my website to practice my docker skills. I have documented the steps / issues that led to the solution that I am using. You may skip ahead and refer to the [final solution](#final-solution).
+
+The objectives of this exercise:
+
+- Set up a platform-agnostic development environment for a website built with Gatsby. Anyone should run the project on their local with just docker.
+- [Hot Module Reloading (HMR) / Fast Refresh](https://www.gatsbyjs.com/docs/reference/local-development/fast-refresh/) must work.
+
+While researching this topic, I found plenty of tutorials and guides revolving around [dockerizing react apps](https://mherman.org/blog/dockerizing-a-react-app/). However, there is very little documentation on how we can achieve the objectives above with a Gatsby site.
+
+_It shouldn't be that different, right?_ Boy, was I wrong.
+
+## Getting a Fresh Gatsby Site up and Running on Docker
+
+I managed to get a [fresh Gatsby site](https://github.com/davzoku/gatsby-docker/commit/e5b62d3835384eac09b52f599286a6e605f7b231) up and running on docker in a Windows machine based on this [tutorial](https://medium.com/ultralight-io/getting-gatsby-to-run-on-docker-compose-6bf3b0d97efb) by Daniel Graham. However, HMR is not working.
+
+We have to specify the host port as Gatsby specifically listens to `0.0.0.0` for localhost.
+
+### Getting HMR to Work
+
+Turns out we have to add an extra environment variable `GATSBY_WEBPACK_PUBLICPATH` to specify the webpack config as recommended in this [setup guide](https://dev.to/stoutlabs/my-docker-setup-for-gatsbyjs-and-nextjs-5gao) by Daniel Stout. However, this only solves half the problem, as HMR only worked on Mac.
+
+### Getting HMR to Work (Again) On Windows
+
+I took another dive into the Gatsby issues section and turns out someone had a [similar issue](https://github.com/gatsbyjs/gatsby/issues/34497) as me just a month ago.
+
+We just have to specify the webpack config on `gatsby-node.js` and we can remove environment variables such as `GATSBY_WEBPACK_PUBLICPATH: /` and `CHOKIDAR_USEPOLLING: 'true'`
+
+```
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    watchOptions: {
+      aggregateTimeout: 200,
+      poll: 1000,
+    },
+  })
+}
+```
+
+For anyone who is interested to test this solution, you may refer to this [commit](https://github.com/davzoku/gatsby-docker/commit/eb163a520348498c6084223b44387dcea4b87856).
+
+## Getting an Existing Gatsby Site Running on Docker
+
+I thought we could set up an existing Gatsby site running on Docker with minor issues since we have figured everything out on a fresh setup. It turns out I was wrong again and there are still plenty of surprises for this exercise.
+
+### Getting Sharp to Work Across Platforms
+
+My website uses [sharp](https://sharp.pixelplumbing.com/) for image processing and the current version, `v0.29.0`, isn't as platform-agnostic as I thought.
+
+While I was building the Docker image (Alpine) from a Windows host machine, I received the following error.
+
+```
+Error in "/app/node_modules/gatsby-transformer-sharp/gatsby-node.js":
+
+Something went wrong installing the "sharp" module
+
+
+Error relocating /usr/lib/libvips-cpp.so.42:
+
+_ZSt28__throw_bad_array_new_lengthv: symbol not found
+
+
+Possible solutions:
+
+- Install with the --verbose flag and look for errors: "npm install
+
+--ignore-scripts=false --verbose sharp"
+
+- Install for the current runtime: "npm install --platform=linux --arch=x64
+
+sharp"
+
+- Consult the installation documentation:
+
+https://sharp.pixelplumbing.com/install
+```
+
+The issue persists even after adding the `platform` and `arch` flags in my Dockerfile. Following the same solution from [this issue](https://github.com/lovell/sharp/issues/2875), I decided to change from an Alpine Node image to a Debian "Bullseye" image.
+
+I also added a platform config available only on docker compose v2.4, after checking the [Docker Compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v2/#platform)
+
+```
+version: "2.4"
+services:
+  web:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+```
+
+### Resolving Gatsby EACCES Issue
+
+Another issue arises following this setup. Different EACCES permissions errors such as mkdir, unlink, starts to appear when I try to run from the `node` user with the least privileges.
+
+I managed to get my website running on Docker on both Windows and Mac machine after making this last change. (although it is not recommended.)
+
+```
+# RUN chown -R node /app/node_modules
+# USER node
+RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
+```
+
+### Final Solution
+
+1. Add Webpack Config in `gatsby-node.js`
+
+```
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    watchOptions: {
+      aggregateTimeout: 200,
+      poll: 1000,
+    },
+  });
+};
+```
+
+2. Add Dockerfile
+
+```
+FROM node:16-bullseye
+EXPOSE 8000
+
+RUN npm config set unsafe-perm true
+RUN npm install -g gatsby-cli
+WORKDIR /app
+COPY ./package.json /app
+RUN npm cache clean --force
+RUN npm install --arch=x64 --platform=linux --legacy-peer-deps
+COPY . /app
+
+RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
+CMD ["gatsby", "develop", "-H", "0.0.0.0" ]
+```
+
+3. Add docker-compose.yml
+
+```
+version: "2.4"
+services:
+  web:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+    environment:
+      - NODE_ENV=development
+```
+
+**Note that HMR is not working for changes in "data" files such as Markdown. I will continue to look for solution to fix this part.** Click [here](https://github.com/gatsbyjs/gatsby/issues/34497#issuecomment-1033090768) for more info.
+
+### Conclusion
+
+I learnt a lot about Docker and the inner workings of Gatsby from this exercise. I hope these notes can shed some light for other wanderers who are trying to explore the same topic of running Gatsby on Docker. My solution for this exercise is not perfect and I would love to hear any feedback to optimize my solution. I will continue to update as my knowledge on Gatsby/Docker deepens.
+
+## References
+
+**Getting Gatsby to run on Docker**
+
+- [Developer Tea :: Using Docker for Gatsby local development](https://developertea.com/blog/2020-10-19-docker-update-for-gatsby)
+- [My Docker Setup For GatsbyJS (and NextJS) - DEV Community](https://dev.to/stoutlabs/my-docker-setup-for-gatsbyjs-and-nextjs-5gao)
+- [daniel-norris/v2: Personal portfolio v2 using Gatsby, React, Framer Motion, Docker and Tailwind CSS.](https://github.com/daniel-norris/v2)
+- [Getting Gatsby to run on Docker Compose | by Daniel Graham | Ultralight.io | Medium](https://medium.com/ultralight-io/getting-gatsby-to-run-on-docker-compose-6bf3b0d97efb)
+
+**Getting HMR to work on Docker and Windows**
+
+- [How to Enable Resource-Responsible Polling for When inotify Won't Work · Issue #9112 · gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby/issues/9112)
+- [Webpack file changes not properly detected inside docker container · Issue #34497 · gatsbyjs/gatsby](https://github.com/gatsbyjs/gatsby/issues/34497)
+- [SaculRennorb/gatsby_hot_reloading_bug](https://github.com/SaculRennorb/gatsby_hot_reloading_bug)
+
+**Fixing EACCES: Permission denied issue**
+
+- [npm - (EACCES: permission denied, mkdir '/usr/app/node_modules/.cache) How can I create a docker-compose file to make node_modules a non-root folder? - Stack Overflow](https://stackoverflow.com/questions/67087735/eacces-permission-denied-mkdir-usr-app-node-modules-cache-how-can-i-creat)
+- [linux - Docker - EACCES: permission denied, mkdir '/app/node_modules/.cache' - Stack Overflow](https://stackoverflow.com/questions/67187750/docker-eacces-permission-denied-mkdir-app-node-modules-cache)
+
+**Getting Sharp to work on Docker with cross platform setup**
+
+- [Installation - sharp - High performance Node.js image processing](https://sharp.pixelplumbing.com/install#cross-platform)
+- [Cannot install sharp on M1 Mac with Debian Stretch based Docker container · Issue #2875 · lovell/sharp](https://github.com/lovell/sharp/issues/2875)
+- [Docker compose on cross-platform environment - Stack Overflow](https://stackoverflow.com/questions/42652332/docker-compose-on-cross-platform-environment)
+- [Compose file version 2 reference | Docker Documentation](https://docs.docker.com/compose/compose-file/compose-file-v2/#platform)
+
+**Docker and Node.js Best Practices**
+
+- [docker-node/BestPractices.md at main · nodejs/docker-node](https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user)
