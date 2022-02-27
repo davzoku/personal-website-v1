@@ -1,7 +1,6 @@
 const config = require("./config/website")
 require("dotenv").config()
 
-
 module.exports = {
   siteMetadata: {
     title: config.siteTitle,
@@ -29,21 +28,21 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/projects`,
         name: "Projects",
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/notes`,
         name: "Notes",
       },
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/books`,
         name: "Books",
@@ -87,7 +86,7 @@ module.exports = {
         ],
       },
     },
-    "gatsby-plugin-twitter",
+    `gatsby-plugin-twitter`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -110,8 +109,8 @@ module.exports = {
         head: true,
       },
     },
-    "gatsby-plugin-offline",
-    "gatsby-plugin-netlify",
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-netlify`,
     {
       resolve: `gatsby-plugin-webmention`,
       options: {
@@ -127,7 +126,7 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-theme-switcher",
+      resolve: `gatsby-plugin-theme-switcher`,
       options: {
         defaultDarkTheme: "theme-merlion",
         defaultLightTheme: "theme-night-safari",
