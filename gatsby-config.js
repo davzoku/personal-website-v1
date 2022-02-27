@@ -1,35 +1,6 @@
 const config = require("./config/website")
 require("dotenv").config()
-const {
-  prismicRepo,
-  releaseID,
-  accessToken,
-} = require("./prismic-configuration")
-const linkResolver = require("./src/utils/linkResolver")
 
-const reponame = process.env.PRISMIC_REPO_NAME || prismicRepo
-const apiKey = process.env.PRISMIC_API_KEY || accessToken
-const prismicReleaseID = process.env.PRISMIC_RELEASE_ID || releaseID
-
-const homePageSchema = require("./custom_types/homepage.json")
-const postSchema = require("./custom_types/post.json")
-const projectSchema = require("./custom_types/project.json")
-
-const gastbySourcePrismicConfig = {
-  resolve: "gatsby-source-prismic",
-  options: {
-    repositoryName: reponame,
-    accessToken: apiKey,
-    releaseID: prismicReleaseID,
-    prismicToolbar: true,
-    linkResolver: () => (doc) => linkResolver(doc),
-    schemas: {
-      homepage: homePageSchema,
-      post: postSchema,
-      project: projectSchema,
-    },
-  },
-}
 
 module.exports = {
   siteMetadata: {
@@ -41,7 +12,6 @@ module.exports = {
     twitterUsername: config.twitterHandle,
   },
   plugins: [
-    gastbySourcePrismicConfig,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

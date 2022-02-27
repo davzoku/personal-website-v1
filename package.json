@@ -37,14 +37,12 @@
     "gatsby-remark-table-of-contents": "^1.0.0",
     "gatsby-source-filesystem": "^3.7.1",
     "gatsby-source-graphql-universal": "^3.4.0",
-    "gatsby-source-prismic": "^3.3.6",
     "gatsby-transformer-sharp": "^3.7.1",
     "graphql": "^15.5.0",
     "immer": "^9.0.7",
     "json-schema": "^0.4.0",
     "node-sass": "^6.0.1",
     "object-path": "^0.11.8",
-    "prismic-reactjs": "^1.1.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
@@ -69,7 +67,6 @@
   },
   "keywords": [
     "gatsby",
-    "prismic",
     "blog",
     "portfolio",
     "davzoku"
