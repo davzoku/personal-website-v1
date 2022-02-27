@@ -1,0 +1,245 @@
+---
+slug: postman
+startDate: 2022-02-01
+updated: 2022-02-27
+title: "Postman Tips and Tricks"
+description: "Some thoughts on prioritizing backward compatibility implementation and managing development time"
+published: true
+featured: false
+type: ["Note"]
+tags: ["Postman", "API Testing", "Cheatsheet"]
+cover: ./cover.png
+growthStage: "Budding"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645852905/waltertengcom/garden/postman/cover_n80b3j.png"
+  alt="cover"
+/>
+
+[Photo from Postman](https://www.postman.com/)
+
+## Table of Contents
+
+```toc
+
+```
+
+## Motivation
+
+I just completed [Postman](https://www.postman.com/)'s [30 Days of Postman](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/overview) and [Valentin Despa](https://vdespa.com/)'s [Postman](https://www.udemy.com/course/postman-the-complete-guide/) course on Udemy in February 2022.
+
+Before embarking on these courses, I was literally using Postman on a need-to-know basis. I was using the basic features of Postman to perform HTTP requests to check API behavior etc. However, as I collaborated more with other fellow developers from my team, my Postman workspace is starting to clutter with many Postman collections. Some of these collections contain the same APIs, but different authors create them with different variable naming conventions etc. Sorting through these collections is taking a toll on my productivity. I realised I needed to do a deep dive on Postman to take advantage of its latest features.
+
+In my examples below, I will cover some tips and tricks of using Postman using only features available from the free plan.
+
+## Variables
+
+### Understanding Variable Scopes
+
+[Variable scopes | Postman Learning Center](https://learning.postman.com/docs/sending-requests/variables/#choosing-variable-scope)
+
+Postman supports the following variable scopes:
+
+- Global
+- Collection
+- Environment
+- Data
+- Local
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645857024/waltertengcom/garden/postman/var-scope_ssnahj.jpg"
+  alt="variable scopes"
+/>
+
+If a variable with the same name is declared in two different scopes, the value stored in the variable with the narrowest scope will be used. For example, if `baseUrl` is declared in both Collection and Environment level, the value from the Environment will take precedence.
+
+> Tip: We often set different environment variables in our local workspace. For example:
+>
+> (LOCAL env) baseUrl = localhost:8080
+>
+> (DEV env) baseUrl = app-dev.com
+>
+> (SIT env) baseUrl = app-sit.com
+>
+> (PROD env) baseUrl = app.com
+>
+> When we share our APIs to other developers, we often only share the collection without the environment (as it may contains other irrelevant variables). If there are some constant variables that are essential to the collection, we should set them as collection variables before sharing the collection with others. Otherwise the variables will be empty, and your peers will have to reverse engineer these values somehow.
+
+### Dynamic Variables
+
+[Dynamic variables | Postman Learning Center](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/)
+
+We can use dynamic variables to generate random test values like random UUID, names or timestamps. I recommend to take a look at the [Dynamic variables](https://learning.postman.com/docs/writing-scripts/script-references/variables-list/) section to take full advantage of this feature.
+
+For example, I sometimes need a random UUID. Instead of googling for the [Online UUID Generator Tool](https://www.uuidgenerator.net/), I can use this helper request to generate random UUID from Postman itself.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645858330/waltertengcom/garden/postman/random-gen_ufhkiw.jpg"
+  alt="uuid generator request"
+/>
+
+## Understanding Pre-request Script and Tests Script
+
+### Pre-request Script
+
+As the name implies, the pre-request script is executed before the request is made. One of the main usages of the pre-request script is to make your request more dynamic.
+
+For example, if a request requires the current date, we can use the moment library to get the current date before passing it to the request body.
+
+```
+var moment = require('moment');
+pm.environment.set('currentDate', moment().format(("DD/MM/YYYY")));
+```
+
+### Tests Script
+
+Tests scripts are executed after the request is made. They can be used to perform assertions, set or remove variables etc.
+
+> [Request Chaining](https://blog.postman.com/extracting-data-from-responses-and-chaining-requests/) is one of the easiest ways to increase your productivity. Suppose you have 2 APIs, and to execute the second API, you need to pass a token from the response of the first API. Instead of copying and pasting the values every time you run these APIs, you can use request chaining to automate this process for you.
+
+After going through the 30 Days of Postman, I realise most of the use cases are covered by the provided snippets in Postman, making it handy to know which snippets are available instead of reinventing the wheel with custom scripts. With that being said, there are times when we need to know [advanced assertions](https://www.youtube.com/watch?v=NEO8RqnfYec) when dealing with complex datasets.
+
+## Encode URI Component
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645859098/waltertengcom/garden/postman/encode-uri-component_sqytjm.jpg"
+  alt="encode uri component"
+/>
+
+When handling special characters in the query params, always right-click to encode URI Component.
+
+From my experience, the `+` symbol will be parsed as a space in the backend. It occurs even when the `Encode URL automatically` setting is turned on.
+
+## curl
+
+In my opinion, curl is one of the easiest methods to pass requests in or out of Postman.
+
+### Chrome -> curl -> Postman
+
+We can get the curl command for a particular request by going into Dev Tools from Chrome and copy the request as curl.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645945448/waltertengcom/garden/postman/curl-chrome_uj5ecz.jpg"
+  alt="get curl from chrome"
+/>
+
+Alternatively, other developers may pass their existing curl command to you, and you can simply import into Postman as raw text.
+
+### Postman -> curl
+
+Suppose you want to share a request from your Postman workspace, the recipient may not necessarily use Postman so it will not useful if export share the Postman collection.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645945448/waltertengcom/garden/postman/curl-pm_zeiwwy.jpg"
+  alt="get curl from postman"
+/>
+
+We can go to the `Code` section from the sidebar and export the code snippet in curl. Other languages are available too.
+
+## OAuth
+
+Exercise to try: [Day 14: OAuth](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-0e372950-c58c-483d-aea9-fe676547e6f0)
+
+During your development work, you may need to test APIs with OAuth 2.0 authentication hence it is good to know how we can make it work in Postman.
+
+## GraphQL
+
+Exercise to try: [Day 19: GraphQL](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-bd7ff4ba-c209-47b3-85d7-514a7ce0f3bf)
+
+Postman supports GraphQL. Some of the best practice for executing graphQL queries on Postman includes:
+
+1. Whenever possible, import the graphQL schema to support query validation
+2. Avoid mixing postman variables with graphQL queries. Use postman variables in graphQL variables instead, to make your queries cleaner.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645951452/waltertengcom/garden/postman/graphql_adimk2.jpg"
+  alt="github graphql"
+/>
+
+## OpenAPI
+
+Exercise to try: [Day 18: API Specifications](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-c385b569-e55a-4d4f-b252-51a33311ca78)
+
+Postman supports [different API specifications](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-api-specifications) such as OpenAPI 3.0. This means that we can directly import API specs from API editors such as [SwaggerHub](https://swagger.io/tools/swaggerhub/) into Postman and create [mock APIs](#mock-server).
+
+## Mock Server
+
+Exercise to try: [Day 10: Mock services](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-900c913f-3ce2-4445-9508-4f994faeff10)
+
+Imagine a case where you are working on a set of APIs that other developers are dependent on or vice versa. The API specifications are mostly finalised, but the APIs are pending implementation. In this case, we can consider mocking the APIs so that any development work can continue in parallel.
+
+When you send a request to a mock server, Postman will match the request configuration to the examples you have saved and respond with the data you added to the example. However, I find that the actual use case is fairly limited as there are known limitations of Postman mock servers. We cannot match the request body or query parameters. For more info: [Understanding example matching](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/matching-algorithm/)
+
+Note that there is a limit of 1000 mock calls per month for free plan users.
+
+## Monitor
+
+Exercise to try: [Day 18: API Specifications](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-c385b569-e55a-4d4f-b252-51a33311ca78)
+
+During your development work, you may find a need to check whether certain APIs are working correctly or alive periodically. Postman provides a simple way to create a collection-based monitor to continuously check your API's health, run test suites, or validate critical workflows.
+
+For example, we can set a monitor to run every day at 9 am, and we can monitor the API's health over time in Postman itself. We can also set up email notifications to be notified immediately whenever the test cases in our monitor fail.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1645951128/waltertengcom/garden/postman/monitor_g4lfkc.jpg"
+  alt="postman monitor"
+/>
+
+Note that there is a limit of 1000 monitoring calls per month for free plan users.
+
+## Newman
+
+[Newman](https://github.com/postmanlabs/newman) is a CLI runner for Postman. It allows developers to run Postman collection from the command line directly and make it possible to integrate with other continuous integration servers and build systems.
+
+As mentioned above, Postman Monitor is a managed feature provided by Postman. Some of us may find the 1000 free calls too restrictive for our use cases. We can integrate Newman with the Jenkins pipeline to run at set intervals in this case. Since we are using Jenkins, we have far more customization in terms of notification such as email, Slack, Microsoft Teams or even Telegram.
+
+https://www.youtube.com/watch?v=iS7HPNswv-8
+
+## Notable Mentions
+
+This section covers other interesting features that Postman supports. I find them to be good-to-know and less crucial for a typical developer.
+
+### Postman Runner
+
+Exercise to try: [Day 09: Scripting](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-7b82a13b-7c2a-4b51-9620-66a51df3e313)
+
+Postman Runner is a straightforward tool to sequentially run the requests in a collection. Take time to understand the `postman.setNextRequest()` command to implement unique workflows to run a collection.
+
+### WebSockets
+
+Exercise to try: [Day 21: WebSockets](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-8b2c3197-1df3-44ba-9687-eba60470d270)
+
+Postman supports WebSockets.
+
+### Data Files
+
+Exercise to try: [Day 23: Data files](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-087bf975-4820-44b2-82be-2664a55d9958)
+
+Postman can parse external data files like CSV.
+
+### Postman APIs
+
+[Postman APIs](https://www.postman.com/postman/workspace/postman-public-workspace/documentation/12959542-c8142d51-e97c-46b6-bd77-52bb66712c9a) are a set of API provided by Postman to allow users to programmatically access data stored in their Postman account easily. You can use them to create or access resources like workspace, environment etc. and even create [webhooks](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/collection/1559645-7d96fb0a-52d9-4c7e-b044-6f5c3f6ee12f).
+
+Note that there is a limit of 1000 Postman API calls per month for free plan users.
+
+### External Libraries
+
+Postman comes with some [buit-in libraries](https://learning.postman.com/docs/writing-scripts/script-references/postman-sandbox-api-reference/#using-external-libraries) such as moment and cheerio. We can also include other external libraries using [this method](https://community.postman.com/t/adding-external-libraries-to-postman/1971/4).
+
+## Conclusion
+
+There are many features currently developed by the Postman team. In this article, I have only covered a general overview of features that I find useful in my scope of work. I will try to keep these tips as updated as possible.
+
+For a general guide on Postman, I recommend referring to the [official documentation from Postman](https://learning.postman.com/docs/getting-started/introduction/) and this [quick reference guide](https://drive.google.com/file/d/1puV-awBU5uYvsMYITIk35cFAHAeFgDqU/view) compiled by Valentin Despa.
+
+## References
+
+- [Postman: The Complete Guide - REST API Testing | Udemy](https://www.udemy.com/course/postman-the-complete-guide/)
+
+- [30 Days of Postman](https://www.postman.com/postman/workspace/30-days-of-postman-for-developers/overview)
+
+- [Postman Learning Center](https://learning.postman.com/docs/getting-started/introduction/)
+
+- [API Testing Tips from a Postman Professional | Postman Blog](https://blog.postman.com/api-testing-tips-from-a-postman-professional/)
