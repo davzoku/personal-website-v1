@@ -1,0 +1,192 @@
+---
+slug: using-zsh-on-windows
+startDate: 2022-03-20
+updated: 2022-03-20
+title: "Using zsh on Windows"
+description: "Notes on setting up zsh shell on Windows Terminal"
+published: true
+featured: true
+type: ["Note"]
+tags:
+  [
+    "SWE",
+    "Tips",
+    "zsh",
+    "Windows",
+    "Cross-Platform",
+    "bash",
+    "Shell Scripting",
+    "Setup",
+  ]
+cover: ./cover.png
+growthStage: "Evergreen"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1647790544/waltertengcom/garden/using-zsh-on-windows/cover_jyxvff.png"
+  alt="cover"
+/>
+
+_This is part of the "Setting Up a Cross-Platform Development Experience" series, where I simplify my own user experience across my macOS and Windows machines for general use and software development._
+
+## Table of Contents
+
+```toc
+
+```
+
+One of the long-time arguments that favor macOS over Windows for developers is that macOS Terminal can run Unix commands while Windows Command Prompt cannot. However, since most servers worldwide are UNIX-based, it is common advice for developers to be familiar with Unix commands as much as possible.
+
+Today, this argument holds little weight as there are plenty of ways Windows users can install a Unix shell like bash easily with
+[Git Bash](https://gitforwindows.org/) and [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install).
+
+As macOS has [replaced bash with zsh since Catalina](https://www.theverge.com/2019/6/4/18651872/apple-macos-catalina-zsh-bash-shell-replacement-features), I decided to use zsh on Windows too, so that I have an unified experience across 2 different OS, with the same (or similar) `.zshrc` config.
+
+It turns out it is not as straightforward as I initially thought.
+
+> TLDR: My advice is to stick with git bash for Windows as it is good enough for most cases. (See my 1-minute guide on [How to add Git Bash to Windows Terminal](/garden/how-to-add-git-bash-to-windows-terminal)) If you are as experimental as I am, please proceed ahead.
+
+There are 2 options to install zsh on Windows. We can either [install zsh on WSL](#install-zsh-on-wsl) or [replace the git bash shell with zsh](#replace-git-bash-with-zsh). _See [Git Bash vs WSL](https://www.reddit.com/r/git/comments/fkpjou/windows_git_bash_vs_cygwin_vs_windows_subsystem/)_.
+
+## Prerequisties
+
+You may need these software installed on your Windows machine to follow this guide.
+
+- [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701)
+- [Git Bash](https://gitforwindows.org/)
+- [Windows Subsytem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/install)
+
+## Install zsh on WSL
+
+> Use this method if you are already using WSL for most of your stuff.
+
+This is the easier option; we just have to run the following commands in the Ubuntu shell.
+
+```sh
+sudo apt update
+sudo apt install zsh -y
+# install oh-my-zsh to set zsh as default shell and install plugins
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+You are good to go at this point. You may continue to watch the following video or read the [companion blog post](https://www.the-digital-life.com/awesome-wsl-wsl2-terminal/) by Christian for more tips on this method.
+
+https://www.youtube.com/watch?v=235G6X5EAvM
+
+## Replace Git Bash with zsh
+
+> This is my preferred choice as git bash is easier for me to maintain due to the [differences in the file directory with WSL](https://superuser.com/questions/1471994/git-bash-and-wsl-have-a-different-directory-structure). Most of files are stored in the Windows file system and I use [Chocolatey](https://chocolatey.org/) to manage my installation packages.
+
+For this method to work, we need `pacman` but it is [not included](https://github.com/git-for-windows/git/issues/397#issuecomment-140984199) with _Git for Windows_ by default.
+
+At this point, we have 2 options:
+
+1. Install [Git for Windows SDK](https://stackoverflow.com/questions/32712133/package-management-in-git-for-windows-git-bash/54740597#54740597)
+2. or, download [pacman separately](https://stackoverflow.com/questions/32712133/package-management-in-git-for-windows-git-bash/65204171#65204171)
+
+Git for Windows SDK has a huge disk footprint of 5.33 GB as compared to a typical installation of Git for Windows which is only about 840 MB.
+
+Hence, restoring pacman is a much more reasonable option.
+
+### Restore pacman in Git for Windows
+
+_Huge thanks to [Michael Chen](https://stackoverflow.com/questions/32712133/package-management-in-git-for-windows-git-bash/65204171#65204171) _
+
+1. Run the following commands to download /etc/pacman.conf and 3 packages: pacman, pacman-mirrors and msys2-keyring
+
+```sh
+curl https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf -o /etc/pacman.conf
+for f in pacman-5.2.2-4-x86_64 pacman-mirrors-20201028-1-any msys2-keyring-1~20201002-1-any;
+ do curl https://repo.msys2.org/msys/x86_64/$f.pkg.tar.xz -o ~/Downloads/$f.pkg.tar.xz;
+done
+```
+
+2. Unpack them at the root then restore pacman with these commands
+
+```sh
+cd /
+tar x --xz -vf ~/Downloads/msys2-keyring-1~20201002-1-any.pkg.tar.xz usr
+tar x --xz -vf ~/Downloads/pacman-mirrors-20201028-1-any.pkg.tar.xz etc
+tar x --xz -vf ~/Downloads/pacman-5.2.2-4-x86_64.pkg.tar.xz usr
+mkdir -p /var/lib/pacman
+pacman-key --init
+pacman-key --populate msys2
+pacman -Syu
+```
+
+3.  The next two commands restore all matching metadata. The second command is multi-line but still safe to cut and paste (be patient):
+
+```sh
+URL=https://github.com/git-for-windows/git-sdk-64/raw/main
+cat /etc/package-versions.txt | while read p v; do d=/var/lib/pacman/local/$p-$v;
+ mkdir -p $d; echo $d; for f in desc files install mtree; do curl -sSL "$URL$d/$f" -o $d/$f;
+ done; done
+```
+
+4. Refresh pacman keys (to avoid [this issue](https://github.com/msys2/MSYS2-packages/issues/2058))
+
+```sh
+pacman-key --refresh-keys
+```
+
+5. Install zsh!
+
+```sh
+pacman -S zsh
+```
+
+6. Add the following line to `.bashrc` to switch from git bash to zsh whenever executing git bash.
+
+```sh
+bash -c zsh
+```
+
+7. Install oh-my-zsh, theme, plugins and all the good stuff!
+
+   - I use a fairly simple [.zshrc](https://github.com/davzoku/dotfiles) config with [agnoster](https://github.com/agnoster/agnoster-zsh-theme) theme, and plugins like [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) _If you want to take a look at my latest configuration, you can check out [my dotfiles](https://github.com/davzoku/dotfiles)_.
+
+## Extras
+
+_Update: added this section after a week of using zsh on Windows._
+
+### Using both Git Bash and zsh on Windows
+
+After setting up zsh on Windows Terminal, I noticed that zsh is extremely slow within VSCode and freezes from time to time. As there isn't much documentation on this, so I have decided to fall back to using git bash in VSCode for the time being.
+
+However, it seems that there is no simple way to load different `.bashrc` files so that I can switch between git bash and zsh easily.
+
+This is a little hack to make this work.
+
+1. comment out the line mentioned above in my `.bashrc` to switch to zsh
+
+```sh
+# bash -c zsh
+```
+
+2. Add a `switch-to-zsh.sh` script into my user directory
+
+```sh
+#!/bin/bash
+bash -c zsh
+```
+
+3. Execute `switch-to-zsh.sh` only with Windows Terminal. by adding `"commandline": "C:/Program Files/Git/bin/bash.exe --login switch-to-zsh.sh"` to my Windows Terminal [settings.json](https://github.com/davzoku/dotfiles/blob/master/windows/windows-terminal/settings.json).
+
+4. Viola! I get to enjoy the speed of running git bash within VS Code and use zsh on Windows Terminal!
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1647790545/waltertengcom/garden/using-zsh-on-windows/vscode-bash_fomn2y.png"
+  alt="bash on VS Code"
+/>
+
+_One caveat of this setup is that I have to maintain both `.bashrc` and `.zshrc` and make sure my alias and path variables are set up in both files. This is a fairly small cost for me to enjoy both shells on my machine._
+
+## References
+
+- [Awesome WSL / WSL2 Windows Terminal, zsh, oh-my-zsh, Powerlevel10k](https://www.the-digital-life.com/awesome-wsl-wsl2-terminal/)
+
+- [Package management in Git for Windows (Git Bash)? - Stack Overflow](https://stackoverflow.com/questions/32712133/package-management-in-git-for-windows-git-bash)
+
+- [Using WSL and Windows Git Bash interchangeably · Specialising Generalist](https://quotidian-ennui.github.io/blog/2019/09/04/wsl-wingit-bash/)
+
+- [shell - How to run a script with Git bash with custom bashrc? - Stack Overflow](https://stackoverflow.com/questions/22269023/how-to-run-a-script-with-git-bash-with-custom-bashrc)
