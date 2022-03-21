@@ -87,9 +87,9 @@ As the name implies, the pre-request script is executed before the request is ma
 
 For example, if a request requires the current date, we can use the moment library to get the current date before passing it to the request body.
 
-```
-var moment = require('moment');
-pm.environment.set('currentDate', moment().format(("DD/MM/YYYY")));
+```js
+var moment = require("moment")
+pm.environment.set("currentDate", moment().format("DD/MM/YYYY"))
 ```
 
 ### Tests Script

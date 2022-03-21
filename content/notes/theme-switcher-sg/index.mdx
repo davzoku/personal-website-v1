@@ -97,7 +97,7 @@ and, lastly, [Sentosa](https://www.sentosa.com.sg/) for the relaxing beachy vibe
 
 To keep things simple, I picked 8 colors for each theme, just like Max have done. Having 8 colors is manageable and I find it sufficent for my website's design. You can have any number of colors as you see fit.
 
-```
+```css
   --color-primary: for links
   --color-secondary: for ::selection selector
   --color-text: for normal text
@@ -122,7 +122,7 @@ After installing `gatsby-plugin-theme-switcher`, we can add the plugin to our `g
 
 Reuben provided a helpful feature in which we can declare our defaultDarkTheme and defaultLightTheme. The defaultDarkTheme takes advantage of the CSS media feature, [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme). If the user has indicated the dark preference through the system or user agent setting, the user will be greeted with the defaultDarkTheme first.
 
-```
+```js
 module.exports = {
   plugins: [
     {
@@ -133,12 +133,12 @@ module.exports = {
       },
     },
   ],
-};
+}
 ```
 
 Next, we can arrange our color palettes from above into CSS variable with the `.theme-*` format.
 
-```
+```css
 .theme-night-safari {
   --color-primary: #ffb814;
   --color-secondary: #10c8ee;
@@ -157,7 +157,7 @@ Next, we can arrange our color palettes from above into CSS variable with the `.
 
 Subsequently, we have to change every color attribute in our CSS to use the CSS variables that we have declared. _Yes, every single one of them!_
 
-```
+```css
   body {
     width: 100%;
     margin: 0 auto;
@@ -185,7 +185,7 @@ For example, my site icon is a SVG which should change along with the theme idea
 
 Instead of generating multiple image assets, we can modify the SVG code to accept a CSS variable.
 
-```
+```markup
   <svg
     width="31"
     height="31"
@@ -209,7 +209,7 @@ Since I have opted to find a theme picker inspired by Max's UI design, I will fu
 
 First, we can create a hashmap to represent all the available theme options, each containing the theme name and the SVG icon.
 
-```
+```js
 const allThemes = new Map([
   ["Merlion", MIcon],
   ["Night Safari", NSIcon],
@@ -221,7 +221,7 @@ const allThemes = new Map([
 
 We will loop through the map and create a `ThemeButton` component for each item in the map.
 
-```
+```js
 const ThemePicker = ({ theme, setTheme }) => {
   return (
     <ThemeButtons>
@@ -262,7 +262,7 @@ const ThemePicker = ({ theme, setTheme }) => {
 
 To switch themes, we can use the `ThemeContext`.
 
-```
+```js
 import React, { useContext } from "react"
 import { ThemeContext } from 'gatsby-plugin-theme-switcher';
 ...
