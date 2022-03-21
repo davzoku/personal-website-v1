@@ -30,7 +30,7 @@ Since SDKMAN is built for unix systems, installation and using on a mac is smoot
 1. [Install Homebrew](https://docs.brew.sh/Homebrew-on-Linux#install)
 2. Install SDKMAN
 
-```
+```bash
 curl -s "https://get.sdkman.io" | bash
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -42,7 +42,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 - Install my commonly used JDK versions
 
-```
+```bash
 sdk install java 8.0.302-open
 
 sdk install java 11.0.2-open
@@ -54,7 +54,7 @@ sdk install java 17.0.1-open
 
 - Install my commonly used Gradle versions
 
-```
+```bash
 sdk install gradle 4.2.1
 
 sdk install gradle 6.9.1
@@ -64,7 +64,7 @@ sdk install gradle 6.9.1
 
 - Install maven
 
-```
+```bash
 sdk install maven
 ```
 
@@ -76,27 +76,27 @@ I would set up my environment as such:
 
 1. Set my default Java and Gradle versions:
 
-```
+```bash
 sdk default java java 11.0.2-open
 sdk default gradle 6.9.1
 ```
 
 2. Navigate to the config file of your SDKMAN installation. Open the file and set `sdkman_auto_env` as true.
 
-```
+```bash
 sdkman_auto_env=true
 ```
 
 3. Navigate to one of the projects that is using Java 8 and set up the environment using `env` command
 
-```
+```bash
 # creates a .sdkmanrc config file in the base directory
 sdk env init
 ```
 
 - In the `.sdkmanrc` file, I add the following:
 
-```
+```bash
 # Enable auto-env through the sdkman_auto_env config
 # Add key=value pairs of SDKs to use below
 java=8.0.302-open
@@ -107,7 +107,7 @@ gradle=4.2.1
 
 - Whenever I navigate to my Java 8 project, I will see the SDKs switch automatically.
 
-```
+```bash
 $ cd my-java-8-project
 
 Using java version 8.0.302-open in this shell.

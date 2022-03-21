@@ -44,7 +44,7 @@ I took another dive into the Gatsby issues section and turns out someone had a [
 
 We just have to specify the webpack config on `gatsby-node.js` and we can remove environment variables such as `GATSBY_WEBPACK_PUBLICPATH: /` and `CHOKIDAR_USEPOLLING: 'true'`
 
-```
+```js
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     watchOptions: {
@@ -97,7 +97,7 @@ The issue persists even after adding the `platform` and `arch` flags in my Docke
 
 I also added a platform config available only on docker compose v2.4, after checking the [Docker Compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v2/#platform)
 
-```
+```yaml
 version: "2.4"
 services:
   web:
@@ -113,7 +113,7 @@ Another issue arises following this setup. Different EACCES permissions errors s
 
 I managed to get my website running on Docker on both Windows and Mac machine after making this last change. (although it is not recommended.)
 
-```
+```bash
 # RUN chown -R node /app/node_modules
 # USER node
 RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
@@ -123,20 +123,20 @@ RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
 
 1. Add Webpack Config in `gatsby-node.js`
 
-```
+```js
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     watchOptions: {
       aggregateTimeout: 200,
       poll: 1000,
     },
-  });
-};
+  })
+}
 ```
 
 2. Add Dockerfile
 
-```
+```dockerfile
 FROM node:16-bullseye
 EXPOSE 8000
 
@@ -154,7 +154,7 @@ CMD ["gatsby", "develop", "-H", "0.0.0.0" ]
 
 3. Add docker-compose.yml
 
-```
+```yaml
 version: "2.4"
 services:
   web:
