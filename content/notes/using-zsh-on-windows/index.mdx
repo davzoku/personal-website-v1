@@ -62,7 +62,7 @@ You may need these software installed on your Windows machine to follow this gui
 
 This is the easier option; we just have to run the following commands in the Ubuntu shell.
 
-```sh
+```bash
 sudo apt update
 sudo apt install zsh -y
 # install oh-my-zsh to set zsh as default shell and install plugins
@@ -94,7 +94,7 @@ _Huge thanks to [Michael Chen](https://stackoverflow.com/questions/32712133/pack
 
 1. Run the following commands to download /etc/pacman.conf and 3 packages: pacman, pacman-mirrors and msys2-keyring
 
-```sh
+```bash
 curl https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf -o /etc/pacman.conf
 for f in pacman-5.2.2-4-x86_64 pacman-mirrors-20201028-1-any msys2-keyring-1~20201002-1-any;
  do curl https://repo.msys2.org/msys/x86_64/$f.pkg.tar.xz -o ~/Downloads/$f.pkg.tar.xz;
@@ -103,7 +103,7 @@ done
 
 2. Unpack them at the root then restore pacman with these commands
 
-```sh
+```bash
 cd /
 tar x --xz -vf ~/Downloads/msys2-keyring-1~20201002-1-any.pkg.tar.xz usr
 tar x --xz -vf ~/Downloads/pacman-mirrors-20201028-1-any.pkg.tar.xz etc
@@ -116,7 +116,7 @@ pacman -Syu
 
 3.  The next two commands restore all matching metadata. The second command is multi-line but still safe to cut and paste (be patient):
 
-```sh
+```bash
 URL=https://github.com/git-for-windows/git-sdk-64/raw/main
 cat /etc/package-versions.txt | while read p v; do d=/var/lib/pacman/local/$p-$v;
  mkdir -p $d; echo $d; for f in desc files install mtree; do curl -sSL "$URL$d/$f" -o $d/$f;
@@ -125,19 +125,19 @@ cat /etc/package-versions.txt | while read p v; do d=/var/lib/pacman/local/$p-$v
 
 4. Refresh pacman keys (to avoid [this issue](https://github.com/msys2/MSYS2-packages/issues/2058))
 
-```sh
+```bash
 pacman-key --refresh-keys
 ```
 
 5. Install zsh!
 
-```sh
+```bash
 pacman -S zsh
 ```
 
 6. Add the following line to `.bashrc` to switch from git bash to zsh whenever executing git bash.
 
-```sh
+```bash
 bash -c zsh
 ```
 
@@ -159,13 +159,13 @@ This is a little hack to make this work.
 
 1. comment out the line mentioned above in my `.bashrc` to switch to zsh
 
-```sh
+```bash
 # bash -c zsh
 ```
 
 2. Add a `switch-to-zsh.sh` script into my user directory
 
-```sh
+```bash
 #!/bin/bash
 bash -c zsh
 ```

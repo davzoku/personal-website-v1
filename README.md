@@ -34,7 +34,7 @@ This Gatsby site supports Docker for local development.
 
 To run the Docker container on your local machine:
 
-```
+```bash
 docker compose up
 ```
 
