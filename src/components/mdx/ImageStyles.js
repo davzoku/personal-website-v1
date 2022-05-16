@@ -8,7 +8,7 @@ export const Img = styled.img`
 
 export const BasicImage = (props) => {
   return (
-    <div>
+    <div align="center">
       <img
         css={css({
           width: props.width || "100%",
