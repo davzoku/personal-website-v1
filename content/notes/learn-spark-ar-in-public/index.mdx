@@ -1,0 +1,66 @@
+---
+slug: learn-spark-ar-in-public
+startDate: 2022-05-16
+updated: 2022-05-20
+title: "Learning Spark AR in Public"
+description: "Follow my journey as I learn to use Spark AR to make AR filters for Instagram and Facebook"
+published: true
+featured: false
+type: ["Note"]
+tags:
+  [
+    "Learning Journey",
+    "Learn in Public",
+    "Spark AR",
+    "Augmented Reality",
+    "Filters",
+  ]
+cover: ./cover.png
+growthStage: "Seedling"
+---
+
+<WIP />
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1652973925/waltertengcom/garden/learn-spark-ar/cover_nznjih.png"
+  alt="cover"
+/>
+
+## Introduction
+
+[Spark AR Studio](https://sparkar.facebook.com/ar-studio/) is an application developed by Meta to create AR filters on social media platforms like Facebook and Instagram. Other social media AR app includes [Lens Studio](https://ar.snap.com/) for Snapchat and [Effect House](https://effecthouse.tiktok.com/) for TikTok.
+
+## Motivation
+
+I have always dreamt of creating my own Instagram filter in 2019-2020. My action plan is to migrate my existing Lightroom presets into Instagram compatible filters as a starter project and explore further once I have familiarized myself with Spark AR basics.
+
+I finally put things into action and recently created my [Spark AR Filters](https://walterteng.com/spark-ar-filters) in 2022.
+
+## Learning Points
+
+Here are some of my learning points from my first starter project:
+
+### 1. Always plan for the target platforms before developing your filter
+
+- There are 3 types of experiences that Spark AR filters can support on Facebook and Instagram
+  1. Sharing new experiences on stories, reels, posts or messages
+  2. Real-time video experience for real-time video calls
+  3. Existing Media (Applying filters on saved images or videos)
+- All capabilities and patches are available for sharing new experiences, and the availability of capabilities reduces as you go down the list.
+- For example, filters cannot be applied to existing media if the filters use native UI like [UI Picker](https://sparkar.facebook.com/ar-studio/learn/tutorials/native-ui-picker/) or [UI Slider](https://sparkar.facebook.com/ar-studio/learn/tutorials/native-ui-slider/)
+
+### 2. The option is to apply filter on existing media is precious
+
+- If a filter has been published with capabilities that are not compatible with existing media, updating the published filter with a backward-compatible project will not bring back to option to apply the filter to existing media.
+
+- There is no known workaround for this. I have to resubmit my filters as a new submission to get the option to apply for existing media.
+
+## Resources
+
+This section documents a list of valuable resources that I have used to pick up this skill:
+
+- [DJS CREATES](https://www.youtube.com/user/ddanyy95) : High-quality Spark AR tutorials in bite-size format
+
+- [Eddy Adams](https://www.youtube.com/c/EddyAdamsin3d): Most comprehensive masterclass about Spark AR on YouTube
+
+- [Udart](https://www.youtube.com/c/Udart): Deep-dive on various patches for a thorough understanding
