@@ -1,7 +1,7 @@
 ---
 slug: learn-spark-ar-in-public
 startDate: 2022-05-16
-updated: 2022-05-20
+updated: 2022-05-22
 title: "Learning Spark AR in Public"
 description: "Follow my journey as I learn to use Spark AR to make AR filters for Instagram and Facebook"
 published: true
@@ -16,7 +16,7 @@ tags:
     "Filters",
   ]
 cover: ./cover.png
-growthStage: "Seedling"
+growthStage: "Budding"
 ---
 
 <WIP />
@@ -26,6 +26,10 @@ growthStage: "Seedling"
   alt="cover"
 />
 
+```toc
+
+```
+
 ## Introduction
 
 [Spark AR Studio](https://sparkar.facebook.com/ar-studio/) is an application developed by Meta to create AR filters on social media platforms like Facebook and Instagram. Other social media AR app includes [Lens Studio](https://ar.snap.com/) for Snapchat and [Effect House](https://effecthouse.tiktok.com/) for TikTok.
@@ -34,7 +38,14 @@ growthStage: "Seedling"
 
 I have always dreamt of creating my own Instagram filter in 2019-2020. My action plan is to migrate my existing Lightroom presets into Instagram compatible filters as a starter project and explore further once I have familiarized myself with Spark AR basics.
 
-I finally put things into action and recently created my [Spark AR Filters](https://walterteng.com/spark-ar-filters) in 2022.
+I finally put things into action and recently created my [Spark AR Filters](/spark-ar-filters) in 2022.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1652708621/waltertengcom/projects/spark-ar-filters/cover_tfsc1n.png"
+  alt="Spark AR Filters"
+  width="80%"
+  link="/spark-ar-filters"
+/>
 
 ## Learning Points
 
@@ -54,6 +65,32 @@ Here are some of my learning points from my first starter project:
 - If a filter has been published with capabilities that are not compatible with existing media, updating the published filter with a backward-compatible project will not bring back to option to apply the filter to existing media.
 
 - There is no known workaround for this. I have to resubmit my filters as a new submission to get the option to apply for existing media.
+
+### 3. Understanding gestures
+
+There are 5 [gestures](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.gesture) available on Spark AR.
+
+These gestures are :
+
+- [Tap](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.tapgesture)
+
+  - Most common in filters. Users can tap the screen to toggle a setting or cycle through a list of settings.
+
+- [Pan](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.pangesture)
+
+  - Can also be understood as a tap and drag gesture. Typically used to drag and drop a prop around the viewport.
+
+- [Long Press](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.longpressgesture)
+
+  - An alternative to Tap. It is less intuitive than Tap, but it can be used to add additional functionality to the filter.
+
+- [Pinch](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.pinchgesture)
+
+  - Typically used to resize a prop. **However, the default gesture, pinch to zoom, will not longer work if this gesture is enabled.**
+
+- [Rotate](https://sparkar.facebook.com/ar-studio/learn/reference/classes/touchgesturesmodule.rotategesture)
+
+  - 2-Finger-Rotate. Least common in filters, can be used to skew or rotate the orientation of a prop.
 
 ## Resources
 
