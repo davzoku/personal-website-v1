@@ -1,9 +1,7 @@
 import React from "react"
 import styled from "@emotion/styled"
-//import colors from "styles/colors"
-//import icon from "images/icon.png"
 import PropTypes from "prop-types"
-import { Twitter, GitHub, LinkedIn } from "./Social"
+import { Twitter, GitHub, Instagram, LinkedIn } from "./Social"
 
 const FooterContainer = styled("div")`
   width: 90%;
@@ -38,11 +36,6 @@ const FooterLinks = styled("div")`
   margin-top: 1.5em;
 `
 
-// const FooterIcon = styled("img")`
-//   max-width: 33px;
-//   margin-top: 1em;
-// `
-
 const Footer = ({ author }) => (
   <FooterContainer>
     <FooterCopyright>
@@ -52,6 +45,7 @@ const Footer = ({ author }) => (
     </FooterCopyright>
     <FooterLinks>
       <Twitter />
+      <Instagram />
       <GitHub />
       <LinkedIn />
     </FooterLinks>

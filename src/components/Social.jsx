@@ -4,6 +4,7 @@ import config from "../../config/website"
 import TwitterIcon from "@material-ui/icons/Twitter"
 import GitHubIcon from "@material-ui/icons/GitHub"
 import LinkedInIcon from "@material-ui/icons/LinkedIn"
+import InstagramIcon from "@material-ui/icons/Instagram"
 //import colors from "styles/colors"
 
 export const Twitter = ({ url = `${config.twitter}` }) => {
@@ -62,6 +63,26 @@ export const LinkedIn = ({ url = `${config.linkedin}` }) => {
       aria-label="Visit my Linkedin"
     >
       <LinkedInIcon />
+    </a>
+  )
+}
+
+export const Instagram = ({ url = `${config.instagram}` }) => {
+  return (
+    <a
+      target="_blank"
+      rel="me noopener"
+      href={url}
+      css={css`
+        margin-left: 10px;
+        color: var(--color-text, #16161a);
+        :hover {
+          color: var(--color-primary, #73abff);
+        }
+      `}
+      aria-label="Visit my Instagram"
+    >
+      <InstagramIcon />
     </a>
   )
 }

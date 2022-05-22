@@ -27,6 +27,8 @@ module.exports = {
   twitterHandle: "@davzoku",
   github: "https://github.com/davzoku",
   linkedin: "https://sg.linkedin.com/in/tengkokwai",
+  instagram: "https://www.instagram.com/drawwithwalter/",
+  instagramHandle: "@drawwithwalter",
   email: "walter.tengkw@gmail.com",
 
   navLinks: [

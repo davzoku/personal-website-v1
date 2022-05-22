@@ -152,6 +152,7 @@ const skills = ["Java", "Spring Framework", "JSP", "Javascript", "React", "AWS"]
 
 const bioLinks = new Map([
   ["Twitter", "https://twitter.com/davzoku"],
+  ["Instagram", "https://www.instagram.com/drawwithwalter/"],
   ["Github", "https://github.com/davzoku"],
   ["Linkedin", "https://www.linkedin.com/in/tengkokwai/"],
   ["Polywork", "https://www.polywork.com/walterteng"],
