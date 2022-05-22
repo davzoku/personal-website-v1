@@ -63,8 +63,8 @@ const LinkButton = styled.button`
 const linksArray = [
   {
     text: "Spark AR Filters",
-    url: "https://www.facebook.com/sparkarhub/portfolios/ig/drawwithwalter/",
-    target: "_blank",
+    url: "/spark-ar-filters",
+    target: "_self",
   },
   {
     text: "Notion Templates",
