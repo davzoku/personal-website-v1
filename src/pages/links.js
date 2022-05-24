@@ -72,6 +72,11 @@ const linksArray = [
     target: "_blank",
   },
   {
+    text: "Chrome Extensions",
+    url: "/projects/tags/chrome-extension",
+    target: "_self",
+  },
+  {
     text: "Microsoft Edge Add-ons",
     url: "https://microsoftedge.microsoft.com/addons/search?developer=davzoku",
     target: "_blank",
