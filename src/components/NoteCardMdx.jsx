@@ -1,4 +1,5 @@
 import React from "react"
+import kebabCase from "lodash/kebabCase"
 //import Moment from "react-moment"
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
@@ -59,8 +60,12 @@ const PostMetas = styled("div")`
   margin: 1rem 0;
   padding: 0 2rem;
   justify-content: flex-start;
-  font-size: 0.85em;
+  font-size: 1em;
   color: var(--color-text, #16161a);
+  a {
+    text-decoration: none;
+    color: var(--color-text, #16161a);
+  }
 `
 
 const Tag = styled("div")`
@@ -143,7 +148,9 @@ const NoteCardMdx = ({ data }) => {
       <PostMetas>
         <>
           {data.tags.slice(0, 3).map((tag) => (
-            <Tag>{tag.toUpperCase()}</Tag>
+            <Link to={`/garden/tags/${kebabCase(tag)}`}>
+              <Tag>{tag.toUpperCase()}</Tag>
+            </Link>
           ))}
         </>
       </PostMetas>

@@ -1,4 +1,5 @@
 import React from "react"
+import kebabCase from "lodash/kebabCase"
 //import Moment from "react-moment"
 import { Link } from "gatsby"
 import styled from "@emotion/styled"
@@ -65,6 +66,10 @@ const PostMetas = styled("div")`
   justify-content: flex-start;
   font-size: 0.85em;
   color: var(--color-text, #16161a);
+  a {
+    text-decoration: none;
+    color: var(--color-text, #16161a);
+  }
 `
 
 const Tag = styled("div")`
@@ -138,8 +143,10 @@ const ProjectCardMdx = ({ data }) => {
       <PostDescription>{data.description}</PostDescription>
       <PostMetas>
         <>
-          {data.techStack.slice(0, 3).map((tag) => (
-            <Tag>{tag.toUpperCase()}</Tag>
+          {data.tags.slice(0, 3).map((tag) => (
+            <Link to={`/projects/tags/${kebabCase(tag)}`}>
+              <Tag>{tag.toUpperCase()}</Tag>
+            </Link>
           ))}
         </>
       </PostMetas>

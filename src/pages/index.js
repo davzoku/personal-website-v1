@@ -312,6 +312,7 @@ export const query = graphql`
         node {
           frontmatter {
             description
+            tags
             title
             techStack
             slug

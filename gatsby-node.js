@@ -89,6 +89,36 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+
+      projectTagsQuery: allMdx(
+        filter: {
+          frontmatter: { published: { eq: true }, type: { eq: "Project" } }
+        }
+      ) {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+
+      noteTagsQuery: allMdx(
+        filter: {
+          frontmatter: { published: { eq: true }, type: { eq: "Note" } }
+        }
+      ) {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
+
+      bookTagsQuery: allMdx(
+        filter: {
+          frontmatter: { published: { eq: true }, type: { eq: "Note" } }
+        }
+      ) {
+        group(field: frontmatter___tags) {
+          fieldValue
+        }
+      }
     }
   `).then(({ data, errors }) => {
     if (errors) {
@@ -111,6 +141,12 @@ exports.createPages = async ({ graphql, actions }) => {
     const projectTemplate = require.resolve("./src/templates/project.jsx")
     const noteTemplate = require.resolve("./src/templates/note.jsx")
     const bookTemplate = require.resolve("./src/templates/book.jsx")
+    const tagsListTemplate = require.resolve("./src/templates/tagsList.jsx")
+    const projectTagsTemplate = require.resolve(
+      "./src/templates/projectTags.jsx"
+    )
+    const noteTagsTemplate = require.resolve("./src/templates/noteTags.jsx")
+    const bookTagsTemplate = require.resolve("./src/templates/bookTags.jsx")
 
     data.projectsQuery.edges.forEach(({ node }, i) => {
       const { edges } = data.projectsQuery
@@ -157,6 +193,63 @@ exports.createPages = async ({ graphql, actions }) => {
         },
       })
     })
+
+    data.projectTagsQuery.group.forEach((tag) => {
+      createPage({
+        path: `projects/tags/${_.kebabCase(tag.fieldValue)}`,
+        component: projectTagsTemplate,
+        context: {
+          tag: tag.fieldValue,
+        },
+      })
+    })
+
+    data.noteTagsQuery.group.forEach((tag) => {
+      createPage({
+        path: `garden/tags/${_.kebabCase(tag.fieldValue)}`,
+        component: noteTagsTemplate,
+        context: {
+          tag: tag.fieldValue,
+        },
+      })
+    })
+
+    data.bookTagsQuery.group.forEach((tag) => {
+      createPage({
+        path: `library/tags/${_.kebabCase(tag.fieldValue)}`,
+        component: bookTagsTemplate,
+        context: {
+          tag: tag.fieldValue,
+        },
+      })
+    })
+
+    createPage({
+      path: `projects/tags`,
+      component: tagsListTemplate,
+      context: {
+        prefix: `projects`,
+        type: `Project`,
+      },
+    })
+
+    createPage({
+      path: `garden/tags`,
+      component: tagsListTemplate,
+      context: {
+        prefix: `garden`,
+        type: `Note`,
+      },
+    })
+
+    createPage({
+      path: `library/tags`,
+      component: tagsListTemplate,
+      context: {
+        prefix: `library`,
+        type: `Book`,
+      },
+    })
   })
 }
 exports.onCreateWebpackConfig = ({ actions }) => {
@@ -165,5 +258,5 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       aggregateTimeout: 200,
       poll: 1000,
     },
-  });
-};
+  })
+}
