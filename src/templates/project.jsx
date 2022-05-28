@@ -140,6 +140,7 @@ const Project = ({ project, meta, prev, next }) => {
         <PostTime
           timeToRead={project.timeToRead}
           updatedDate={project.frontmatter.updated}
+          startDate={project.frontmatter.startDate}
         />
         <ProjectBody>
           <DefaultMdxComponentsProvider>
@@ -201,9 +202,9 @@ export const query = graphql`
         slug
         techStack
         type
-        updated(formatString: "DD MMM YYYY")
+        updated(fromNow: true)
+        startDate(fromNow: true)
         description
-        startDate
         extLink
         cover {
           childImageSharp {

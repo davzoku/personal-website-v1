@@ -140,6 +140,7 @@ const Note = ({ note, meta, prev, next }) => {
         <PostTime
           timeToRead={note.timeToRead}
           updatedDate={note.frontmatter.updated}
+          startDate={note.frontmatter.startDate}
           growthStage={note.frontmatter.growthStage}
         />
         <NoteBody>
@@ -198,9 +199,9 @@ export const query = graphql`
         tags
         type
         growthStage
-        updated(formatString: "DD MMM YYYY")
+        updated(fromNow: true)
+        startDate(fromNow: true)
         description
-        startDate
         cover {
           childImageSharp {
             gatsbyImageData

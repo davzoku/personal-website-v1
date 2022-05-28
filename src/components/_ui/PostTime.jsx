@@ -5,23 +5,42 @@ import dimensions from "styles/dimensions"
 const PostTimeDiv = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   margin: 0 auto;
-  border-bottom: 0.1em solid var(--color-text, #16161a);
-  font-weight: 300;
-  color: var(--color-text, #16161a);
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+`
+
+const PostTimeTopDiv = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+`
+
+const PostTimeBottomDiv = styled("div")`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `
+
+const Border = styled("div")`
+  border-bottom: 0.1em solid var(--color-text, #16161a);
+`
 const ReadingTime = styled("span")``
 const LastUpdatedDate = styled("span")``
 
-const PostTime = ({ timeToRead, updatedDate }) => {
+const PostTime = ({ timeToRead, updatedDate, startDate }) => {
   return (
     <PostTimeDiv>
-      <ReadingTime>
-        {timeToRead} min read {timeToRead > 5 ? "☕️" : "⚡️"}
-      </ReadingTime>
-      <LastUpdatedDate>Last Updated: {updatedDate}</LastUpdatedDate>
+      <PostTimeTopDiv>
+        <LastUpdatedDate>Last tended {updatedDate}</LastUpdatedDate>
+      </PostTimeTopDiv>
+      <PostTimeBottomDiv>
+        <ReadingTime>
+          {timeToRead} min read {timeToRead > 5 ? "☕️" : "⚡️"}
+        </ReadingTime>
+        <LastUpdatedDate>Planted {startDate}</LastUpdatedDate>
+      </PostTimeBottomDiv>
+      <Border></Border>
     </PostTimeDiv>
   )
 }

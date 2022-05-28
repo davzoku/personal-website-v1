@@ -192,7 +192,8 @@ const Note = ({ note, meta, prev, next }) => {
             <h6>
               Read Status: {note.frontmatter.readingStatus} {readingStatusEmoji}
             </h6>
-            <h6>Last Updated : {note.frontmatter.updated}</h6>
+            <h6>Last tended {note.frontmatter.updated}</h6>
+            <h6>Planted {note.frontmatter.startDate}</h6>
             <h6>
               {note.frontmatter.growthStage} {growthStageEmoji}
             </h6>
@@ -260,8 +261,8 @@ export const query = graphql`
         author
         growthStage
         readingStatus
-        updated(formatString: "DD MMM YYYY")
-        startDate
+        updated(fromNow: true)
+        startDate(fromNow: true)
         cover {
           id
           childImageSharp {
