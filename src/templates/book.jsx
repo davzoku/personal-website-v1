@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import styled from "@emotion/styled"
 //import colors from "styles/colors"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 //import Button from "components/_ui/Button"
 import Layout from "components/Layout"
 import dimensions from "styles/dimensions"
@@ -14,8 +14,9 @@ import PreviousNext from "components/_ui/PreviousNext"
 //import PostTime from "components/_ui/PostTime"
 import Share from "components/_ui/Share"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import kebabCase from "lodash/kebabCase"
 
-// const NoteHeroContainer = styled("div")`
+// const BookHeroContainer = styled("div")`
 //   display: flex;
 //   justify-content: center;
 //   align-items: flex-end;
@@ -44,6 +45,15 @@ const BookMetaContainer = styled("div")`
     padding: 0.5rem 0;
   }
 
+  a {
+    text-decoration: none;
+    color: var(--color-primary, #73abff);
+  }
+  a:hover {
+    text-decoration: none;
+    color: var(--color-primaryOffset, #3672f8);
+  }
+
   @media (min-width: ${dimensions.maxwidthTablet}px) {
     display: flex;
     flex-direction: row;
@@ -59,7 +69,7 @@ const BookMetaSection = styled("div")`
   }
 `
 
-const NoteBody = styled("div")`
+const BookBody = styled("div")`
   max-width: ${dimensions.maxwidthTablet}px;
   padding: 1rem;
   margin: 0 auto;
@@ -97,19 +107,19 @@ const NoteBody = styled("div")`
   }
 `
 
-// const Noteslink = styled(Link)`
+// const Bookslink = styled(Link)`
 //   margin-top: 3em;
 //   display: block;
 //   text-align: center;
 // `
 
-const Note = ({ note, meta, prev, next }) => {
-  const image = getImage(note.frontmatter.cover)
-  const autoGenDesc = `Thoughts and Reflections on ${note.frontmatter.author}'s ${note.frontmatter.title}`
+const Book = ({ book, meta, prev, next }) => {
+  const image = getImage(book.frontmatter.cover)
+  const autoGenDesc = `Thoughts and Reflections on ${book.frontmatter.author}'s ${book.frontmatter.title}`
   let readingStatusEmoji = "📕"
 
   // emoji logic
-  switch (note.frontmatter.readingStatus) {
+  switch (book.frontmatter.readingStatus) {
     case "In Progress":
       readingStatusEmoji = "📖"
       break
@@ -118,7 +128,7 @@ const Note = ({ note, meta, prev, next }) => {
   let growthStageEmoji = "🌱"
 
   // Growth stage emoji logic
-  switch (note.frontmatter.growthStage) {
+  switch (book.frontmatter.growthStage) {
     case "Evergreen":
       growthStageEmoji = "🌳"
       break
@@ -131,7 +141,7 @@ const Note = ({ note, meta, prev, next }) => {
     <>
       <SeoHelmet />
       <Helmet
-        title={`${note.frontmatter.title}`}
+        title={`${book.frontmatter.title}`}
         titleTemplate={`%s | ${meta.author}`}
         meta={[
           {
@@ -140,7 +150,7 @@ const Note = ({ note, meta, prev, next }) => {
           },
           {
             property: `og:title`,
-            content: `${note.frontmatter.title}`,
+            content: `${book.frontmatter.title}`,
           },
           {
             property: `og:description`,
@@ -150,7 +160,7 @@ const Note = ({ note, meta, prev, next }) => {
             property: `og:image`,
             content:
               meta.siteUrl +
-              `${note.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
+              `${book.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
           {
             property: `og:type`,
@@ -166,7 +176,7 @@ const Note = ({ note, meta, prev, next }) => {
           },
           {
             name: `twitter:title`,
-            content: `${note.frontmatter.title}`,
+            content: `${book.frontmatter.title}`,
           },
           {
             name: `twitter:description`,
@@ -176,7 +186,7 @@ const Note = ({ note, meta, prev, next }) => {
             property: `twitter:image`,
             content:
               meta.siteUrl +
-              `${note.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
+              `${book.frontmatter.cover.childImageSharp.gatsbyImageData.images.fallback.src}`,
           },
         ].concat(meta)}
       />
@@ -186,35 +196,50 @@ const Note = ({ note, meta, prev, next }) => {
             <GatsbyImage image={image} alt="cover" />
           </BookMetaSection>
           <BookMetaSection>
-            <h1>{note.frontmatter.title}</h1>
-            <h2>{note.frontmatter.subtitle}</h2>
-            <h3>by {note.frontmatter.author}</h3>
+            <h1>{book.frontmatter.title}</h1>
+            <h2>{book.frontmatter.subtitle}</h2>
+            <h3>by {book.frontmatter.author}</h3>
             <h6>
-              Read Status: {note.frontmatter.readingStatus} {readingStatusEmoji}
+              Read Status: {book.frontmatter.readingStatus} {readingStatusEmoji}
             </h6>
-            <h6>Last tended {note.frontmatter.updated}</h6>
-            <h6>Planted {note.frontmatter.startDate}</h6>
+            <h6>Last tended {book.frontmatter.updated}</h6>
+            <h6>Planted {book.frontmatter.startDate}</h6>
             <h6>
-              {note.frontmatter.growthStage} {growthStageEmoji}
+              {book.frontmatter.growthStage} {growthStageEmoji}
             </h6>
             <h6>
-              {note.timeToRead} min read {note.timeToRead > 5 ? "☕️" : "⚡️"}
+              <>Tags: </>
+              {book.frontmatter.tags.slice(0, 3).map((tag, i) => {
+                return (
+                  <span>
+                    <Link to={`/library/tags/${kebabCase(tag)}`}>
+                      {tag.toUpperCase()}
+                    </Link>
+                    {book.frontmatter.tags.slice(0, 3).length === i + 1
+                      ? ``
+                      : `, `}
+                  </span>
+                )
+              })}
+            </h6>
+            <h6>
+              {book.timeToRead} min read {book.timeToRead > 5 ? "☕️" : "⚡️"}
             </h6>
           </BookMetaSection>
         </BookMetaContainer>
-        <NoteBody>
+        <BookBody>
           <DefaultMdxComponentsProvider>
-            <MDXRenderer>{note.body}</MDXRenderer>
+            <MDXRenderer>{book.body}</MDXRenderer>
           </DefaultMdxComponentsProvider>
-        </NoteBody>
+        </BookBody>
         <Share
-          url={`${meta.siteUrl}/library/${note.frontmatter.slug}`}
-          title={note.frontmatter.title}
+          url={`${meta.siteUrl}/library/${book.frontmatter.slug}`}
+          title={book.frontmatter.title}
           twitterHandle={meta.twitterUsername}
         />
-        {/* <Noteslink to={"/garden"}>
-          <Button className="Button--secondary">See other notes</Button>
-        </Noteslink> */}
+        {/* <Bookslink to={"/garden"}>
+          <Button className="Button--secondary">See other books</Button>
+        </Bookslink> */}
         <PreviousNext
           prevSlug={prev && `library/${prev.frontmatter.slug}`}
           prevTitle={prev && prev.frontmatter.title}
@@ -226,17 +251,17 @@ const Note = ({ note, meta, prev, next }) => {
   )
 }
 
-export default function NotePage({
+export default function BookPage({
   data: { site, mdx },
   pageContext: { prevPage, nextPage },
 }) {
   return (
-    <Note note={mdx} meta={site.siteMetadata} prev={prevPage} next={nextPage} />
+    <Book book={mdx} meta={site.siteMetadata} prev={prevPage} next={nextPage} />
   )
 }
 
-Note.propTypes = {
-  note: PropTypes.object.isRequired,
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
 }
 
 export const query = graphql`
