@@ -21,6 +21,12 @@ const BookCardContainer = styled("div")`
   a:hover {
     color: var(--color-text, #16161a);
   }
+
+  &:hover {
+    box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.1);
+    transform: scale3d(1.02, 1.02, 1.02);
+    transition: all 150ms ease-in-out;
+  }
 `
 const ImageContainer = styled("div")`
   img {

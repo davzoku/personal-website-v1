@@ -29,6 +29,7 @@ const ProjectCardContainer = styled("div")`
 
   &:hover {
     box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.1);
+    transform: scale3d(1.02, 1.02, 1.02);
     transition: all 150ms ease-in-out;
   }
 `
@@ -55,6 +56,10 @@ const PostTitle = styled("h3")`
   margin: 0;
   margin-top: 0.5em;
   padding: 0 2rem;
+  a {
+    text-decoration: none;
+    color: var(--color-text, #16161a);
+  }
 `
 
 const PostMetas = styled("div")`
@@ -139,7 +144,9 @@ const ProjectCardMdx = ({ data }) => {
         </ImageContainer>
       </Link>
       <PostCategory>{data.category}</PostCategory>
-      <PostTitle>{data.title}</PostTitle>
+      <PostTitle>
+        <Link to={projectUrl}>{data.title}</Link>
+      </PostTitle>
       <PostDescription>{data.description}</PostDescription>
       <PostMetas>
         <>
