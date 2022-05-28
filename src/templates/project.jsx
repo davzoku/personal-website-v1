@@ -13,6 +13,7 @@ import SeoHelmet from "components/SeoHelmet"
 import PreviousNext from "components/_ui/PreviousNext"
 import PostTime from "components/_ui/PostTime"
 import Share from "components/_ui/Share"
+import Tags from "components/_ui/Tags"
 
 // const ProjectHeroContainer = styled("div")`
 //   display: flex;
@@ -142,6 +143,7 @@ const Project = ({ project, meta, prev, next }) => {
           updatedDate={project.frontmatter.updated}
           startDate={project.frontmatter.startDate}
         />
+        <Tags prefix="projects" tags={project.frontmatter.tags}></Tags>
         <ProjectBody>
           <DefaultMdxComponentsProvider>
             <MDXRenderer>{project.body}</MDXRenderer>
@@ -200,6 +202,7 @@ export const query = graphql`
       frontmatter {
         title
         slug
+        tags
         techStack
         type
         updated(fromNow: true)

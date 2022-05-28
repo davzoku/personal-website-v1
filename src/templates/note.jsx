@@ -13,6 +13,7 @@ import SeoHelmet from "components/SeoHelmet"
 import PreviousNext from "components/_ui/PreviousNext"
 import PostTime from "components/_ui/PostTimeGrowthStage"
 import Share from "components/_ui/Share"
+import Tags from "components/_ui/Tags"
 
 // const NoteHeroContainer = styled("div")`
 //   display: flex;
@@ -143,6 +144,7 @@ const Note = ({ note, meta, prev, next }) => {
           startDate={note.frontmatter.startDate}
           growthStage={note.frontmatter.growthStage}
         />
+        <Tags prefix="garden" tags={note.frontmatter.tags}></Tags>
         <NoteBody>
           <DefaultMdxComponentsProvider>
             <MDXRenderer>{note.body}</MDXRenderer>
