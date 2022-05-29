@@ -125,7 +125,7 @@ const NoteCardAction = styled(Link)`
 
 const NoteCardMdx = ({ data }) => {
   const image = getImage(data.cover)
-  const noteUrl = `/garden/${data.slug}`
+  const noteUrl = `/${data.slug}`
 
   let growthStageEmoji = "🌱"
 

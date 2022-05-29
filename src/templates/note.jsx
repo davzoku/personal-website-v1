@@ -151,17 +151,14 @@ const Note = ({ note, meta, prev, next }) => {
           </DefaultMdxComponentsProvider>
         </NoteBody>
         <Share
-          url={`${meta.siteUrl}/garden/${note.frontmatter.slug}`}
+          url={`${meta.siteUrl}/${note.frontmatter.slug}`}
           title={note.frontmatter.title}
           twitterHandle={meta.twitterUsername}
         />
-        {/* <Noteslink to={"/garden"}>
-          <Button className="Button--secondary">See other notes</Button>
-        </Noteslink> */}
         <PreviousNext
-          prevSlug={prev && `garden/${prev.frontmatter.slug}`}
+          prevSlug={prev && `${prev.frontmatter.slug}`}
           prevTitle={prev && prev.frontmatter.title}
-          nextSlug={next && `garden/${next.frontmatter.slug}`}
+          nextSlug={next && `${next.frontmatter.slug}`}
           nextTitle={next && next.frontmatter.title}
         />
       </Layout>
