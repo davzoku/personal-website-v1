@@ -23,7 +23,7 @@ const Hero = styled("div")`
   flex-direction: column;
 
   h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
     margin-bottom: 1em;
 
     a {
@@ -38,10 +38,6 @@ const Hero = styled("div")`
 
     @media (max-width: ${dimensions.maxwidthTablet}px) {
       font-size: 2rem;
-    }
-
-    @media (max-width: ${dimensions.maxwidthMobile}px) {
-      font-size: 1.5rem;
     }
   }
 `
