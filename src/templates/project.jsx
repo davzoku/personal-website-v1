@@ -154,9 +154,6 @@ const Project = ({ project, meta, prev, next }) => {
           title={project.frontmatter.title}
           twitterHandle={meta.twitterUsername}
         />
-        {/* <Projectslink to={"/projects"}>
-          <Button className="Button--secondary">See other projects</Button>
-        </Projectslink> */}
         <PreviousNext
           prevSlug={prev && `${prev.frontmatter.slug}`}
           prevTitle={prev && prev.frontmatter.title}

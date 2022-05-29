@@ -183,8 +183,9 @@ exports.createPages = async ({ graphql, actions }) => {
       const { edges } = data.booksQuery
       const prevPage = i === 0 ? null : edges[i - 1].node
       const nextPage = i === edges.length - 1 ? null : edges[i + 1].node
+      pageRedirects(node)
       createPage({
-        path: `/library/${node.frontmatter.slug}`,
+        path: `/${node.frontmatter.slug}`,
         component: bookTemplate,
         context: {
           id: node.id,

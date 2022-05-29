@@ -49,7 +49,7 @@ const PostDescription = styled("div")`
 
 const BookCardMdx = ({ data }) => {
   const image = getImage(data.cover)
-  const bookUrl = `/library/${data.slug}`
+  const bookUrl = `/${data.slug}`
 
   let readingStatusEmoji = "📕"
 

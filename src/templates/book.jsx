@@ -233,17 +233,14 @@ const Book = ({ book, meta, prev, next }) => {
           </DefaultMdxComponentsProvider>
         </BookBody>
         <Share
-          url={`${meta.siteUrl}/library/${book.frontmatter.slug}`}
+          url={`${meta.siteUrl}/${book.frontmatter.slug}`}
           title={book.frontmatter.title}
           twitterHandle={meta.twitterUsername}
         />
-        {/* <Bookslink to={"/garden"}>
-          <Button className="Button--secondary">See other books</Button>
-        </Bookslink> */}
         <PreviousNext
-          prevSlug={prev && `library/${prev.frontmatter.slug}`}
+          prevSlug={prev && `${prev.frontmatter.slug}`}
           prevTitle={prev && prev.frontmatter.title}
-          nextSlug={next && `library/${next.frontmatter.slug}`}
+          nextSlug={next && `${next.frontmatter.slug}`}
           nextTitle={next && next.frontmatter.title}
         />
       </Layout>
