@@ -15,16 +15,15 @@ import SeoHelmet from "components/SeoHelmet"
 import config from "../../config/website"
 
 const Hero = styled("div")`
-  padding-top: 2.5em;
-  padding-bottom: 3em;
-  margin-bottom: 6em;
   max-width: 830px;
-
-  @media (max-width: ${dimensions.maxwidthMobile}px) {
-    margin-bottom: 3em;
-  }
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
 
   h1 {
+    font-size: 2.8rem;
     margin-bottom: 1em;
 
     a {
@@ -35,6 +34,14 @@ const Hero = styled("div")`
         cursor: pointer;
         transition: all 100ms ease-in-out;
       }
+    }
+
+    @media (max-width: ${dimensions.maxwidthTablet}px) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: ${dimensions.maxwidthMobile}px) {
+      font-size: 1.5rem;
     }
   }
 `

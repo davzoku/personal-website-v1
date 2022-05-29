@@ -27,14 +27,12 @@ const ThemeMenu = styled("div")`
 
 const HeaderContent = styled("div")`
   width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   max-width: 1200px;
-  padding-top: 3.75em;
-  padding-bottom: 3em;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: 20vh;
 `
 
 const HeaderNavBar = styled("div")`
