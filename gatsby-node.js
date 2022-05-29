@@ -168,8 +168,9 @@ exports.createPages = async ({ graphql, actions }) => {
       const { edges } = data.notesQuery
       const prevPage = i === 0 ? null : edges[i - 1].node
       const nextPage = i === edges.length - 1 ? null : edges[i + 1].node
+      pageRedirects(node)
       createPage({
-        path: `/garden/${node.frontmatter.slug}`,
+        path: `/${node.frontmatter.slug}`,
         component: noteTemplate,
         context: {
           id: node.id,
