@@ -6,50 +6,21 @@ import { StaticImage } from "gatsby-plugin-image"
 //import colors from "styles/colors"
 
 const AboutContainer = styled("div")`
-  padding-top: 1em;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-column-gap: 3em;
-
-  @media (max-width: ${dimensions.maxwidthTablet}px) {
-    grid-column-gap: 1.5em;
-  }
+  display: flex;
+  flex-direction: row;
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 0.5em;
+    flex-direction: column;
   }
 `
 
 const AboutPhoto = styled("div")`
-  padding-top: 1em;
-  padding-bottom: 3em;
   margin: auto;
-  grid-area: 1 / 1 / 2 / 3;
-  text-align: center;
-
-  @media (max-width: ${dimensions.maxwidthTablet}px) {
-    padding-bottom: 2em;
-  }
-
-  @media (max-width: ${dimensions.maxwidthMobile}px) {
-    padding-bottom: 1em;
-    grid-area: 1 / 1 / 2 / 4;
-    img {
-      width: 70%;
-
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
 `
 
 const AboutBio = styled("div")`
-  padding-bottom: 3rem;
-  grid-area: 1 / 3 / 2 / 7;
-
+  margin: auto;
+  padding: 2rem;
   a {
     font-weight: 600;
     color: var(--color-primary, #73abff);
@@ -91,12 +62,10 @@ const AboutBio = styled("div")`
   }
 
   @media (max-width: ${dimensions.maxwidthTablet}px) {
-    padding-bottom: 2rem;
+    padding: 0rem;
   }
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
-    padding-bottom: 1rem;
-    grid-area: 2 / 1 / 3 / 3;
     ul {
       display: grid;
       grid-template-columns: 1fr;
@@ -109,17 +78,12 @@ const AboutBio = styled("div")`
 `
 
 const AboutLinkContainer = styled("div")`
-  padding-top: 1em;
-  padding-bottom: 3em;
   display: flex;
   flex-direction: column;
-  grid-area: 1 / 7 / 2 / 8;
-
-  @media (max-width: ${dimensions.maxwidthTablet}px) {
-  }
+  margin: auto;
+  width: 20%;
 
   @media (max-width: ${dimensions.maxwidthMobile}px) {
-    grid-area: 2 / 3 / 3 / 4;
     display: none;
   }
 `
