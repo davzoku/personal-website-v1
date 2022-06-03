@@ -1,5 +1,5 @@
-const config = require("./config/website")
-require("dotenv").config()
+require("dotenv").config();
+const config = require("./config/website");
 
 module.exports = {
   siteMetadata: {
@@ -17,7 +17,6 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-sass`,
-    `gatsby-plugin-resolve-src`,
     `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-emotion`,
     {

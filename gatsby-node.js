@@ -30,11 +30,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 sourceInstanceName
               }
             }
-            excerpt(pruneLength: 250)
             frontmatter {
               slug
               title
-              redirects
             }
           }
         }
@@ -55,11 +53,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 sourceInstanceName
               }
             }
-            excerpt(pruneLength: 250)
             frontmatter {
-              slug
               title
-              redirects
+              slug
             }
           }
         }
@@ -80,11 +76,9 @@ exports.createPages = async ({ graphql, actions }) => {
                 sourceInstanceName
               }
             }
-            excerpt(pruneLength: 250)
             frontmatter {
               slug
               title
-              redirects
             }
           }
         }
@@ -138,15 +132,15 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
 
-    const projectTemplate = require.resolve("./src/templates/project.jsx")
-    const noteTemplate = require.resolve("./src/templates/note.jsx")
-    const bookTemplate = require.resolve("./src/templates/book.jsx")
-    const tagsListTemplate = require.resolve("./src/templates/tagsList.jsx")
+    const projectTemplate = require.resolve("./src/templates/project.tsx")
+    const noteTemplate = require.resolve("./src/templates/note.tsx")
+    const bookTemplate = require.resolve("./src/templates/book.tsx")
+    const tagsListTemplate = require.resolve("./src/templates/tagsList.tsx")
     const projectTagsTemplate = require.resolve(
-      "./src/templates/projectTags.jsx"
+      "./src/templates/projectTags.tsx"
     )
-    const noteTagsTemplate = require.resolve("./src/templates/noteTags.jsx")
-    const bookTagsTemplate = require.resolve("./src/templates/bookTags.jsx")
+    const noteTagsTemplate = require.resolve("./src/templates/noteTags.tsx")
+    const bookTagsTemplate = require.resolve("./src/templates/bookTags.tsx")
 
     data.projectsQuery.edges.forEach(({ node }, i) => {
       const { edges } = data.projectsQuery
@@ -256,6 +250,13 @@ exports.createPages = async ({ graphql, actions }) => {
 }
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@components": path.resolve(__dirname, "src/components"),
+        "@images": path.resolve(__dirname, "src/images"),
+        "@styles": path.resolve(__dirname, "src/styles"),
+      }
+    },
     watchOptions: {
       aggregateTimeout: 200,
       poll: 1000,
