@@ -28,6 +28,17 @@ This site serves as a common ground / digital garden to share my projects and no
 
 I have came across many beautiful personal websites while developing my own. Some of the design ideas are influenced by these awesome developers and designers, do check out their work too: @margueriteroth, @bchiang7, @maxboeck, @MaggieAppleton, @slarsendisney, @joshwcomeau, @mxstbr
 
+### The Stack
+
+- React
+- Typescript
+- Gatsby
+- MDX
+- [Emotion](https://emotion.sh/docs/styled)
+- [GraphQL Code Generator](https://www.graphql-code-generator.com/)
+- [eslint-config-wesbos](https://github.com/wesbos/eslint-config-wesbos)
+- Docker
+
 ### Using Docker
 
 This Gatsby site supports Docker for local development.
