@@ -1,15 +1,17 @@
 require("dotenv").config();
 const config = require("./config/website");
 
+const siteMetadata = {
+  title: config.siteTitle,
+  description: config.siteDescription,
+  author: config.author,
+  siteUrl: config.siteUrl, // No trailing slash allowed!
+  image: config.ogImage,
+  twitterUsername: config.twitterHandle,
+}
+
 module.exports = {
-  siteMetadata: {
-    title: config.siteTitle,
-    description: config.siteDescription,
-    author: config.author,
-    siteUrl: config.siteUrl, // No trailing slash allowed!
-    image: config.ogImage,
-    twitterUsername: config.twitterHandle,
-  },
+  siteMetadata: siteMetadata,
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
@@ -129,6 +131,56 @@ module.exports = {
       options: {
         defaultDarkTheme: "theme-merlion",
         defaultLightTheme: "theme-night-safari",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMdx } }) => {
+              return allMdx.nodes.map(node => {
+                return Object.assign({}, node.frontmatter, {
+                  description: node.frontmatter.description,
+                  date: node.frontmatter.updated,
+                  url: site.siteMetadata.siteUrl + '/' + node.frontmatter.slug,
+                  guid: site.siteMetadata.siteUrl + '/' + node.frontmatter.slug,
+                })
+              })
+            },
+            query: `
+              {
+                allMdx(
+                  filter: {frontmatter: {published: {eq: true}}}
+                  sort: {order: DESC, fields: frontmatter___updated}
+                ) {
+                  nodes {
+                    frontmatter {
+                      description
+                      title
+                      startDate
+                      slug
+                      updated
+                    }
+                  }
+                }
+              }
+            `,
+            output: '/rss.xml',
+            title: `walterteng.com Feed`,
+          },
+        ],
       },
     },
   ],
