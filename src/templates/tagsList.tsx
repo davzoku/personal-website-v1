@@ -81,7 +81,7 @@ const TagsList = ({ pageContext, data }: TagsListPageTemplateProps) => {
       <Layout>
         <SectionPageTitle>Tags</SectionPageTitle>
         <Section>
-          {tags.map((tag, i) => (
+          {tags.map((tag) => (
             <li key={tag.fieldValue}>
               <Link to={`/${prefix}/tags/${kebabCase(tag.fieldValue || '')}`}>
                 {tag.fieldValue} ({tag.totalCount})

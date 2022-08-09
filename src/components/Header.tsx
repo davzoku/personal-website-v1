@@ -251,7 +251,7 @@ const Header = () => {
           <HeaderLinks>
             {config.navLinksShort && (
               <>
-                {config.navLinksShort.map(({ url, name }, i) => (
+                {config.navLinksShort.map(({ url, name }) => (
                   <Link activeClassName="Link--is-active" to={url}>
                     {name}
                   </Link>

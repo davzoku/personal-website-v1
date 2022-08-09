@@ -159,7 +159,7 @@ function LinksPage({ data }: LinksPageTemplateProps) {
         </h6>
       </Hero>
       <Section>
-        {linksArray.map((item, index) => (
+        {linksArray.map((item) => (
           <a
             href={item.url}
             ariaLabel="This is a button link"

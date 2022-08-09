@@ -188,7 +188,7 @@ function BookTemplate({ data, pageContext }: PageTemplateProps) {
               {book.frontmatter!.growthStage} {growthStageEmoji.emoji}
             </GrowthStage>
             <h6>
-              <>Tags: </>
+              <span>Tags: </span>
               {book.frontmatter!.tags!.slice(0, 3).map((tag, i) => (
                 <span>
                   <Link to={`/library/tags/${kebabCase(tag)}`}>

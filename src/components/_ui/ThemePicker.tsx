@@ -79,13 +79,12 @@ const ThemePicker = ({ theme, setTheme }) => (
       return (
         <ThemeButton
           key={name}
-          className={`theme-${themeVal}`}
           aria-label={`Theme ${name}`}
           className={`${theme === `theme-${themeVal}` ? 'selectedTheme' : ''}`}
           onClick={() => setTheme(`theme-${themeVal}`)}
         >
           <div data-tip={`${name}`}>
-            <img src={svg} />
+            <img src={svg} alt={`${name}`} />
           </div>
           <ThemeName
             className={`${

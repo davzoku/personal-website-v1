@@ -26,7 +26,7 @@ interface TagsProps {
 
 const Tags = ({ prefix, tags }: TagsProps) => (
   <TagsDiv>
-    <>Tags: </>
+    <span>Tags: </span>
     {tags.slice(0, 3).map((tag, i) => (
       <span>
         <Link to={`/${prefix}/tags/${kebabCase(tag)}`}>
