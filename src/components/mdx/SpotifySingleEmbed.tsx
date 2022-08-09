@@ -12,5 +12,6 @@ export const SpotifySingleEmbed = ({ src }: SpotifySingleEmbedProps) => (
     frameBorder="0"
     allowFullScreen=""
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+    title="Spotify Player"
   />
 );

@@ -10,4 +10,6 @@ const faviconLinks = [
   { rel: 'shortcut icon', type: 'image/png', href: favicon64x64 },
 ];
 
-export default () => <Helmet link={faviconLinks} />;
+const SeoHelmet = () => <Helmet link={faviconLinks} />;
+
+export default SeoHelmet;

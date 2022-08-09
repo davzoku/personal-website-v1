@@ -39,15 +39,13 @@ interface ShareProps {
 
 const Share = ({ url, title, twitterHandle }: ShareProps) => (
   <TwitterShare>
-    <>
-      <TwitterShareButton
-        url={url}
-        quote={title}
-        via={twitterHandle.split('@').join('')}
-      >
-        <TwitterIcon className="icon" />
-      </TwitterShareButton>
-    </>
+    <TwitterShareButton
+      url={url}
+      quote={title}
+      via={twitterHandle.split('@').join('')}
+    >
+      <TwitterIcon className="icon" />
+    </TwitterShareButton>
     <Clickable>
       <TwitterShareButton
         url={url}
