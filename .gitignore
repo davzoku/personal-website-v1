@@ -109,3 +109,5 @@ dist
 
 ## Google Drive
 /.tmp.driveupload
+# Local Netlify folder
+.netlify
