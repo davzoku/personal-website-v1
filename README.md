@@ -38,6 +38,7 @@ I have came across many beautiful personal websites while developing my own. Som
 - [GraphQL Code Generator](https://www.graphql-code-generator.com/)
 - [eslint-config-wesbos](https://github.com/wesbos/eslint-config-wesbos)
 - Docker
+- Husky
 
 ### Using Docker
 
@@ -54,3 +55,25 @@ For more info on the Docker config and how to set up similar configurations for 
 ## Changelog
 
 The changelog is maintained <a href="https://walterteng.com/garden/how-i-built-my-website-v1" target="_blank">here</a>
+
+## Architecture Decision Records (ADR)
+
+The decisions for this site are recorded within [this repository folder](/docs/adr/), using [phodal/adr](https://github.com/phodal/adr).
+
+For more info on [ADR](https://adr.github.io/).
+
+### ADR Commands
+
+```
+// to add new ADR
+adr new <decision-name>
+
+// list
+adr list
+
+// generate toc
+adr generate toc
+
+// export
+adr export <csv/html/json>
+```
