@@ -74,6 +74,8 @@
     "eslint-plugin-import": "^2.26.0",
     "gatsby-plugin-netlify": "^4.1.0",
     "gatsby-plugin-remove-trailing-slashes": "^3.7.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.3.1",
     "typescript": "^4.7.2"
   },
@@ -87,13 +89,13 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
