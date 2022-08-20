@@ -73,7 +73,7 @@
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
     "gatsby-plugin-netlify": "^4.1.0",
-    "gatsby-plugin-remove-trailing-slashes": "^3.7.1",
+    "gatsby-plugin-remove-trailing-slashes": "^4.19.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "prettier": "^2.3.1",
