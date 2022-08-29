@@ -1,0 +1,120 @@
+---
+slug: adr
+startDate: 2022-08-29
+updated: 2022-08-29
+title: "Getting Started with Architectural Decision Records (ADR) for Your Project"
+description: "How to include an ADR process into your project systematically."
+published: true
+featured: true
+type: ["Note"]
+tags: ["SWE", "Tips", "ADR", "Architecture", "Documentation", "Decision Making"]
+cover: ./cover.png
+growthStage: "Budding"
+redirects:
+  - "/garden/adr"
+  - "/garden/adr/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1661785967/waltertengcom/garden/adr/cover_jscdyd.png"
+  alt="cover"
+/>
+
+```toc
+
+```
+
+## Introduction
+
+When working on an existing software project, have you ever wondered about these questions?
+
+1. Why were certain past decisions made in a particular manner? Why did the colleagues before you adopt this tech stack in the past? What was the context of the problem?
+2. Can I propose a change to the product? What is a good approach to begin a discussion where the benefits and drawbacks can be discussed?
+
+First introduced by [Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions), Architectural Decision Records (ADR) is the answer you are looking for.
+
+This article will discuss what ADRs are and how I have included it in my current project.
+
+## What are ADRs?
+
+Architectural decision records (ADR) detail important decisions the development team makes regarding a critical component of the software architecture they intend to create. Each ADR explains the architectural choice, its context, and its implications.
+
+ADRs are short, modular documents which interested team members can scan quickly to understand the motivation behind certain decisions. They are meant to help new members to familiarise themselves with the project quickly and aid the team in tracking various decisions over time.
+
+## Why write ADRs?
+
+- They are short, modular documents which interested team members can scan quickly to understand the motivation behind certain decisions. They can serve as a valuable tool for documenting the software architecture and its changes for the lifecycle of the project.
+
+- They can help new members to familiarise themselves with the project quickly. Newcomers will grasp which components are crucial to the infrastructure and improve their contextual knowledge of the project.
+
+- The ADR process serves as a discussion platform for members to propose changes in a structured manner. Benefits and tradeoffs have to be considered carefully before being accepted collectively.
+
+- They help to improve the transparency of the team. Anyone interested in the project can read about the decision process over time.
+
+## Template
+
+Let's see how an ADR is typically structured.
+
+| Section      | Description                                                    | Example                                       |
+| ------------ | -------------------------------------------------------------- | --------------------------------------------- |
+| Title        | Concise name with sequential tag                               | ADR 1: Use Java or Go                         |
+| Context      | Explain why a decision have to be made                         | We need to develop a new backend microservice |
+| Decision     | Response to the proposal                                       | Use Go                                        |
+| Status       | Whether it is reviewed, accepted or superseded                 | Accepted                                      |
+| Consequences | List both advantages and disadvantage to the proposed approach | Some learning curve for the team              |
+
+Feel free to change the format to a structure that fits your teams' needs.
+
+## Implementation
+
+As a sole developer and maintainer of my own website, I evaluate different tools, coding patterns, and design decisions to include in my website. Information will inevitably be forgotten over time. Hence, it is essential for me to retain these decision logs collectively in a timely manner. It will be a simplified [ADR process](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html#review), whereby I am the sole decision maker.
+
+### Tools
+
+There are plenty of useful open-source tools to generate ADR templates and manage the decision logs. For example, I have selected [phodal/adr](https://github.com/phodal/adr) as [my tool of choice](https://github.com/davzoku/personal-website-v1/blob/main/docs/adr/0008-adr-tooling.md) to maintain the ADRs for my personal website.
+
+### Benefits of phodal/adr
+
+1. Runs on Node (cross-platform)
+2. Feature-rich (includes search, export etc.)
+3. User-friendly
+
+[For detailed comparsion across other short-listed tools.](https://github.com/davzoku/personal-website-v1/blob/main/docs/adr/0008-adr-tooling.md)
+
+### How to Use
+
+1. Install
+
+```
+npm install -g adr
+```
+
+2. Init
+
+```
+adr init en
+```
+
+3. Create new record
+
+```
+adr new <title>
+```
+
+4. List all records
+
+```
+adr list
+```
+
+## Conclusion
+
+I believe implementing a proper ADR process will be a worthwhile investment for your team and stakeholders. It reminds me of
+[ARCHITECTURE.md](https://matklad.github.io/2021/02/06/ARCHITECTURE.md.html), a document which [Aleksey Kladov](https://matklad.github.io/) proposes to help improve documentation for open source projects.
+
+## References
+
+- [Architectural Decision Records | adr.github.io](https://adr.github.io/)
+- [Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+- [ADR process - AWS Prescriptive Guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html)
+- [The Ultimate Guide to Architectural Decision Records | Better Programming](https://betterprogramming.pub/the-ultimate-guide-to-architectural-decision-records-6d74fd3850ee)
