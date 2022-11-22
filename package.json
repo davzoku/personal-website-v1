@@ -27,7 +27,7 @@
     "gatsby-plugin-mdx": "^2.14.1",
     "gatsby-plugin-offline": "^4.7.1",
     "gatsby-plugin-react-helmet": "^4.7.1",
-    "gatsby-plugin-sass": "^4.7.1",
+    "gatsby-plugin-sass": "^6.1.0",
     "gatsby-plugin-sharp": "^4.8.0",
     "gatsby-plugin-theme-switcher": "^1.0.0",
     "gatsby-plugin-twitter": "^3.9.0",
