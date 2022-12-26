@@ -1,0 +1,209 @@
+---
+slug: algorithms-to-live-by
+startDate: 2022-12-23
+updated: 2022-12-23
+title: "Algorithms to Live By"
+subtitle: "The Computer Science of Human Decisions"
+author: "Brian Christian, Tom Griffiths"
+published: true
+type: ["Book"]
+tags: ["Algorithms", "Decision-Making", "Psychology"]
+cover: ./cover.jpg
+growthStage: "Evergreen"
+readingStatus: "Completed"
+redirects:
+  - "/library/algorithms-to-live-by"
+  - "/library/algorithms-to-live-by/"
+---
+
+## Table of Contents
+
+```toc
+
+```
+
+## Summary
+
+[Blinkist](https://www.blinkist.com/en/app/books/algorithms-to-live-by-en)
+
+This book combines computer science with real-world experiences, making it an enjoyable introductory read. This book explores the notion of human algorithm design to find more effective responses to people's daily problems. This book brings us through some of the biggest challenges faced by computers and human minds alike: how to manage finite space, finite time, limited attention, unknown unknowns, incomplete information, and an unforeseeable future; how to do so with grace and confidence; and how to do so in a community with others who are all simultaneously trying to do the same.
+
+My most important takeaway from this book is my newly-found perspective to use algorithms I learn or use at work and actively apply them in day-to-day life. It is not surprising that we may subconsciously use similar concepts in our daily problems; this book teaches us how to look at our issues from an analytical lens systematically.
+
+An algorithm is nothing complicated. It is a finite sequence of steps to solve a problem, like cooking from a recipe or building IKEA furniture from instruction manuals.
+
+## TED Talk
+
+https://www.youtube.com/watch?v=OwKj-wgXteo
+
+## Key Ideas
+
+### Optimal Stopping: When to Stop Looking
+
+**When to use:** Searching for something, e.g. apartment, hotel, dating partner, a new employee etc.
+
+**Known problems:** [Secretary problem](https://en.wikipedia.org/wiki/Secretary_problem)
+
+**Solution:** Apply the **37% Rule** and **Look-Then-Leap Rule**. Gather data and explore your options for the first 37% in which you categorically don't choose anyone, no matter how impressive, then make a decision (leap) as soon as you find an option better than the first 37%. There's a certain flexibility in the 37% Rule: it can be applied to the number of applicants or the time one is searching.
+
+**Rationale:** Consider a job application with 3 applicants. When we see the first applicant, we have no _information_ — she'll always appear to be the best. When we see the third applicant, we have no _agency_ — we have to make an offer to the final applicant since we've dismissed the others.
+
+**Variants:** _Rejection and Recall._ Applicants can reject the offer; the employer can recall past applicants that have been passed over. The best approach remains the same: look noncommittally for a time, then be ready to leap. Be prepared to propose early and often in case of rejection.
+
+**Considerations:** _No-information and full-information setup._ In a no-information structure, we can differentiate the better candidate, but we can't take by how much. This gives rise to the unavoidable "look" phase. In a full-information setup, we can know precisely how well the applicants perform, for example, by an IQ test. In this scenario, we can consider using the **Threshold Rule**, where we can immediately accept an applicant if she is above a certain percentile.
+
+Consider another variation of the secretary problem. Imagine you want to sell a house. Your goal isn't to secure the single best offer but make the most money through the process. Given that waiting has a cost measured in dollars, a good offer today beats a slightly better one several months from now. The cost of search also complicates the problem. Just set a threshold, ignore every offer below, and immediately accept any offer above..
+
+**Takeaway:** Most people acted in a way that was consistent with the Look-Then-Leap Rule, but **they leapt sooner than they should** have more than four-fifths of the time. We need to consider the role of time; people tend to be impatient because while searching for a secretary, you don't have a secretary, and you have to invest your time further to interview instead of getting your work done. Fight your urge to commit quickly whenever possible.
+
+### Explore/Exploit: The Latest vs the Greatest
+
+**When to use:** When considering a fairly unknown option vs a known good option.
+
+**Known problems:** [Multi-armed bandit](https://en.wikipedia.org/wiki/Multi-armed_bandit)
+
+Exploration is gathering information, and exploitation is using the information you have to get a known good result. When you start playing, you will know which machines are lucrative or just money sinks.
+
+Explore/exploit tradeoff isn't just a way to improve decisions about where to eat or what to listen to. It also provides fundamental insights into how our goals should change as we age and why the most rational course of action is only sometimes trying to choose the best. **Our decisions are rarely isolated, and expected value isn't the end of the story.**
+
+So which of those two arms should you pull? It's a trick question. It ultimately depends on something we still need to discuss: **how long you plan to be in the casino**. For example, one is likelier to try a new restaurant when she moves to a city than when she is leaving it. Discovering a charming cafe on your last night in town doesn't allow you to return. You may be better off going to your favourite restaurants at this point.
+
+The "Win-Stay, Lose-Shift" method, created in 1952 by mathematician Herbert Robins, uses slot machines as a metaphor. Randomly select a machine, then play it till you lose. Then change to a different machine; this approach is more reliable than chance. Lose-shift can be a rash move if it just fails once. Imagine going to a restaurant a hundred times, each time having a wonderful meal. Would one disappointment be enough to induce you to give up on it?
+
+**Solution:** Focus on regret. Project yourself in the future and consider whether you regret making a particular decision. Regret is the result of comparing what we did with what would have been best in hindsight. Apply a “regret minimisation framework”. Computer science can't offer you a life with no regret. But it can potentially provide you a life with minimal regret.
+
+The **Upper Confidence Bound** algorithm, or “optimism in the face of uncertainty, " guarantees minimal regret. The confidence interval will shrink as we gain more data about something, reflecting an increasingly accurate assessment. An Upper Confidence Bound algorithm simply says to pick the option for which the top of the confidence interval is highest. It doesn't care which arm has performed best so far; instead, it chooses the arm that could reasonably perform best in the future.
+
+**Consideration**: The "restless bandit"; if the probabilities of a payoff on the different arms change over time, the problem becomes much more complicated. It might be worth returning to that disappointing restaurant you haven't visited a few years ago, in case it's under new management.
+
+**Takeaway:** **People tend to over-explore—to favour the new disproportionately over the best.** We tend to think of the young as inconsistent and the old as stubborn. However, the explore/exploit dilemma suggests that the differences in social preference are not about age as such—they're about where people perceive themselves to be on the interval relevant to their decision.
+
+### Sorting: Making Order
+
+Sorting involves steep diseconomies of scale, violating our usual intuitions about the virtues of doing things in bulk. Computer scientists are more interested in the worst-case analysis than the single best or average performance. Worst-case analysis lets us make hard guarantees: that a critical process will finish in time and that deadlines won't be blown.
+
+Big-O notation provides a way to talk about the relationship between the size of the problem and the program's running time. Big-O notation can be constant time (O(1)), linear time (O(n)), quadratic time (O(n^2)), linearithmic time (O(n log n)).
+
+**Takeaway:** Sorting something you will never search for is a complete waste; searching for something you never sorted is inefficient.
+
+### Caching: Forget About It
+
+Your office or wardrobe works like caches in the computer. There is a hierarchy of caches ranked by their accessibility. For example, your wardrobe is one cache level, your basement another, and a self-storage locker a third.
+
+There are many strategies to reduce the items in the cache or wardrobe. The best approach is **Least Recently Used (LRU)**. Simply evict the items after a certain time if they are no longer used.
+
+The forgetting curve hypothesises the decline of memory retention over time. The problem with the human brain might be not one of storage but of organisation. The authors argue that since the database is exponentially more extensive than when you are 20, a slower intellect in old age may be a search difficulty.
+
+### Scheduling: First Thing First
+
+**Every guru has a different system, and it's hard to know who to listen.**
+
+Depending on the metric you are optimising, there are a few strategies to choose from. For example, if you're concerned with minimising maximum lateness, the best strategy is to start with the task due soonest and work toward the last task.
+
+Minimising the sum of completion times leads to a straightforward optimal algorithm called **Shortest Processing Time**: always do the quickest task possible.
+
+Some tasks may have precedence constraints in which the task itself depends on completing other tasks. In this case, it is easier to build the schedule back to front: look only at the tasks that no other tasks depend on, and put the one with the latest due date at the end of the schedule.
+
+Be wary of _priority inversion_, in which a low-priority task supersedes a high-priority task.
+
+**Solution:** Priority inheritance. Suppose a low-priority task is blocking a high-priority task. In that case, the low-priority task inherits the priority of the blocked task, making it the highest priority task in the system.
+
+Suppose assignments get tossed on your desk at unpredictable moments. In that case, the optimal strategy for minimising maximum lateness is still the preemptive version of the Earliest Due Date — switching to the job that just came up if it's due sooner than the one you're currently doing and otherwise ignoring it. Be wary of context switching costs.
+
+Whenever you take on a new task, it is like a juggler juggling balls. But what if the juggler takes on one more ball than he can handle? He doesn't drop that ball; he drops everything. It is what happens when thrashing. Learn to say no and protect your limited attention at all costs.
+
+Slow down, and practice **interrupt coalescing**. If you have five credit card bills, for instance, don't pay them as they arrive; take care of them all in one go when the fifth bill comes.
+
+### Bayes' Rule: Predicting the Future
+
+**Problem**: Predicting when the bus will come, the probability of winning a lottery.
+
+Bayes' theorem describes the probability of an event based on prior knowledge (priors) of conditions that might be related to the event.
+
+Laplace's Law states, in brief, that for any possible drawing of w winning tickets in n attempts, the expectation is simply the number of wins plus one, divided by the number of tries plus two: (w+1)/(n+2).
+
+The intuition from the Copernican Principle is that you're not experiencing something at a special moment. If we assume that we're arriving precisely halfway into something's duration, the best guess for how long it will last into the future becomes obvious: exactly as long as it's lasted. For example, the Copernican Principle predicts that Google will last until roughly 2032.
+
+The Copernican Principle is just Bayes's Rule with an uninformative prior. We can further improve our prediction by understanding real-world priors. There are two types of things in the world: things that tend toward (or cluster around) some kind of “natural” value and things that don't. Many things, such as human height and weight, has a "Gaussian" distribution.
+
+Money, in general, follows the "power-law distribution" or "scale-free distributions". For example, The most prestigious firms are most likely to attract new clients.
+
+For any power-law distribution, Bayes's Rule indicates that the appropriate prediction strategy is a Multiplicative Rule: multiply the quantity observed so far by some constant factor.
+
+When we apply Bayes's Rule with a normal distribution as a prior, we can use the average rule instead. If somebody is younger than the average life span, then simply predict the average; as their age gets close to and exceeds the average, predict that they'll live a few years more.
+
+Some things are invariant. They follow an Erlang distribution. This curve's shape differs from the normal and the power-law: it has a winglike contour, rising to a gentle hump, with a tail that falls off faster than a power-law but more slowly than a normal distribution. The Erlang distribution gives us a third kind of prediction rule, the Additive Rule: always predict that things will go on just a constant amount longer.
+
+**Takeaway:** Being a good Bayesian means representing the world in the correct proportions—having suitable priors, appropriately calibrated. Secondly, the news and social media allow us to spread language mechanically. It can skew the statistics of our experience. The representation of events in the media does not track their frequency in the world. For example, the murder rate in the United States declined by 20% throughout the 1990s, yet during that period, the presence of gun violence on American news increased by 600%. **You need to protect your priors to make good predictions**
+
+### Overfitting: When to Think Less
+
+The ruthless and clever optimisation of the wrong thing can be dangerous. The company will build whatever the CEO decides to measure. Focusing on production metrics can lead to supervisors needing to pay more attention to maintenance and repairs, setting up future catastrophes.
+We can detect overfitting by cross-validation and combat overfitting by penalising complexity.
+
+**Occam's razor principle** suggests that all things being equal, the simplest possible hypothesis is probably the correct one.
+
+Psychologists Gerd Gigerenzer and Henry Brighton have argued that the decision-making shortcuts people use in the real world are, in many cases, precisely the kind of thinking that makes for good decisions.
+
+_When should we stop thinking?_
+
+The greater the uncertainty, the more significant the gap between what you can measure and what matters, and the more you should watch out for overfitting—the more you prefer simplicity and the earlier you should stop.
+
+### Relaxation: Let It Slide
+
+Many real-life problems have some form of **Constrained Optimization**. We want to find the single best arrangement of a set of variables, given particular rules and a scorekeeping measure. For example, a bride may want to arrange her wedding guest at tables of 10 where everyone knows each other.
+
+However, sometimes the problem is intractable, and the optimal answer needs to be within reach. Consider using **Constraint Relaxation**. Try to remove some constraints and solve the problem. Then, after they can make some progress, add the constraints again.
+
+Alternatively, consider **Lagrangian Relaxation**. An optimisation problem has two parts: the rules and the scorekeeping. In Lagrangian Relaxation, we take some of the problem's constraints and bake them into the scoring system instead. For example, the bride can request that some tables can seat more than 10 guests instead.
+
+### Randomness: When to Leave It to Chance
+
+Sampling may be better than no results when the analysis is too exhaustive.
+
+Serendipity is about finding interesting or valuable things by chance.
+
+For example, one can use [Oblique Strategies](https://en.wikipedia.org/wiki/Oblique_Strategies) to stimulate creativity.
+
+### Networking: How We Connect
+
+**Problem:** Byzantine generals' problem
+
+When inviting an indecisive friend for social plans, consider using **Exponential Backoff** on the invitation.
+
+When 2 people converse, the pair simultaneously engages in speaking and listening. The listener forms the back channel in which he sends a message such as "yes or "uh-huh" to affirm the speaker that he is still listening. With poor feedback, the conversation falls apart.
+**A poor listener destroys the tale.**
+
+### Game Theory: The Minds of Others
+
+**Problem:** Prisoner's dilemma, the tragedy of the commons, man vs man, man vs society
+
+Successful investing is anticipating the anticipations of others. A buyer buys a stock at $60 thinking that he can sell it for $70 to someone who believes he can sell it for $80 and so on.
+
+In poker, it is called levelling. There's a rule that you only want to play one level above your opponent.
+
+The Nash equilibrium predicts the stable long-term outcome of any set of rules or incentives.
+
+**Algorithmic game theory (AGT)** is an area in the intersection of game theory and computer science, with the objective of understanding and designing algorithms in strategic environments.
+
+The equilibrium strategy is stable but may not lead to the best outcomes for players.
+
+The **price of anarchy** measures the gap between cooperation (a centrally designed or coordinated solution) and competition (where each participant is independently trying to maximise the outcome for themselves). For example, the “selfish routing” approach in traffic has a price of anarchy that's a mere 4/3. A free-for-all is only 33% worse than perfect top-down coordination. The lack of centralised coordination makes your commute, at most only 33% worse.
+
+> A low price of anarchy means the system is, for better or worse, about as good on its own as it would be if it were carefully managed. A high price of anarchy, on the other hand, means that things have the potential to turn out fine if they're carefully coordinated—but that without some form of intervention, we are courting disaster.
+
+**Mechanism design** (or "reverse game theory") takes an objectives-first approach to designing economic mechanisms or incentives, toward desired objectives, in strategic settings where players act rationally. For example, the CEO can make a certain minimal amount of vacation compulsory instead of offering cash benefits to employees to encourage them to take vacation leave.
+
+Game theory also offers a sobering perspective: catastrophes like this can happen even when no one's at fault. For example, in Dutch auctions ("descending auction") and English auctions ("increasing auction"), the mixing of private and public info can be dangerous. You know the other bidder's actions but not their beliefs. A group of agents behaving perfectly rationally and appropriately can nonetheless fall prey to what is effectively infinite misinformation. It has come to be known as an “information cascade.” Consider the Vickrey auction. In a Vickrey auction, the winner pays not the amount of their bid but that of the second-place bidder. The participants are incentivised, to be honest. It is considered "strategy-proof", in which honesty is the dominant strategy.
+
+**Takeaway:** If changing strategies don't help, you can try to change the game. And if that's not possible, you can exercise some control over which games you choose to play
+
+### Computational Kindness
+
+Knowing that you are using an optimal algorithm should be a relief even if you don't get the results you were looking for. Even the best strategy sometimes yields bad results; it is important to distinguish "process" and "outcome". If you followed the best possible process, you've done all you can, and you shouldn't blame yourself if things didn't go your way. If you wind up stuck in an intractable scenario, remember that heuristics, approximations, and strategic use of randomness can help you find workable solutions.
+
+> sometimes “good enough” really is good enough.
+
+Be concise. Asking someone what they want to do may sound lovely, but it rarely works. You are transferring the computational burden to them. People preferred receiving a constrained problem, even if the constraints were plucked out of thin air, than a wide-open one. Give them easy options.
+
+Computational kindness isn't just a principle of behaviour; it's also a design principle. Instead of going for the most optimal solution, choose the one that is almost as good and computationally kinder. When Shallit observed that an 18-cent coin could minimise the number of coins to make the change, a 2-cent or 3-cent can be almost as good too. **Subtle changes in design can radically shift the kind of cognitive problem posed to human users.**
