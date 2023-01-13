@@ -4,7 +4,7 @@ startDate: 2022-08-29
 updated: 2022-08-29
 title: "How to add Husky to your project"
 description: "Adding Husky to your project"
-published: true
+published: false
 featured: false
 type: ["Note"]
 tags: ["SWE", "Tips", "Git Hooks", "Husky"]
@@ -15,52 +15,4 @@ redirects:
   - "/garden/husky/"
 ---
 
-<BasicImage
-  src="https://res.cloudinary.com/wtkw/image/upload/v1635868104/waltertengcom/garden/how-to-add-git-bash-to-windows-terminal/cover_b4wwu0.png"
-  alt="cover"
-/>
-
-_**Update:** I have since switched to [using zsh on the Windows Terminal](/using-zsh-on-windows) for a unified experience across my macOS and Windows machines._
-
-## Windows Terminal
-
-Initially released on 3 May 2019, the [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701) offers users a multi-tabbed command-line experience. It can run any Windows terminal emulators in a separate tab. I immediately downloaded the preview version when it first came out after I saw this feature.
-
-<BasicImage
-  src="https://res.cloudinary.com/wtkw/image/upload/v1635866974/waltertengcom/garden/how-to-add-git-bash-to-windows-terminal/win_terminal_thcqj6.png"
-  alt="default win terminal"
-/>
-
-By default, Windows Terminal comes with PowerShell, Command Prompt, Azure Cloud Shell and WSL.
-
-I had no idea how to add Git Bash to Windows Terminal, and I searched for a solution. It was only recently when it occurred to me whenever I want to use Git Bash; I am using it standalone. Below is the working steps for me for my future reference.
-
-## Adding Git Bash
-
-1. Go to settings by pressing `Ctrl + , `
-2. Click on "Open JSON file"
-3. Under the `list` array add the following:
-
-```json
-{
-  "guid": "{00000000-0000-0000-ba54-000000000002}",
-  "name": "Git",
-  "commandline": "C:/Program Files/Git/bin/bash.exe --login",
-  "icon": "%PROGRAMFILES%/Git/mingw64/share/git/git-for-windows.ico",
-  "startingDirectory": "%USERPROFILE%",
-  "hidden": false
-}
-```
-
-4. Save the settings.json file
-
-<BasicImage
-  src="https://res.cloudinary.com/wtkw/image/upload/v1635866974/waltertengcom/garden/how-to-add-git-bash-to-windows-terminal/win_terminal_with_git_bash_rnal0z.png"
-  alt="win terminal with git bash"
-/>
-
-These steps can also be used to add other shell profiles.
-
-## References
-
-- [Adding Git-Bash to the new Windows Terminal - Stack Overflow](https://stackoverflow.com/questions/56839307/adding-git-bash-to-the-new-windows-terminal)
+<WIP />
