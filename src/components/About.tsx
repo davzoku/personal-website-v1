@@ -111,11 +111,11 @@ const AboutLink = styled('a')`
 `;
 
 const skills = [
+  'Python',
   'Java',
-  'Spring Framework',
-  'JSP',
   'Javascript',
-  'React',
+  'Spring Framework',
+  'React.js',
   'AWS',
 ];
 
@@ -143,23 +143,25 @@ const About = () => (
     </AboutPhoto>
     <AboutBio>
       <p>
-        Hi! My name is Walter, and I am currently based in Singapore. I did my
-        Bachelors in{' '}
-        <a href="https://www.ntu.edu.sg/eee">
-          Nanyang Technological University (NTU)
-        </a>
-        , majoring in Electrical and Electronic Engineering.
+        Hi! My name is Walter. I'm a software engineer with a focus on
+        delivering business value through technology. I am delighted to have
+        opportunities in my career to helping my clients in the government,
+        healthcare, and legal sectors improve their digital experiences.
       </p>
 
       <p>
-        Fast forward to today, I am delighted to have the opportunities to help
-        clients in the government and legal sectors in improving their digital
-        experiences.
+        I am currently pursuing my{' '}
+        <a href="https://scis.smu.edu.sg/master-it-business/artificial-intelligence-track/curriculum">
+          graduate studies
+        </a>{' '}
+        in Artificial Intelligence and business. I seek to develop innovative
+        solutions that can help solve complex problems at the intersections of
+        business, AI and software engineering.
       </p>
 
       <p>
         Over here in my <a href="#garden">digital garden</a>, I write about how
-        I make my life 1% easier as a software engineer, summarize books I read
+        I make my life 1% easier as a software engineer, summarize books I read,
         and occasionally describe my learning process for making digital
         illustrations with my iPad.
       </p>
