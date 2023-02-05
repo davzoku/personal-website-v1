@@ -1,0 +1,100 @@
+---
+slug: jupyter-tips
+startDate: 2023-02-05
+updated: 2023-02-05
+title: "Jupyter Tips & Tricks for Python, R, Julia"
+description: "A compilation of Jupyter tips for running Python, R, Julia code and kernel management"
+published: true
+featured: true
+type: ["Note"]
+tags: ["SWE", "Tips", "Jupyter", "Python", "R", "Julia", "Data Science"]
+cover: ./cover.png
+growthStage: "Budding"
+redirects:
+  - "/garden/jupyter-tips"
+  - "/garden/jupyter-tips/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1675573170/waltertengcom/garden/jupyter-tips/jupyter-tips_jmaqm9.png"
+  alt="cover"
+/>
+
+Jupyter is a popular tool for data science as it provides a user-friendly web-based interface for writing, executing code and observing the results in real-time.
+
+## Kernel Management
+
+One of the charms of Jupyter is that it can support multiple programming languages such as Python, R, Julia and others by installing different kernels into the user's local machine. Having a basic understanding of Jupyter kernels will help you appreciate Jupyter better and give you an idea of fully utilising the tool.
+
+When you use a Jupyter notebook, you write code in cells and run them. A kernel is a program that executes the code and returns the results to the Jupyter notebook. Each kernel is written specifically for a particular language and contains the components and dependencies required to execute code written in that language.
+
+### List Installed Kernels
+
+You can list the installed kernels by running `jupyter kernelspec list` in the terminal.
+
+Sample Output:
+
+```
+Available kernels:
+  ir           /Users/walter/Library/Jupyter/kernels/ir
+  julia-1.8    /Users/walter/Library/Jupyter/kernels/julia-1.8
+  python3      /opt/homebrew/Caskroom/miniconda/base/share/jupyter/kernels/python3
+```
+
+### Remove a Kernel
+
+Run `jupyter kernelspec remove <kernel-name>`
+
+Sample Output:
+
+```
+Kernel specs to remove:
+  ir                    /Users/walter/Library/Jupyter/kernels/ir
+Remove 1 kernel specs [y/N]:
+```
+
+### Add a Kernel
+
+The steps to add a kernel varies from language, and the installation steps may be obscure for a user from another programming language.
+
+The following steps assume that the programming language has already been installed.
+
+#### Adding Python Kernel
+
+Run `pip install jupyter` in your terminal.
+
+#### Adding R Kernel
+
+[IRkernel/IRkernel Github](https://github.com/IRkernel/IRkernel)
+
+1. From the terminal, type `R` to start R console.
+2. In R console, type `install.packages("IRkernel")` to install IRkernel package
+3. Type `IRkernel::installspec()` to register the kernel in the current R installation
+
+_Alternatively, you can use RStudio GUI to install the package in place of step 1 and 2._
+
+#### Adding Julia Kernel
+
+[JuliaLang/IJulia.jl Github](https://github.com/JuliaLang/IJulia.jl)
+
+1. From the terminal, type `julia` to start julia console
+2. In julia console, type `Pkg.add("IJulia")` to install IJulia package.
+
+## Shell Aliases
+
+_This is my personal tip:_
+
+I like to add aliases for commonly used commands. For example, I can type `jl` to start jupyter lab and `jn` to start jupyter notebook.
+
+```
+alias jn='jupyter notebook'
+alias jl='jupyter lab'
+```
+
+See [update alias · davzoku/dotfiles@baf915a](https://github.com/davzoku/dotfiles/commit/baf915abec755f886d4bdcebcdb97284d424b6d2)
+
+## References
+
+[Jupyter Kernel Documentation](https://jupyter-client.readthedocs.io/en/stable/kernels.html#kernel-specs)
+
+[List of Jupyter Kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels)
