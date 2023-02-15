@@ -1,0 +1,100 @@
+---
+slug: walter-teng-cli
+startDate: 2023-02-15
+updated: 2023-02-15
+title: "Walter Teng CLI"
+published: true
+type: ["Project"]
+category: ["Side Project"]
+deliverables: ["Node.JS CLI"]
+techStack: ["Javascript"]
+tags: ["Javascript", "CLI"]
+cover: ./cover.png
+featured: true
+description: "💻 A node.js based command line interface (CLI) for others to know me via the Terminal"
+githubLink: "https://github.com/davzoku/walter-teng-cli"
+extLink: "https://www.npmjs.com/package/walter-teng"
+redirects:
+  - "/projects/walter-teng-cli"
+  - "/projects/walter-teng-cli/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1676463292/waltertengcom/projects/walter-teng-cli/cover_mi6lrt.png"
+  alt="cover"
+/>
+
+### Available on:
+
+[npm](https://www.npmjs.com/package/walter-teng)
+
+## Introduction
+
+Greetings, fellow developers! Today, I'm thrilled to introduce you to [walter-teng-cli](https://www.npmjs.com/package/walter-teng), a new command line interface (CLI) tool I've created to help you discover more about me. This tool is designed to display my social links and the latest blog posts from my website, all from the comfort of your terminal.
+
+## Getting Started
+
+To execute this cli, simply type:
+
+```sh
+npx walter-teng
+```
+
+Alternatively, you can also installed it globally on your machine with the following command:
+
+```sh
+npm install -g walter-teng
+```
+
+## Usage
+
+This package takes several aliases, namely `wt, walter, walterteng, walter-teng`.
+
+By typing `walter` on your terminal, the CLI will show a list of my social links from Github, Twitter and LinkedIn profiles. This makes it easy for you to find and connect with me on various problems.
+
+That's not all. walter-teng-cli pulls the latest posts from my website via RSS, allowing you to stay updated on my latest content. To do so, you can add the following flags `-p` or `--posts`.
+
+Example:
+
+```sh
+walter -p
+```
+
+The CLI also has a `help` command that provides information on supported commands and flags.
+
+```sh
+walter help
+```
+
+I hope this tool will spark some imagination among the developers on the creative ways to express themselves through different mediums. It is a fun starter project for anyone looking to publish their first npm package or node CLI tool.
+
+Give it a try and let me know what you think!
+
+## Inspiration
+
+This mini-project is inspired by [Ahmad Awais' work](https://github.com/ahmadawais/awais).
+
+## References
+
+- [ahmadawais/awais](https://github.com/ahmadawais/awais)
+- [ahmadawais/lwj-cli](https://github.com/ahmadawais/lwj-cli)
+- [Automating Tasks with Node CLIs (with Ahmad Awais) — Learn With Jason - YouTube](https://www.youtube.com/watch?v=V1GkmB7T7Ps)
+
+---
+
+## Additional Notes
+
+### How to Build Your Own CLI
+
+Below are some guiding milestones on how to create your first node CLI.
+
+> Refer to the [references](#references) below for similar implementation and YouTube tutorials on this topic.
+
+- You can start a new project like any other node project by `npm init` or use a CLI tool such as `npx create-node-cli` to simplify the initialization.
+- Consider CLI helper packages such as [meow](https://www.npmjs.com/package/meow) or [commander](https://www.npmjs.com/package/commander) to manage flags and commands easily. Choose [meow for simpler CLI projects](https://github.com/sindresorhus/meow/issues/32).
+- Add [chalk](https://www.npmjs.com/package/chalk) for beautiful string styling.
+- Add more helper packages to make your life even easier:
+  - [cli-welcome](https://www.npmjs.com/package/cli-welcome) for handling welcome message
+  - [cli-handle-unhandled](https://www.npmjs.com/package/cli-handle-unhandled) for handling errors
+  - [cli-meow-help](https://www.npmjs.com/package/cli-meow-help) for generating help instructions with meow
+- Add additional packages like [rss-parser](https://www.npmjs.com/package/rss-parser) to add further custom functionalities to your CLI tool.
