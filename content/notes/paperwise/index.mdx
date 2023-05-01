@@ -1,0 +1,208 @@
+---
+slug: paperwise
+startDate: 2023-05-01
+updated: 2023-05-01
+title: "Paperwise"
+description: "A streamlined research workflow for paper discovery, active note-taking, synthesis, and management, powered by Zotero, ResearchRabbit, and Obsidian."
+published: true
+featured: true
+type: ["Note"]
+tags: ["AI", "Research", "Note-Taking", "Obsidian", "ResearchRabbit", "Zotero"]
+cover: ./cover.png
+growthStage: "Budding"
+redirects:
+  - "/garden/paperwise"
+  - "/garden/paperwise/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931047/waltertengcom/garden/paperwise/cover_dkumx1.png"
+  alt="cover"
+/>
+
+```toc
+
+```
+
+## What is Paperwise?
+
+> Starter template to try out Paperwise: [Github: davzoku/paperwise](https://github.com/davzoku/paperwise)
+
+Paperwise is a systematic and streamlined research workflow for managing AI papers that revolves around three core tools: [Zotero](https://www.zotero.org/), [ResearchRabbit](https://www.researchrabbit.ai/), and [Obsidian](https://obsidian.md/). Zotero is a citation management software that allows users to organize and annotate their papers in one paper. Research Rabbit is a paper discovery tool that is tightly integrated with Zotero to offer paper recommendations based on the existing Zotero collections. Obsidian is a popular note-taking application among knowledge workers and students that encourages active note-taking for better retention and synthesis of information.
+
+In this article, I will discuss how I set up the Paperwise workflow using these tools together with additional plugins and cloud storage sync to assemble a seamless reading experience.
+
+## Key Features
+
+1. Seamless integration from paper discovery to paper management with Research Rabbit and Zotero
+2. Overcome Zotero's 300MB free file size limit with cloud storage providers like Google Drive using [ZotFile](http://zotfile.com/)
+3. Cross-platform sync of annotated PDFs across devices such as desktop, iOS devices and Android
+4. Populate annotation and paper metadata automatically into Obsidian using [Citation](/obsidian-plugins#citation) plugin.
+
+**Paperwise is modular.** You can select specific components of the workflow to use, or swap out tools or plugins with alternatives that better meet your requirements. This flexibility ensures that you can tailor your research process to match your workflow, allowing you to work more efficiently and effectively.
+
+## Setup
+
+This section describe the setup process by component.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/paperwise_kc4yy0.png"
+  alt="paperwise"
+/>
+
+### Paper Management (Zotero)
+
+#### Saving Papers from Chrome
+
+**Software to install:**
+
+- [Zotero](https://www.zotero.org/download/)
+- [Zotero Chrome Plugin](https://www.zotero.org/download/) (Other popular browsers are supported too.)
+- [ZotFile for Zotero](http://zotfile.com/#how-to-install--set-up-zotfile)
+- [Better BibTeX for Zotero](https://retorque.re/zotero-better-bibtex/installation/)
+
+After installing Zotero and its Chrome plugin, you will be able to save papers from Arxiv or any website into Zotero from the address bar as such:
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/zotero-chrome_afy0bu.png"
+  alt="cover"
+/>
+
+After that, I prefer to add short title to identify papers easily if it is not populated by default. This will be the short name that I will look out for when browsing through the papers on my mobile devices.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931046/waltertengcom/garden/paperwise/zotero-short-title_xjdqn0.png"
+  alt="short title"
+/>
+
+##### Rename and Move with Zotfile
+
+By default, Zotero comes with 300MB free cloud storage and saved attachments will count into this storage quota. Using Zotfile, you can configure a separate file location to store the PDFs. For example, I configured my setup so that Zotfile will move any saved attachments into a folder called `Zotero` in my Google Drive.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931046/waltertengcom/garden/paperwise/zotfile-1_l0o00r.png"
+  alt="zotfile settings"
+/>
+
+Additionally, I configured a renaming strategy as such: `{%y_}{%h_}{%t_}{%a}`; which means `{Year}_{Short-Title}_{Title}_{Author}.pdf`.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931046/waltertengcom/garden/paperwise/zotfile-2_bdpws7.png"
+  alt="zotfile settings"
+/>
+
+In other words, the classic paper on GANs will be named `2014_GAN_Generative Adversarial Networks_Goodfellow et al.pdf` in my Google Drive.
+
+#### Read and Annotate on Mobile devices
+
+**Software to install:**
+
+- [Documents by Readdle (iOS)](https://apps.apple.com/us/app/documents-file-manager-web/id364901807)
+- [Autosync for Google Drive (Android)](https://play.google.com/store/apps/details?id=com.ttxapps.drivesync&hl=en_SG&gl=US)
+
+By default, the Google Drive mobile apps restrict users to save files for offline access one at a time, which can be limiting. However, there are free apps such as Documents by Readdle or Autosync that can help users sync a Google Drive folder for free. This means we can sync our entire Zotero folder to our mobile devices for seamless reading. This way, any annotations made on mobile devices can be synced in the background, ensuring all notes are kept up to date.
+
+#### Better BibTeX for Citation
+
+Better BibTeX is a third-party plugin for Zotero that offers advanced management and customization of bibliographic data. It allows you to generate unique citation keys using a CSL-JSON file. For simplicity, we can keep this file in the same Google Drive folder for PDF attachments. This file will be consumed by the Citation Obsidian plugin described in the [later sections](#note-taking).
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/better-bibtex-settings_ukoiom.png"
+  alt="better bibtex settings"
+/>
+
+### Paper Discovery (Research Rabbit)
+
+**Software Selected: ** [Research Rabbit](https://researchrabbitapp.com/)
+
+Research Rabbit is a web-based tool that helps users discover research papers and other academic resources. It has a feature that allows user to import Zotero collections to discover similar papers.
+
+In this example, I have uploaded my Zotero collection about GANs and Research Rabbit is able to recommend new papers related to the topic, helping me stay up-to-date with the latest research.
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/research-rabbit_hu1yfw.png"
+  alt="research rabbit"
+/>
+
+> Research Rabbit is not the only paper discovery tool. There are other AI-powered tools such as [Elicit](https://elicit.org/) and [Semantic Scholar](https://www.semanticscholar.org/). However, as far as I know, Research Rabbit is the only one with integration with Zotero.
+
+### Note-Taking (Obsidian)
+
+> Obsidian is a versatile note-taking app with many powerful plugins. Check out my [separate note](/obsidian-plugins) to see the full list of plugins I am using.
+
+**Software to install:**
+
+- [Obsidian](https://obsidian.md/)
+- [hans/obsidian-citation-plugin](https://github.com/hans/obsidian-citation-plugin#setup)
+- [blacksmithgu/obsidian-dataview](https://github.com/blacksmithgu/obsidian-dataview) (Optional)
+
+Obsidian is my note-taking app of choice for knowledge management, and it is closely related to the Zettelkasten method, which emphasizes the creation of atomic, interconnected notes for efficient information retrieval and synthesis.
+
+To integrate Zotero and Obsidian, I have selected the Citation plugin.
+
+Firstly, we will configure Citation to consume the CSL-JSON file that we have generated using Bibtex
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/citation-settings_tvspkh.png"
+  alt="citation settings"
+/>
+
+Subsequently, we can generate a literature note template based on a paper we have read.
+
+I am using a very basic template for my use case.
+
+```
+---
+title: {{title}}
+shortTitle: {{titleShort}}
+alias: {{citekey}}
+authors: {{authorString}}
+year: {{year}}
+url: {{URL}}
+tags: paper
+codeUrl:
+isCodeAvailable:
+---
+
+## General Notes
+
+## New Ideas
+
+## Related Work
+
+## Future Work
+```
+
+This will generate a note as such:
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/citation-template_ddqknr.png"
+  alt="citation template"
+/>
+
+You can further configure your template by referring to the [plugin documentation](https://www.foldl.me/obsidian-citation-plugin/classes/entry.html). I opt to not import any highlights as I prefer to highlight in fragments and it is less useful if taken out of its context. Instead, I summarize my readings in my own words, which helps me internalize the knowledge better.
+
+> The alternative plugin for Citation is [mgmeyers/obsidian-zotero-integration](https://github.com/mgmeyers/obsidian-zotero-integration). It also requires Better Bibtex and offers similar functionality. I chose Citations as it is slightly more initiutive for me.
+
+Additionally, you can generate a Notion-like table view using the Data View plugin by writing a similar SQL-like query:
+
+```dataview
+TABLE file.name as name, shortTitle, year, isCodeAvailable
+WHERE contains(file.tags, "#paper")
+SORT shortTitle asc
+```
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682932468/waltertengcom/garden/paperwise/paper-dataview_u50nsu.png"
+  alt="paper dataview"
+/>
+
+For other examples of how I use Data View, check out [this note](/obsidian-plugins#obsidian-dataview).
+
+## Conclusion
+
+I hope Paperwise offers you some inspiration in revolutionize your research workflow. By adopting Paperwise with Zotero, Research Rabbit, and Obsidian, you can easily manage your research papers, discover new and relevant research, and take active and deliberate notes that seamlessly integrate with your paper management and citation needs.Remember, you can adapt this workflow to fit your needs, swapping out tools as you see fit. Don't hesitate to reach out to me on Twitter for any suggestions or feedback. Try this workflow today and experience the benefits for yourself!
+
+## Additional Thoughts
+
+The topic of syncing processed notes across different software is a popular one in the field of knowledgement management. In fact, while writing this note, a [similar article](https://ryanwwest.com/pkm-annotation/) has appeared on my social feed. It's fascinating to see how different users have adapted the tools to fit their own needs and preferences.
