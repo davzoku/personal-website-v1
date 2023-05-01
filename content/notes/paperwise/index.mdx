@@ -16,7 +16,7 @@ redirects:
 ---
 
 <BasicImage
-  src="https://res.cloudinary.com/wtkw/image/upload/v1682931047/waltertengcom/garden/paperwise/cover_dkumx1.png"
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682947887/waltertengcom/garden/paperwise/cover_sig5sj.png"
   alt="cover"
 />
 
@@ -46,7 +46,7 @@ In this article, I will discuss how I set up the Paperwise workflow using these 
 This section describe the setup process by component.
 
 <BasicImage
-  src="https://res.cloudinary.com/wtkw/image/upload/v1682931045/waltertengcom/garden/paperwise/paperwise_kc4yy0.png"
+  src="https://res.cloudinary.com/wtkw/image/upload/v1682947886/waltertengcom/garden/paperwise/paperwise_kd2iwm.png"
   alt="paperwise"
 />
 
@@ -133,10 +133,13 @@ In this example, I have uploaded my Zotero collection about GANs and Research Ra
 **Software to install:**
 
 - [Obsidian](https://obsidian.md/)
-- [hans/obsidian-citation-plugin](https://github.com/hans/obsidian-citation-plugin#setup)
+- [hans/obsidian-citation-plugin](https://github.com/hans/obsidian-citation-plugin)
+- [denolehov/obsidian-git](https://github.com/denolehov/obsidian-git)
 - [blacksmithgu/obsidian-dataview](https://github.com/blacksmithgu/obsidian-dataview) (Optional)
 
 Obsidian is my note-taking app of choice for knowledge management, and it is closely related to the Zettelkasten method, which emphasizes the creation of atomic, interconnected notes for efficient information retrieval and synthesis.
+
+#### Citation
 
 To integrate Zotero and Obsidian, I have selected the Citation plugin.
 
@@ -184,6 +187,8 @@ You can further configure your template by referring to the [plugin documentatio
 
 > The alternative plugin for Citation is [mgmeyers/obsidian-zotero-integration](https://github.com/mgmeyers/obsidian-zotero-integration). It also requires Better Bibtex and offers similar functionality. I chose Citations as it is slightly more initiutive for me.
 
+#### Obsidian Data View
+
 Additionally, you can generate a Notion-like table view using the Data View plugin by writing a similar SQL-like query:
 
 ```dataview
@@ -198,6 +203,19 @@ SORT shortTitle asc
 />
 
 For other examples of how I use Data View, check out [this note](/obsidian-plugins#obsidian-dataview).
+
+#### Obsidian Git
+
+**Software to install**:
+
+- [Working Copy for iOS](https://apps.apple.com/us/app/working-copy-git-client/id896694807) (Paid)
+- [Termux - Apps on Google Play](https://play.google.com/store/apps/details?id=com.termux&hl=en_US)
+
+To sync your notes across multiple devices, I recommend using Obsidian Git with default settings as described [here](/obsidian-plugins#obsidian-git).
+
+If you want to sync your Obsidian Vault on iOS devices, you will need the paid version of Working Copy because iOS apps run in a sandbox environment. To set up folder sync on Working Copy, follow the steps outlined [here](https://forum.obsidian.md/t/mobile-setting-up-ios-git-based-syncing-with-mobile-app-using-working-copy/16499). Subsequently, you will be able to open the vault in Obsidian iOS app.
+
+If you want to sync your Obsidian Vault on Android devices, I suggest using Termux, an Android terminal emulator that allows you to install Git and run Git commands to sync your repository. Unfortunately, a full-featured Git Client GUI like Working Copy is not available for Android. While there are other possible options like [MGit](https://play.google.com/store/apps/details?id=com.manichord.mgit&hl=en_US&gl=US), [GitJournal](https://play.google.com/store/apps/details?id=io.gitjournal.gitjournal&hl=en&gl=US), [Spck Editor](https://play.google.com/store/search?q=spck+editor&c=apps&hl=en&gl=US), they all have their own limitations and making them unsuitable for our specific use case.
 
 ## Conclusion
 
