@@ -104,12 +104,16 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: config.googleAnalyticsID,
-        head: true,
+        trackingIds: [
+          config.googleAnalyticsID,
+        ],
+        pluginConfig: {
+          head: true,
+        },
       },
-    },
+    },    
     `gatsby-plugin-offline`,
     `gatsby-plugin-netlify`,
     {

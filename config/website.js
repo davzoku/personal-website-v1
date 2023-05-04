@@ -15,7 +15,7 @@ module.exports = {
   userTwitter: '@davzoku', // Twitter Username
   ogSiteName: 'Walter Teng', // Facebook Site Name
   ogLanguage: 'en_US',
-  googleAnalyticsID: 'UA-43031692-9',
+  googleAnalyticsID: 'G-HP6C32D6T4',
   ogImage: '/og.png',
 
   // Manifest and Progress color
