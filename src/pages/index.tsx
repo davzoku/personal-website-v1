@@ -200,8 +200,14 @@ function IndexTemplate({ data }: IndexProps) {
       />
       <Hero>
         <h1>
-          Hello, I'm Walter Teng. 👋🏻 <br />I help to transform and develop
-          digital experiences.
+          Hello, I'm Walter Teng. 👋🏻 <br />I specialize in transforming{' '}
+          <span style={{ color: 'var(--color-hero-primary)' }}>
+            imagination
+          </span>{' '}
+          into{' '}
+          <span style={{ color: 'var(--color-hero-secondary)' }}>
+            delightful digital experiences.
+          </span>
         </h1>
         <a
           href="mailto:walter.tengkw@gmail.com"

@@ -5,8 +5,8 @@ const NotFoundPage = () => (
   <Layout>
     <h1>404: Page Not Found :(</h1>
     <p>
-      If you believe this was a bug, please let me know! Email walter.teng [at]
-      gmail.com
+      If you believe this was a bug, please let me know! Email walter.tengkw
+      [at] gmail.com
     </p>
   </Layout>
 );
