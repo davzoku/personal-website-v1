@@ -17,7 +17,7 @@
 </p>
 
 <div align="center">
-  <img alt="demo" src="https://raw.githubusercontent.com/davzoku/personal-website-v1/main/static/og.png" />
+  <img alt="demo" src="static/og.png" />
 </div>
 
 ## About the Site

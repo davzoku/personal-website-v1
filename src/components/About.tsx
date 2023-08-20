@@ -110,14 +110,7 @@ const AboutLink = styled('a')`
   }
 `;
 
-const skills = [
-  'Python',
-  'Java',
-  'Javascript',
-  'Spring Framework',
-  'React.js',
-  'AWS',
-];
+const skills = ['Python', 'PyTorch', 'Java', 'Javascript', 'Next.js', 'AWS'];
 
 const bioLinks = new Map([
   ['Twitter', 'https://twitter.com/davzoku'],
@@ -144,9 +137,10 @@ const About = () => (
     <AboutBio>
       <p>
         Hi! My name is Walter. I'm a software engineer with a focus on
-        delivering business value through technology. I am delighted to have
-        opportunities in my career to helping my clients in the government,
-        healthcare, and legal sectors improve their digital experiences.
+        delivering business value through innovation and technology. I am
+        delighted to have opportunities in my career to helping my clients in
+        the government, healthcare, and legal sectors to improve their digital
+        experiences.
       </p>
 
       <p>
@@ -162,8 +156,7 @@ const About = () => (
       <p>
         Over here in my <a href="#garden">digital garden</a>, I write about how
         I make my life 1% easier as a software engineer, summarize books I read,
-        and occasionally describe my learning process for making digital
-        illustrations with my iPad.
+        and share projects that I am passionate about.
       </p>
 
       <p>Here are a few technologies that I've been working with recently:</p>

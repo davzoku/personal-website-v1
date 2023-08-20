@@ -11,6 +11,9 @@
   --color-logo-text: #ffffff;
   --color-logo-circle: #5d96f7;
   --color-logo-ring: #4b84e5;
+
+  --color-hero-primary: #8eae0e;
+  --color-hero-secondary: #10c8ee;
 }
 
 .theme-night-safari {
@@ -26,6 +29,9 @@
   --color-logo-text: #ffffff;
   --color-logo-circle: #ca8d00;
   --color-logo-ring: #ffb814;
+
+  --color-hero-primary: #bee71f;
+  --color-hero-secondary: #10c8ee;
 }
 
 .theme-garden-by-the-bay {
@@ -41,6 +47,9 @@
   --color-logo-text: #ffffff;
   --color-logo-circle: #ff5697;
   --color-logo-ring: #ed347b;
+
+  --color-hero-primary: #8eae0e;
+  --color-hero-secondary: #10c8ee;
 }
 
 .theme-chinatown {
@@ -56,6 +65,9 @@
   --color-logo-text: #ffffff;
   --color-logo-circle: #ff6737;
   --color-logo-ring: #ff3e00;
+
+  --color-hero-primary: #8eae0e;
+  --color-hero-secondary: #10c8ee;
 }
 
 .theme-sentosa-sunset {
@@ -71,6 +83,9 @@
   --color-logo-text: #ffffff;
   --color-logo-circle: #629dc3;
   --color-logo-ring: #030303;
+
+  --color-hero-primary: #8eae0e;
+  --color-hero-secondary: #10c8ee;
 }
 
 html,
