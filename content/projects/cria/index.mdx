@@ -1,0 +1,90 @@
+---
+slug: cria
+startDate: 2023-08-21
+updated: 2023-08-21
+title: "CRIA Chat"
+published: true
+type: ["Project"]
+category: ["Side Project"]
+deliverables: ["LLM Conversational Chatbot"]
+techStack: ["Python", "Next.js"]
+tags: ["AI", "LLM", "Chatbot", "NLP"]
+cover: ./cover.png
+featured: true
+description: "🍼🦙 Meet CRIA, a conversational chatbot built on the latest and free open-source AI resources"
+githubLink: "https://github.com/davzoku/cria"
+extLink: "https://chat.walterteng.com"
+redirects:
+  - "/projects/cria"
+  - "/projects/cria/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1692633512/waltertengcom/projects/cria/cover_fbtagu.png"
+  alt="cover"
+/>
+
+### Available on:
+
+- [chat.walterteng.com](https://chat.walterteng.com)
+- [Github](https://github.com/davzoku/cria)
+- [HuggingFace](https://huggingface.co/davzoku/cria-llama2-7b-v1.3-GGML)
+
+2023 is undeniably an exhilarating time for AI engineers and enthusiasts alike. The field of Large Language Models (LLMs) has witnessed remarkable progress, pushing the boundaries of what artificial intelligence can achieve. Developing LLMs appears to be meant for large corporations and research labs. It may seem out of reach for individual contributors with limited computing resources. _However, is this truly the case?_
+
+In this article, I am thrilled to introduce you to CRIA, an LLM project that aims to democratize AI and paves the way for individual contributors to create their end-to-end conversational chatbot in as little as one week.
+
+## Introducing CRIA
+
+CRIA stands for **"Crafting a Rapid prototype of an Intelligent LLM App using open-source resources."** This name perfectly encapsulates the project's objective, emphasizing its accessibility and the speed at which you can prototype intelligent LLM-based applications with little to no cost today.
+
+Additionally, the name CRIA pays homage to its foundational model, Meta's [Llama-2](https://ai.meta.com/llama/) 7b LLM. Like a baby llama, CRIA adopts a cheerful persona and strives to be an enjoyable conversational partner.
+
+https://www.youtube.com/watch?v=OTsBGFcVc8k
+
+## Features
+
+### Demonstration of Instruction-Tuning on LLM
+
+CRIA goes beyond theory and demonstrates the implementation of instruction tuning on LLMs. Even more impressive is that you can achieve this using a [free Colab instance](https://colab.research.google.com/drive/1rYTs3qWJerrYwihf1j0f00cnzzcpAfYe), making experimentation and learning accessible to all, regardless of computational resources.
+
+### Fast LLM Inference with Server-Sent Events (SSE)
+
+CRIA takes pride in its lightning-fast LLM inference capabilities, thanks to the implementation of [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events). SSE ensures that user interactions with CRIA are not only swift but also real-time.
+
+### User-Friendly Modern Web Interface (PWA-Compliant)
+
+CRIA's user-friendly modern web interface is [Progressive Web App (PWA)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) compliant. This means that users can install the web-based app to interact with CRIA just like using a native app. The interface is designed to provide an intuitive and engaging user experience, making conversations with CRIA more delightful than ever.
+
+### Comprehensive Documentation
+
+Detailed documentation is provided on the [project's GitHub page](https://github.com/davzoku/cria#documentation) to ensure developers can quickly dive into CRIA's capabilities. This documentation includes [setup instructions](https://github.com/davzoku/cria/blob/main/docs/setup.md), [architectural diagrams](https://github.com/davzoku/cria/blob/main/docs/architecture.md), [Architecture Decision Records (ADRs)](https://github.com/davzoku/cria/tree/main/docs/adr), and [model evaluation](https://github.com/davzoku/cria/tree/main/docs/model-eval) details. It is an invaluable resource for those eager to explore and understand the inner workings of CRIA.
+
+For a deeper dive into the various phases of CRIA's implementation, I have crafted companion articles that provide step-by-step guidance:
+
+1. **How to Perform Instruction Tuning on Colab:** This article walks you through the process of instruction tuning, helping you harness the full potential of your LLM. _(Coming Soon!)_
+2. **How to Serve and Deploy LLM Inference via API:** Learn how to implement your API server and deploy your LLM model for real-world applications. _(Coming Soon!)_
+3. **How to Integrate a Next.js Front End and Deploy:** This article goes through the integration process of Next.js, a modern web framework with the API server and deploying a user-friendly interface for your LLM-powered chatbot. _(Coming Soon!)_
+
+## Try CRIA Today
+
+If you're eager to experience CRIA's potential, you have two options:
+
+**Cloud Version:** Access CRIA on the cloud at [chat.walterteng.com](https://chat.walterteng.com). Explore its capabilities and interact with your very own AI chatbot.
+
+**Local Deployment:** For those who prefer to dive deeper, you can clone the [CRIA repository](https://github.com/davzoku/cria) and try it out locally.
+
+## References
+
+Developing CRIA is an eye-opening experience, from distilling countless research papers and tapping into open-source community resources to fusing past experience to complete this end-to-end project. I would like to express my appreciation for the following individuals and resources:
+
+- **Research Papers:** Countless research papers have guided me in navigating the evolving landscape of LLMs, from the development of LLMs to prompt engineering and instruction tuning.
+- **[Maxime Labonne](https://mlabonne.github.io/):** His [article](https://mlabonne.github.io/blog/posts/Fine_Tune_Your_Own_Llama_2_Model_in_a_Colab_Notebook.html) and [dataset](https://huggingface.co/datasets/mlabonne/CodeLlama-2-20k) have been instrumental in the project's development.
+- **[Philipp Schmid](https://www.philschmid.de/):** His detailed articles on [instruction tuning](https://www.philschmid.de/instruction-tune-llama-2) and [deployment on AWS](https://www.philschmid.de/sagemaker-llama-llm) have been invaluable.
+- **[TheBloke](https://huggingface.co/TheBloke):** Thank you for his [quantization script](https://gist.github.com/TheBloke/b9423b7ffd512724115c3cd85edcfa07), which helps to make deployment easier and faster inference.
+- **YouTube Community:** Numerous YouTube videos have served as valuable learning resources for this project, and I encourage others to explore these videos to explore other possibilities with LLMs.
+  - [🐐Llama 2 Fine-Tune with QLoRA](https://www.youtube.com/watch?v=eeM6V5aPjhk)
+  - [Fine-Tune Large LLMs with QLoRA](https://www.youtube.com/watch?v=NRVaRXDoI3g)
+  - [LLaMA2 for Multilingual Fine Tuning?](https://www.youtube.com/watch?v=ThKWQcyQXF8)
+  - [How to Tune Falcon-7B With QLoRA on a Single GPU](https://www.youtube.com/watch?v=AXG7TA7vIQ8)
+  - [🦙Llama 2 Fine-Tuning with 4-Bit QLoRA on Dolly-15k](https://www.youtube.com/watch?v=o5bU1H-6TqM)
