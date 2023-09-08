@@ -62,6 +62,16 @@ const LinkButton = styled.button`
 
 const linksArray = [
   {
+    text: 'CRIA Chat',
+    url: 'https://chat.walterteng.com',
+    target: '_self',
+  },
+  {
+    text: 'Paperwise Research Workflow',
+    url: '/paperwise',
+    target: '_self',
+  },
+  {
     text: 'Spark AR Filters',
     url: '/spark-ar-filters',
     target: '_self',
@@ -160,11 +170,7 @@ function LinksPage({ data }: LinksPageTemplateProps) {
       </Hero>
       <Section>
         {linksArray.map((item) => (
-          <a
-            href={item.url}
-            ariaLabel="This is a button link"
-            target={item.target}
-          >
+          <a href={item.url} target={item.target}>
             <LinkButton>{item.text}</LinkButton>
           </a>
         ))}
