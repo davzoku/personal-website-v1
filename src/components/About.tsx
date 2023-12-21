@@ -126,7 +126,7 @@ const About = () => (
     <AboutPhoto>
       <StaticImage
         className="img"
-        src="../images/profile-photo-circle-duo-640.png"
+        src="../images/profile-photo-circle-512.png"
         width={500}
         quality={95}
         placeholder="blurred"
