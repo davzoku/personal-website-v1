@@ -95,7 +95,7 @@ module.exports = {
       options: {
         name: config.siteTitle,
         short_name: config.siteTitleShort,
-        start_url: config.pathPrefix,
+        start_url: `/?utm_source=homescreen`,
         background_color: config.themeColor,
         theme_color: config.backgroundColor,
         display: `standalone`,
