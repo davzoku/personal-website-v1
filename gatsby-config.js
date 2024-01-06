@@ -100,6 +100,19 @@ module.exports = {
         theme_color: config.backgroundColor,
         display: `standalone`,
         icon: `src/images/pwa-maskable-icon.png`, // This path is relative to the root of the site.
+        icons: [
+          {
+            "src": "src/images/profile-photo-sq-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+          },            
+          {
+            "src": "src/images/profile-photo-sq-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          }          
+        ],
         include_favicon: false,
       },
     },
