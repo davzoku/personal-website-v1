@@ -117,7 +117,6 @@ const bioLinks = new Map([
   ['Instagram', 'https://www.instagram.com/drawwithwalter/'],
   ['Github', 'https://github.com/davzoku'],
   ['Linkedin', 'https://www.linkedin.com/in/tengkokwai/'],
-  ['Polywork', 'https://www.polywork.com/walterteng'],
   ['Credly', 'https://credly.com/users/waltertengkw/badges'],
 ]);
 
