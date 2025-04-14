@@ -2,6 +2,7 @@
 import React from 'react';
 import { BasicImage, BasicImageProps } from './ImageStyles';
 import { WIP } from './WIP';
+import { Deprecated } from './Deprecated';
 import {
   SpotifySingleEmbed,
   SpotifySingleEmbedProps,
@@ -18,6 +19,7 @@ export default {
   // ------------- General Components--------------- //
   BasicImage: (props: BasicImageProps) => <BasicImage {...props} />,
   WIP: (props) => <WIP {...props} />,
+  Deprecated: (props) => <Deprecated {...props} />,
   SpotifySingleEmbed: (props: SpotifySingleEmbedProps) => (
     <SpotifySingleEmbed {...props} />
   ),

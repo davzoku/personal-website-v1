@@ -72,11 +72,6 @@ const linksArray = [
     target: '_self',
   },
   {
-    text: 'Spark AR Filters',
-    url: '/spark-ar-filters',
-    target: '_self',
-  },
-  {
     text: 'Notion Templates',
     url: 'https://www.notion.so/walterteng/Walter-Teng-s-Public-Templates-1b8641ca447f47b09289fb41907cbae0',
     target: '_blank',
