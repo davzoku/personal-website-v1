@@ -1,0 +1,72 @@
+---
+slug: deprecation-cycles-and-side-projects
+startDate: 2025-04-14
+updated: 2025-04-14
+title: "Deprecation Cycles and Side Projects"
+description: "Reflections on maintaining side projects over time."
+published: true
+featured: true
+type: ["Note"]
+tags: ["Side Project", "Software Engineering"]
+cover: ./cover.png
+growthStage: "Evergreen"
+redirects:
+  - "/garden/deprecation-cycles-and-side-projects"
+  - "/garden/deprecation-cycles-and-side-projects/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1744647880/waltertengcom/garden/deprecation-cycles-and-side-projects/cover_k3pum1.png"
+  alt="cover"
+/>
+
+```toc
+
+```
+
+## Why We Build Side Projects
+
+As software engineers, the drive to create extends beyond our day jobs. We build side projects for various reasons: the sheer fun of it, the desire to learn a new technology, the objective of making our lives more productive or even the hope of generating side income. Over the years, I have channeled this drive into various project from building small utilities such as [davzoku/emoji.ico](https://github.com/davzoku/emoji.ico) (turning emoji into Windows icons) and productivity tools like [Sharemaster](https://chromewebstore.google.com/detail/sharemaster-copy-title-ur/cglaemmecoiemahimhggkppegekpfdca) (a Chromium extension for formatting page titles and URLs) to creating [Spark AR filters](https://www.facebook.com/sparkarhub/portfolios/ig/drawwithwalter/) that emulate my Lightroom presets.
+
+The journey to creating these side projects has been incredibly rewarding for me. They have allowed me to explore new technologies, make my life more productive, and each of these tools have garnered a small user base over time. All is good until the underlying platform or dependencies start to deprecate one by one.
+
+## The Inevitable Reality of Deprecation
+
+The reliance on third-party platform and libraries means our projects can be impacted or even rendered obsolete by decisions far beyond our control. I have experienced this firsthand earlier this year:
+
+- **Meta Spark Shutdown:** On January 14, 2025, Meta permanently switched off its Meta Spark platform for AR effects (see [announcement](https://spark.meta.com/blog/meta-spark-announcement/)). Without any alternative path offered, the platform effectively vanished. For creators like myself, this meant our projects simply stopped working overnight.
+
+- **Chrome Manifest V2 Deprecation**: Similarly, Google Chrome officially disabled support for extensions built using Manifest V2 on March 31, 2025 (see [timeline](https://developer.chrome.com/docs/extensions/develop/migrate/mv2-deprecation-timeline)). The impact was immediate. Within just a week of the change, I observed at least a 10% jump in uninstalls for my Manifest V2-based extensions as they ceased to work correctly for users.
+
+## Reflections
+
+Acknowledging this reality doesn't mean we should stop building, but rather that we should build smarter. Based on experiences like those above, here are strategies to better navigate the lifecycle of side projects:
+
+1. **Build with Intention**: Before creating a new side project, define your goal and commitment level. Moving forward, I will categorize my projects into two types:
+
+   - **Projects**: Tools or applications you intend to maintain, potentially support users for, and aim for some longevity.
+   - **[Breakable Toys](/apprenticeship-patterns#breakable-toys)**: Breakable Toys are small exploratory projects for learning and experimentation. (eg. making a Netflix clone to learn a new frontend framework). These projects are discardable with no user impact. Long-term maintenance is not expected.
+
+2. **Stay informed about upcoming changes**: Activly monitor the future direction of the platforms and libraries you depend on.
+
+   - Follow official channels and Reddit for announcements.
+   - Keep an eye on GitHub issues for your repositories.
+   - End-of-life information be found on [endoflife.date](https://endoflife.date/)
+
+3. **Plan for Change**: Maintenance phase is also a part of the life cycle for side projects just like regular SDLC at work.
+
+   - Keep your codebase up to date with tools like Dependabot
+   - Communicate proactively with your users about upcoming changes and deprecations.
+   - Plan for migration or alternatives well in advance based on official announcements and Reddit discussions
+
+4. **Let Go Gracefully**: Recognize that technologies and platforms evolve over time. Your personal priorities and interests may shift as well. Sometimes the best course is to sunset a project.
+
+## Concluding Thoughts
+
+Since the event earlier this year, I have officially deprecated my Spark AR filters side project and have successfully upgraded my Chrome extensions to Manifest V3.
+
+Perhpas this serves as a timely reminder to revisit your side projects. Are your side projects still working? Are you still proud of them? Have you updated the dependencies recently? It is also a good time to reflect on your side projects and align them with your current goals and interests.
+
+## Similar Ideas
+
+- [Building side projects – Lim Chee Aun](https://cheeaun.com/blog/2016/01/building-side-projects/)

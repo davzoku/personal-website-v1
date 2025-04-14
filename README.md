@@ -50,11 +50,11 @@ To run the Docker container on your local machine:
 docker compose up
 ```
 
-For more info on the Docker config and how to set up similar configurations for your Gatsby site: <a href="https://walterteng.com/garden/gatsby-docker" target="_blank">My Docker Setup for Gatsby</a>
+For more info on the Docker config and how to set up similar configurations for your Gatsby site: <a href="https://walterteng.com/gatsby-docker" target="_blank">My Docker Setup for Gatsby</a>
 
 ## Changelog
 
-The changelog is maintained <a href="https://walterteng.com/garden/how-i-built-my-website-v1" target="_blank">here</a>
+The changelog is maintained <a href="https://walterteng.com/how-i-built-my-website-v1" target="_blank">here</a>
 
 ## Architecture Decision Records (ADR)
 
