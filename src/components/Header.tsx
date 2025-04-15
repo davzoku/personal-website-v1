@@ -258,14 +258,14 @@ const Header = () => {
                 ))}
               </>
             )}
-            <a
+            {/* <a
               className="resume-button"
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
               Resume
-            </a>
+            </a> */}
           </HeaderLinks>
           <HeaderButtons>
             <HeaderButton
@@ -303,7 +303,7 @@ const Header = () => {
                   </Link>
                 </li>
               ))}
-              <li>
+              {/* <li>
                 <a
                   className="resume-button"
                   href="/resume.pdf"
@@ -312,7 +312,7 @@ const Header = () => {
                 >
                   Resume
                 </a>
-              </li>
+              </li> */}
             </ol>
           )}
         </nav>

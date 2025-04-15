@@ -106,12 +106,12 @@ module.exports = {
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
-          },            
+          },
           {
             "src": "src/images/profile-photo-sq-512.png",
             "sizes": "512x512",
             "type": "image/png"
-          }          
+          }
         ],
         include_favicon: false,
       },
@@ -126,7 +126,14 @@ module.exports = {
           head: true,
         },
       },
-    },    
+    },
+    {
+      resolve: `gatsby-plugin-clarity`,
+      options: {
+        clarity_project_id: config.clarityID,
+        enable_on_dev_env: true,
+      },
+    },
     `gatsby-plugin-offline`,
     `gatsby-plugin-netlify`,
     {

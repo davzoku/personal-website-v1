@@ -19,6 +19,7 @@
     "dotenv": "^10.0.0",
     "gatsby": "^4.0.0",
     "gatsby-plugin-catch-links": "^3.7.1",
+    "gatsby-plugin-clarity": "^1.0.1",
     "gatsby-plugin-emotion": "^6.7.1",
     "gatsby-plugin-feed": "^4.20.0",
     "gatsby-plugin-google-gtag": "^5.9.0",
