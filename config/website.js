@@ -16,6 +16,7 @@ module.exports = {
   ogSiteName: 'Walter Teng', // Facebook Site Name
   ogLanguage: 'en_US',
   googleAnalyticsID: 'G-HP6C32D6T4',
+  clarityID: 'r3ltf1pxq0',
   ogImage: '/og.png',
 
   // Manifest and Progress color
