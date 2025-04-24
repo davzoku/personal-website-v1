@@ -1,0 +1,62 @@
+---
+slug: html-preview-web-extension
+startDate: 2025-04-25
+updated: 2025-04-25
+title: "HTML Preview Web Extension"
+published: true
+type: ["Project"]
+category: ["Side Project"]
+deliverables: ["Chrome Extension"]
+techStack: ["Javascript"]
+tags: ["Chrome Extension", "Javascript", "Tooling", "Productivity"]
+cover: ./cover.png
+featured: True
+description: "✏👨🏻‍💻 A chrome extension that helps users preview HTML files on Github with a click of a button."
+githubLink: "https://github.com/davzoku/html-preview-web-extension"
+extLink: "https://chrome.google.com/webstore/detail/quickedit-edit-local-page/kfgkcpcagbflnecejofneecfbcnodboh"
+redirects:
+  - "/projects/html-preview-web-extension"
+  - "/projects/html-preview-web-extension/"
+---
+
+<BasicImage
+  src="https://res.cloudinary.com/wtkw/image/upload/v1744990848/waltertengcom/projects/html-preview-web-extension/cover_ix5941.png"
+  alt="cover"
+/>
+
+### Available on:
+
+[Chrome Web Store](https://chromewebstore.google.com/detail/git-forge-html-preview-in/gfhpdagbjajommngkcloffbfbmfhakcb)
+
+[Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/git-forge-html-preview-i/hphhimlmjdamgileaijcgldhfcghagam)
+
+### Demo:
+
+https://www.youtube.com/watch?v=I1QNETgFriM
+
+### Features
+
+This web extension redirects HTML files from Git forges like GitHub, GitLab, Bitbucket to the [html-preview.github.io](https://html-preview.github.io/) without needing to open the website manually.
+
+You can open the preview in three ways:
+
+- **via a keyboard shortcut.** (`Alt+P` or `Option+P`)
+
+  - It is configurable via `chrome://extensions/shortcuts`
+
+- from the **right-click context menu**
+- or **using a 'Preview' button on GitHub**.
+
+### Intended Audience
+
+This extension is best suited for users who frequently work with HTML files on GitHub and other Git forges.
+
+### Motivation & Inspiration:
+
+This project is inspired by the [html-preview/html-preview.github.io](https://github.com/html-preview/html-preview.github.io) project and a similar Chrome extension called [GitHub HTML Preview](https://chromewebstore.google.com/detail/github-html-preview/pmpjligbgooljdpakhophgddmcipglna) by [dohyeon5626](https://github.com/dohyeon5626/github-html-preview-extension).
+
+As an end user, I frequently use html-preview to view rendered outputs of Quarto sites and other static HTML files on Github, the workflow of manually navigating to the html-preview site and pasting a URL became repetitive and increasingly inconvenient.
+
+Dohyeon5626’s extension is very handy, particularly for its built-in `Preview` button on Github, but it uses his custom implementation to render the HTML files. Both implementations have different mileage depending on the structure of the HTML files and their linked assets like stylesheets or JavaScript. IMO, I prefer the html-preview approach because it tends to have a higher success rate when rendering various HTML files for my use cases.
+
+This extension is created to combine the convenience provided by the GitHub HTML Preview button with the reliability of html-preview.github.io. In addition, it also adds the flexibility of using a context menu or keyboard shortcut to launch a preview, making the process faster and more seamless. (see [Chrome Extension Projects](https://walterteng.com/projects/tags/chrome-extension) for a list of my other Chrome extensions / shortcuts that I have created to boost my web browsing productivity)
